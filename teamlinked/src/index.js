@@ -1,7 +1,6 @@
 //Dependencias
 import React from 'react';
 import {render} from 'react-dom';
-import ReactDOM from 'react-dom';
 import {BrowserRouter as Router} from 'react-router-dom';
 import * as serviceWorker from './serviceWorker';
 
@@ -12,7 +11,7 @@ import AppRoutes from './routes'
 import './styles/index.css';
 
 
-ReactDOM.render(
+render(
     <Router>
         <AppRoutes />
     </Router>
