@@ -21,9 +21,9 @@ class BarraNavegacion extends Component {
 
                   <LinkContainer to="/empleos"><Nav.Link>Empleos</Nav.Link></LinkContainer>
                   <LinkContainer to="/mired"><Nav.Link>Mi Red</Nav.Link></LinkContainer>
-                  <LinkContainer to="/foros"><Nav.Link>Foros</Nav.Link></LinkContainer>
-                  <LinkContainer to="/chat"><Nav.Link>Chat</Nav.Link></LinkContainer>
-                  <LinkContainer to="/micuenta"><Nav.Link>Mi cuenta</Nav.Link></LinkContainer>
+                  <LinkContainer to="/misforos"><Nav.Link>Foros</Nav.Link></LinkContainer>
+                  <LinkContainer to="/michat"><Nav.Link>Chat</Nav.Link></LinkContainer>
+                  <LinkContainer to="/miperfil"><Nav.Link>Mi cuenta</Nav.Link></LinkContainer>
 
                   <Form inline>
                     <FormControl type="text" placeholder="Search" className="mr-sm-2" />

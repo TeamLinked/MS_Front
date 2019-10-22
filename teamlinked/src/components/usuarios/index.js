@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {Container} from 'react-bootstrap';
+import CreacionUsuarios from './CreacionUsuarios';
 
 //Estilos
 //import '../styles/Usuarios.css'; 
@@ -11,9 +12,9 @@ class MiPerfil extends Component {
     }
     render() { 
         return (  
-            <Container style={{display: 'flex',  justifyContent:'center', alignItems:'center', paddingTop: '10px' }}>
-
-            </Container>
+            <React.Fragment>
+                <CreacionUsuarios/>
+            </React.Fragment>
         );
     }
 }

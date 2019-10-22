@@ -2,7 +2,7 @@ import React from 'react';
 
 //Dependencias
 import {Route, Switch} from 'react-router-dom';
-
+//<Route exact path="/listaempleos" component={ListaEmpleos} />
 //Componentes
 import App from './components/App';
 import MiRed from  './components/redes';
@@ -15,13 +15,13 @@ import Home from './components/home';
 const AppRoutes = () =>
     <App>
         <Switch>
-            <Route exact path="/mired" component={MiRed} />
-            <Route exact path="/misforos" component={MisForos} />
-            <Route exact path="/listaempleos" component={ListaEmpleos} />
-            <Route exact path="/miperfil" component={Miperfil} />
-            <Route exact path="/michat" component={MiChat} />
+            <Route path ='/mired' render= {props => <MiRed {...props}/>} />
+            <Route path ='/empleos' render= {props => <ListaEmpleos {...props}/>} />
+            <Route path ='/misforos' render= {props => <MisForos {...props}/>} />
+            <Route path ='/miperfil' render= {props => <Miperfil {...props}/>} />
+            <Route path ='/michat' render= {props => <MiChat {...props}/>} /> 
+            <Route path ='/' render= {props => <Home {...props}/>} /> 
 
-            <Route exact path="/" component={Home} />
         </Switch>
     </App>;
 
