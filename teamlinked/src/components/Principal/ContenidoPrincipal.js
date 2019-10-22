@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import '../styles/Principal.css'; //Estilos
 
 
-class Home extends Component {
+class ContenidoPrincipal extends Component {
     constructor(props) {
         super(props);
         this.state = {  }
@@ -16,4 +16,4 @@ class Home extends Component {
     }
 }
  
-export default Home;
+export default ContenidoPrincipal;

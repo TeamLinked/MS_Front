@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 // import { Link } from 'react-router-dom'
 //import { withRouter } from 'react-router'
 
-class Header extends Component {
+class BarraNavegacion extends Component {
     render() {
       return (
         <nav className="navbar navbar-expand-lg" style={{background:'#037ad1'}}>
@@ -39,4 +39,4 @@ class Header extends Component {
 }
 
 //export default withRouter(Header)
-export default Header
+export default BarraNavegacion
