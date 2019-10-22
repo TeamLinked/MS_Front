@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Container} from 'react-bootstrap';
+import {Container, Card} from 'react-bootstrap';
 
 //Estilos
 //import '../styles/Usuarios.css'; 
@@ -71,7 +71,10 @@ class CreacionUsuarios extends Component {
     render() { 
         return (  
             <Container style={{display: 'flex',  justifyContent:'center', alignItems:'center', paddingTop: '10px' }}>
-                <div className="App">
+                <Card bg="light" style={{ width: '50rem' }}>
+                    <Card.Header>
+                        <Card.Title>Actualizar mi informacion</Card.Title>
+                    </Card.Header>
                     <form onSubmit={this.handleSubmit} className="p-2">
                     <img src={this.state.previewimg} className="img-thumbnail"/>
                     <input type="file" onChange={this.handlePreview}/>
@@ -202,7 +205,7 @@ class CreacionUsuarios extends Component {
                         </div>
 
                     </form>
-                </div>
+                </Card>
             </Container>
         );
     }

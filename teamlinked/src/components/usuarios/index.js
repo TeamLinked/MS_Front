@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {Container} from 'react-bootstrap';
 import CreacionUsuarios from './CreacionUsuarios';
+import CreacionOrganizaciones from './CreacionOrganizaciones';
 
 //Estilos
 //import '../styles/Usuarios.css'; 
