@@ -1,18 +1,17 @@
 import React, { Component } from 'react';
-import '../styles/Principal.css'; //Estilos
 
-class Footer extends Component {
+class Home extends Component {
     constructor(props) {
         super(props);
         this.state = {  }
     }
     render() { 
-        return ( 
+        return (  
             <div>
-
+                
             </div>
-         );
+        );
     }
 }
  
-export default Footer;
+export default Home;

@@ -5,7 +5,7 @@ import {Container} from 'react-bootstrap';
 import '../styles/Chat.css'; //Estilos
 
 
-class Chat extends Component {
+class MiChat extends Component {
     constructor(props) {
         super(props);
         this.state = {  }
@@ -19,4 +19,4 @@ class Chat extends Component {
     }
 }
  
-export default Chat;
+export default MiChat;

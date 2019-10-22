@@ -1,8 +1,15 @@
-import React, { Component } from 'react'
+//DEpendencias
+import React, { Component } from 'react';
 import logo from '../assets/logo.svg';
 
-import 'bootstrap/dist/css/bootstrap.min.css'; // Estilos de React Boostrap
-import '../styles/App.css'; //Estilos
+//Componentes
+import BarraNavegacion from './BarraNavegacion';
+import Contenido from './Contenido';
+import Footer from './Footer';
+
+//Estilos
+import 'bootstrap/dist/css/bootstrap.min.css';
+//import '../styles/App.css';
 
 
 class App extends Component {
@@ -14,11 +21,13 @@ class App extends Component {
   
   render() { 
     return (  
-      <div className="App">
-      <header className="App-header">
-        <a>Learn React</a>
-      </header>
-    </div>
+      <React.Fragment>
+        <div>
+          <BarraNavegacion/>
+          <Contenido/>
+          <Footer/>
+        </div>
+      </React.Fragment>
     );
   }
 }

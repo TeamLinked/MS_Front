@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import '../styles/Principal.css'; //Estilos
+//import '../styles/Principal'; //Estilos
 
 
-class ContenidoPrincipal extends Component {
+class Contenido extends Component {
     constructor(props) {
         super(props);
         this.state = {  }
@@ -16,4 +16,4 @@ class ContenidoPrincipal extends Component {
     }
 }
  
-export default ContenidoPrincipal;
+export default Contenido;
