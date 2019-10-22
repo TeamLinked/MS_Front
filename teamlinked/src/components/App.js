@@ -1,6 +1,6 @@
 //DEpendencias
 import React, { Component } from 'react';
-import logo from '../assets/logo.svg';
+import PropTypes from 'prop-types';
 
 //Componentes
 import BarraNavegacion from './BarraNavegacion';
@@ -10,21 +10,21 @@ import Footer from './Footer';
 //Estilos
 import 'bootstrap/dist/css/bootstrap.min.css';
 //import '../styles/App.css';
-
+//import logo from '../assets/logo.svg';
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      }
-  }
   
-  render() { 
+  static propTypes = {
+    children: PropTypes.object.isRequired
+  };
+  
+  render() {
+    const {children} = this.props; 
     return (  
       <React.Fragment>
         <div>
           <BarraNavegacion/>
-          <Contenido/>
+          <Contenido body={children}/>
           <Footer/>
         </div>
       </React.Fragment>

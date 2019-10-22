@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import {Container} from 'react-bootstrap';
 
-import '../styles/Redes.css'; //Estilos
+
+//import '../styles/Redes.css'; //Estilos
 
 class AgregarAmigos extends Component {
     constructor(props) {

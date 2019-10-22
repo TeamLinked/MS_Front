@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import {Container} from 'react-bootstrap';
+import CreacionEmpleos from './CreacionEmpleos'
 
-import '../styles/Redes.css'; //Estilos
+//Estilos
+//import '../styles/Redes.css'; 
 
 class ListaEmpleos extends Component {
     constructor(props) {
@@ -9,10 +11,10 @@ class ListaEmpleos extends Component {
         this.state = {  }
     }
     render() { 
-        return (  
-            <Container style={{display: 'flex',  justifyContent:'center', alignItems:'center', paddingTop: '10px' }}>
-                 
-            </Container>
+        return ( 
+            <React.Fragment>
+                <CreacionEmpleos/>
+            </React.Fragment>
         );
     }
 }

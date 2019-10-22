@@ -1,16 +1,23 @@
+//Dependencias
 import React, { Component } from 'react';
-//import '../styles/Principal'; //Estilos
+import PropTypes from 'prop-types';
+
+//Estilos
+//import '../styles/Principal'; 
 
 
 class Contenido extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {  }
-    }
-    render() { 
-        return (  
-            <div>
+    
+    static propTypes = {
+        body: PropTypes.object.isRequired
+    };
 
+    render() {
+        const {body} = this.props;
+        
+        return (  
+            <div className="Content">
+                {body}
             </div>
         );
     }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {Container} from 'react-bootstrap';
 
-import '../styles/Foros.css'; //Estilos
+//import '../styles/Foros.css'; //Estilos
 
 class CreacionForos extends Component {
     constructor(props) {

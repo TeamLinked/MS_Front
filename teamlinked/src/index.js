@@ -1,10 +1,22 @@
+//Dependencias
 import React from 'react';
+import {render} from 'react-dom';
 import ReactDOM from 'react-dom';
-import './styles/index.css';
-import App from './components/App';
+import {BrowserRouter as Router} from 'react-router-dom';
 import * as serviceWorker from './serviceWorker';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+//Componentes
+import AppRoutes from './routes'
+
+//Estilos
+import './styles/index.css';
+
+
+ReactDOM.render(
+    <Router>
+        <AppRoutes />
+    </Router>
+    , document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

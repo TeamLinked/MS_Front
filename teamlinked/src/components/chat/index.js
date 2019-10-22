@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import {Container} from 'react-bootstrap';
 
-
-import '../styles/Chat.css'; //Estilos
+//Estilos
+//import '../styles/Chat.css'; 
 
 
 class MiChat extends Component {

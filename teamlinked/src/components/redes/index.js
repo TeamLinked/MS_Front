@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import {Container} from 'react-bootstrap';
 
-import '../styles/Redes.css'; //Estilos
+//Estilos
+//import '../styles/Redes.css'; 
 
 class MiRed extends Component {
     constructor(props) {

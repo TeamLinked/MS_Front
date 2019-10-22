@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import {Container} from 'react-bootstrap';
 
-import '../styles/Usuarios.css'; //Estilos
+//Estilos
+//import '../styles/Usuarios.css'; 
 
 class CreacionUsuarios extends Component {
     constructor(props) {
