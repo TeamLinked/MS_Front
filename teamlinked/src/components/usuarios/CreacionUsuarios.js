@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import {Container} from 'react-bootstrap';
+
+import '../styles/Usuarios.css'; //Estilos
 
 class CreacionUsuarios extends Component {
     constructor(props) {
@@ -6,7 +9,11 @@ class CreacionUsuarios extends Component {
         this.state = {  }
     }
     render() { 
-        return (  );
+        return (  
+            <Container style={{display: 'flex',  justifyContent:'center', alignItems:'center', paddingTop: '10px' }}>
+
+            </Container>
+        );
     }
 }
  

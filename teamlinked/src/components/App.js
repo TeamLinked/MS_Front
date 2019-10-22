@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import logo from '../assets/logo.svg';
-import '../styles/App.css';
+import '../styles/App.css'; //Estilos
 
 
 class App extends Component {

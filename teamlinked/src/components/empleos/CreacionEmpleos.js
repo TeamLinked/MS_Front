@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import {Container} from 'react-bootstrap';
+
+import '../styles/Empleos.css'; //Estilos
 
 class CreacionEmpleos extends Component {
     constructor(props) {
@@ -6,7 +9,11 @@ class CreacionEmpleos extends Component {
         this.state = {  }
     }
     render() { 
-        return (  );
+        return (  
+            <Container style={{display: 'flex',  justifyContent:'center', alignItems:'center', paddingTop: '10px' }}>
+                 
+            </Container>
+        );
     }
 }
  

@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import {Container} from 'react-bootstrap';
+
+import '../styles/Foros.css'; //Estilos
 
 class CreacionForos extends Component {
     constructor(props) {
@@ -6,7 +9,11 @@ class CreacionForos extends Component {
         this.state = {  }
     }
     render() { 
-        return (  );
+        return (  
+            <Container style={{display: 'flex',  justifyContent:'center', alignItems:'center', paddingTop: '10px' }}>
+                 
+            </Container>
+        );
     }
 }
  

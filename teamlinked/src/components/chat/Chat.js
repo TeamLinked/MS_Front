@@ -1,4 +1,9 @@
 import React, { Component } from 'react';
+import {Container} from 'react-bootstrap';
+
+
+import '../styles/Chat.css'; //Estilos
+
 
 class Chat extends Component {
     constructor(props) {
@@ -6,7 +11,11 @@ class Chat extends Component {
         this.state = {  }
     }
     render() { 
-        return (  );
+        return (  
+            <Container style={{display: 'flex',  justifyContent:'center', alignItems:'center', paddingTop: '10px' }}>
+                 
+            </Container>
+        );
     }
 }
  
