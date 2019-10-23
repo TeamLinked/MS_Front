@@ -1,0 +1,12 @@
+.navbar {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 20px;
+    height: 60px;
+    text-align: center;
+}
+
+.navbar-brand {
+    font-family: 'Zhi Mang Xing', cursive;
+    font-size: 70px;
+    text-align: center;
+}

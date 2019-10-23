@@ -1,21 +1,21 @@
 import React, { Component } from 'react';
-import {Container} from 'react-bootstrap';
+import CreateForo from './CreacionForos'
 
 //Estilos
 //import '../styles/Redes.css'; 
 
-class MisForos extends Component {
+class Foros extends Component {
     constructor(props) {
         super(props);
         this.state = {  }
     }
     render() { 
         return (  
-            <Container style={{display: 'flex',  justifyContent:'center', alignItems:'center', paddingTop: '10px' }}>
-                 
-            </Container>
+            <React.Fragment>
+                <CreateForo/>
+            </React.Fragment>
         );
     }
 }
  
-export default MisForos;
+export default Foros;

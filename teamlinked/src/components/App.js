@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 //Componentes
 import BarraNavegacion from './BarraNavegacion';
 import Contenido from './Contenido';
+import CreateForo from './foros/CreacionForos';
 import Footer from './Footer';
 
 //Estilos
@@ -22,10 +23,10 @@ class App extends Component {
     const {children} = this.props; 
     return (  
       <React.Fragment>
-        <div>
+        <div style={{background:'#D5E3E1'}}>
           <BarraNavegacion/>
           <div>
-          <Contenido body={children}/>
+            <Contenido body={children}/>
           </div>
           <Footer/>
         </div>
