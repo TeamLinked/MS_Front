@@ -1,0 +1,43 @@
+.Registro-text {
+    text-align: left;
+    font-size: calc(10px + 2vmin);
+    display: flex;
+}
+
+.Registro-title {
+    text-align: center;
+    font-size: calc(50px + 2vmin);
+    display: flex;
+}
+
+
+.row {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display:         flex;
+    flex-wrap: wrap;
+}
+
+.row > [class*='col-'] {
+    display: flex;
+    flex-direction: column;
+}
+
+.Registro-header {
+    background-color: #FFF;
+    min-height: 10vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(20px + 2vmin);
+    color: black;
+}
+
+.Registro-image{
+    object-fit: contain;
+    width: 100%;
+    height: 500px;
+}
+  

@@ -24,7 +24,8 @@ class BarraNavegacion extends Component {
                   <LinkContainer to="/misforos"><Nav.Link>Foros</Nav.Link></LinkContainer>
                   <LinkContainer to="/michat"><Nav.Link>Chat</Nav.Link></LinkContainer>
                   <LinkContainer to="/miperfil"><Nav.Link>Mi cuenta</Nav.Link></LinkContainer>
-
+                  <LinkContainer to="/sesion"><Nav.Link>LogOut</Nav.Link></LinkContainer>
+                  
                   <Form inline>
                     <FormControl type="text" placeholder="Search" className="mr-sm-2" />
                     <LinkContainer to="/busqueda">
