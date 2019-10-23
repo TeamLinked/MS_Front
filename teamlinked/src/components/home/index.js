@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PaginaInicial from './PagInicial';
 
 class Home extends Component {
     constructor(props) {
@@ -7,9 +8,9 @@ class Home extends Component {
     }
     render() { 
         return (  
-            <div>
-                
-            </div>
+            <React.Fragment>
+                <PaginaInicial/>
+            </React.Fragment>
         );
     }
 }
