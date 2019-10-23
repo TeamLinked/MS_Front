@@ -11,6 +11,7 @@ import ListaEmpleos from './components/empleos';
 import Miperfil from './components/usuarios';
 import MiChat from './components/chat';
 import Home from './components/home';
+import CreacionUsuarios from './components/usuarios/CreacionUsuarios';
 
 const AppRoutes = () =>
     <App>
@@ -19,7 +20,8 @@ const AppRoutes = () =>
             <Route path ='/empleos' render= {props => <ListaEmpleos {...props}/>} />
             <Route path ='/misforos' render= {props => <MisForos {...props}/>} />
             <Route path ='/miperfil' render= {props => <Miperfil {...props}/>} />
-            <Route path ='/michat' render= {props => <MiChat {...props}/>} /> 
+            <Route path ='/michat' render= {props => <MiChat {...props}/>} />
+            <Route path ='/crearusuario' render= {props => <CreacionUsuarios {...props}/>} />
             <Route path ='/' render= {props => <Home {...props}/>} /> 
 
         </Switch>

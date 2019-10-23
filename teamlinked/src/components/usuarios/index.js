@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {Container} from 'react-bootstrap';
 import CreacionUsuarios from './CreacionUsuarios';
 import CreacionOrganizaciones from './CreacionOrganizaciones';
+import PerfilUsuario from './PerfilUsuario';
 
 //Estilos
 //import '../styles/Usuarios.css'; 
@@ -14,7 +15,7 @@ class MiPerfil extends Component {
     render() { 
         return (  
             <React.Fragment>
-                <CreacionUsuarios/>
+                <PerfilUsuario/>
             </React.Fragment>
         );
     }
