@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios';
+// import {Form, Card, Container, Button, Col, Row} from 'react-bootstrap';
 
 import '../../styles/Foros.css';
 
@@ -47,30 +48,32 @@ class CreateForo extends Component {
 
   render() {
     return (
-      <div className="container card" style={{width: '72rem'}}>
-        <form onSubmit={this.handleSubmit}>
-          <div className="form-group">
-            <input className="no-border form-control-lg mt-2" type="text" placeholder='Titulo' id='titulo' value={this.state.titulo} onChange={this.handleChange} required/>
-          </div>
-          <div className="form-group">
-            <textarea 
-              className="form-control" 
-              id='contenido'
-              rows="10"
-              value={this.state.contenido} onChange={this.handleChange} required>
-            </textarea>
-          </div>          
-          <div className="form-group">
-            <input className="no-border" type="text" placeholder='Categoria' id='categoria' value={this.state.categoria} onChange={this.handleChange} required/>
-          </div>
-          <p>
-            <input 
-              type="file"
-              id="imagen"
-              accept="image/png, image/jpeg" alt="" onChange={this.handleImageChange} required/>
-          </p>
-          <button type="submit" class="btn btn-outline-info">Publicar</button>
-        </form>
+      <div className="container-fluid flex pt-3">
+        <div className="container card pb-2" style={{width: '72rem'}}>
+          <form onSubmit={this.handleSubmit}>
+            <div className="form-group">
+              <input className="no-border form-control-lg mt-2" type="text" placeholder='Titulo' id='titulo' value={this.state.titulo} onChange={this.handleChange} required/>
+            </div>
+            <div className="form-group">
+              <textarea 
+                className="form-control" 
+                id='contenido'
+                rows="10"
+                value={this.state.contenido} onChange={this.handleChange} required>
+              </textarea>
+            </div>          
+            <div className="form-group">
+              <input className="no-border" type="text" placeholder='Categoria' id='categoria' value={this.state.categoria} onChange={this.handleChange} required/>
+            </div>
+            <p>
+              <input 
+                type="file"
+                id="imagen"
+                accept="image/png, image/jpeg" alt="" onChange={this.handleImageChange} required/>
+            </p>
+            <button type="submit" class="btn btn-outline-info">Publicar</button>
+          </form>
+        </div>
       </div>
     );
   }

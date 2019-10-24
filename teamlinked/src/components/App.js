@@ -24,7 +24,7 @@ class App extends Component {
       <React.Fragment>
         <div style={{background:'#D5E3E1'}}>
           <BarraNavegacion/>
-          <div>
+          <div style={{background:'#D5E3E1'}}>
             <Contenido body={children}/>
           </div>
         </div>

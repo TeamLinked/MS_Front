@@ -2,21 +2,24 @@ import React, { Component } from 'react';
 import axios from 'axios';
 
 class Home extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {  }
+    state = {
+        foros: []
     }
-    render() { 
-        return (  
-            <div className="card bg-dark text-black mt-2">
-                <img src="" class="card-img" alt="..."/>
-                <div className="card-img-overlay">
-                <h1 className="card-title">Primera Publicacion</h1>
-                <p className="card-text">Esto es la primera publicacion</p>
-                <p className="card-text">Pruebas</p>
-                </div>    
-            </div>
-        );
+    componentDidMount() {
+        axios.get(`http://35.198.21.214:8000/foros/`)
+          .then(res => {
+            const foros = res.data;
+            console.log(foros);
+            this.setState({ foros });
+        })
+    }
+    
+    render() {
+        return (
+            <ul>
+                { this.state.foros.map(foro => <li>{foro.titulo}</li>)}
+            </ul>
+        )
     }
 }
  
