@@ -18,7 +18,7 @@ class Foro extends Component {
       //     </div> 
       // </div>
       <Card className="bg-dark text-white">
-        <Card.Img src= alt="Card image" />
+        <Card.Img src={this.props.foro.imagen} alt="Card image" />
         <Card.ImgOverlay>
           <Card.Title>{this.props.foro.titulo}</Card.Title>
           <Card.Text>
