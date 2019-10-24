@@ -1,54 +1,78 @@
 import React, { Component } from 'react'
+import axios from 'axios';
+
+import '../../styles/Foros.css';
+
 
 class CreateForo extends Component {
   state = {
     titulo: '',
     contenido: '',
     categoria: '',
-    imagen:'',
+    imagen: null
   }
 
-render() {
-  const { titulo, contenido, categoria, imagen } = this.state
-  return (
-    <div className="container card mt-2" style={{width: '72rem'}}>
-      <form>
-        <div className="form-group mt-1">
-          <label>Titulo</label>
-          <input 
-            type="text" 
-            className="form-control" 
-            placeholder="Titulo de la publicacion"
-            value={titulo}
-            onChange={e => this.setState({ titulo: e.target.value })}/>
-        </div>
-        <div className="form-group">
-          <label>Contenido</label>
-          <textarea 
-            className="form-control" 
-            rows="10"
-            value={contenido}
-            onChange={e => this.setState({ contenido: e.target.value })}>
-          </textarea>
-        </div>
-        <div className="form-group">
-          <label>Categoria</label>
-          <select 
-            className="form-control"  
-            // value={categoria}
-            // onChange={e => this.setState({ categoria: e.target.value })}
-          >
-            <option value={categoria} onChange={e => this.setState({ categoria: e.target.value } )}>Tecnologia</option>
-            <option value={categoria}>Finanzas</option>
-            <option value={categoria}>Leyes</option>
-            <option value={categoria}>Viajes</option>
-            <option value={categoria}>Ventas</option> 
-          </select>
-        </div>
-        
-      </form>
-    </div>
-    )
+  handleChange = (e) => {
+    this.setState({
+      [e.target.id]: e.target.value
+    })
+  };
+
+  handleImageChange = (e) => {
+    this.setState({
+      imagen: e.target.files[0]
+    })
+  };
+
+  handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(this.state);
+    let form_data = new FormData();
+    form_data.append('titulo', this.state.titulo);
+    form_data.append('contenido', this.state.contenido);
+    form_data.append('categoria', this.state.categoria);
+    form_data.append('imagen', this.state.imagen);
+    let url = 'http://35.198.21.214:8000/foros/';
+
+    axios.post(url, form_data, {
+      headers: {
+        'content-type': 'multipart/form-data'
+      }
+    })
+    .then(res => {
+      console.log(res.data);
+    })
+    .catch(err => console.log(err))
+  };
+
+  render() {
+    return (
+      <div className="container card" style={{width: '72rem'}}>
+        <form onSubmit={this.handleSubmit}>
+          <div className="form-group">
+            <input className="no-border form-control-lg mt-2" type="text" placeholder='Titulo' id='titulo' value={this.state.titulo} onChange={this.handleChange} required/>
+          </div>
+          <div className="form-group">
+            <textarea 
+              className="form-control" 
+              id='contenido'
+              rows="10"
+              value={this.state.contenido} onChange={this.handleChange} required>
+            </textarea>
+          </div>          
+          <div className="form-group">
+            <input className="no-border" type="text" placeholder='Categoria' id='categoria' value={this.state.categoria} onChange={this.handleChange} required/>
+          </div>
+          <p>
+            <input 
+              type="file"
+              id="imagen"
+              accept="image/png, image/jpeg" alt="" onChange={this.handleImageChange} required/>
+          </p>
+          <button type="submit" class="btn btn-outline-info">Publicar</button>
+        </form>
+      </div>
+    );
   }
 }
 
