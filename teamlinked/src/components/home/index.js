@@ -1,24 +1,34 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import Foro from '../foros/Foro'
 
 class Home extends Component {
-    state = {
-        foros: []
+    constructor(props){
+        super(props);
+        this.state = {
+            foros: []
+        }
     }
+
     componentDidMount() {
-        axios.get(`http://35.198.21.214:8000/foros/`)
+        axios.get(`http://localhost:8000/foros/`,
+            { 
+            headers: {
+                'Access-Control-Allow-Origin': '*'
+            }}
+        )    
           .then(res => {
             const foros = res.data;
-            console.log(foros);
+            // console.log(res.data);
             this.setState({ foros });
         })
     }
-    
+
     render() {
         return (
-            <ul>
-                { this.state.foros.map(foro => <li>{foro.titulo}</li>)}
-            </ul>
+            <div>
+                { this.state.foros.map(foro => <Foro key={foro.id} foro={foro} />)}
+            </div>
         )
     }
 }
