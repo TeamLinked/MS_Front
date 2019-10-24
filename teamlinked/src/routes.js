@@ -6,7 +6,7 @@ import {Route, Switch} from 'react-router-dom';
 //Componentes
 import App from './components/App';
 import MiRed from  './components/redes';
-import MisForos from './components/foros';
+import Foros from './components/foros';
 import ListaEmpleos from './components/empleos';
 import Miperfil from './components/usuarios';
 import MiChat from './components/chat';
@@ -23,7 +23,7 @@ const AppRoutes = () =>
             <Route path ='/registro' render= {props => <Registro {...props}/>} />
             <Route path ='/mired' render= {props => <MiRed {...props}/>} />
             <Route path ='/empleos' render= {props => <ListaEmpleos {...props}/>} />
-            <Route path ='/misforos' render= {props => <MisForos {...props}/>} />
+            <Route path ='/foros' render= {props => <Foros {...props}/>} />
             <Route path ='/miperfil' render= {props => <Miperfil {...props}/>} />
             <Route path ='/michat' render= {props => <MiChat {...props}/>} />
             <Route path ='/crearusuario' render= {props => <CreacionUsuarios {...props}/>} />

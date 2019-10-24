@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import {Navbar, Nav, Button, FormControl,  Form, Col} from 'react-bootstrap';
 import {LinkContainer} from 'react-router-bootstrap';
 
+import '../styles/Header.css'; 
 
 
 class BarraNavegacion extends Component {
@@ -21,7 +22,7 @@ class BarraNavegacion extends Component {
 
                   <LinkContainer to="/empleos"><Nav.Link>Empleos</Nav.Link></LinkContainer>
                   <LinkContainer to="/mired"><Nav.Link>Mi Red</Nav.Link></LinkContainer>
-                  <LinkContainer to="/misforos"><Nav.Link>Foros</Nav.Link></LinkContainer>
+                  <LinkContainer to="/foros"><Nav.Link>Foros</Nav.Link></LinkContainer>
                   <LinkContainer to="/michat"><Nav.Link>Chat</Nav.Link></LinkContainer>
                   <LinkContainer to="/miperfil"><Nav.Link>Mi cuenta</Nav.Link></LinkContainer>
                   <LinkContainer to="/sesion"><Nav.Link>LogOut</Nav.Link></LinkContainer>
