@@ -33,7 +33,7 @@ class CreateForo extends Component {
     form_data.append('contenido', this.state.contenido);
     form_data.append('categoria', this.state.categoria);
     form_data.append('imagen', this.state.imagen);
-    let url = 'http://35.198.21.214:8000/foros/';
+    let url = 'http://34.94.59.230:8000/foros/';
 
     axios.post(url, form_data, {
       headers: {

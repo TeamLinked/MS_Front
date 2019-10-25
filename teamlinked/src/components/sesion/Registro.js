@@ -73,7 +73,7 @@ class Registro extends Component {
                 email
               }
             }`;
-        const url = "https://cors-anywhere.herokuapp.com/http://35.198.21.214:3050/graphql";
+        const url = "https://cors-anywhere.herokuapp.com/http://34.94.59.230:3050/graphql";
         const opts = {
             method: "POST",
             headers: { "Content-Type": "application/json" ,"Access-Control-Allow-Origin": "*"},

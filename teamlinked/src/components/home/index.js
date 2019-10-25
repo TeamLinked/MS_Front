@@ -11,7 +11,7 @@ class Home extends Component {
     }
 
     componentDidMount() {
-        axios.get(`http://localhost:8000/foros/`,
+        axios.get(`http://34.94.59.230:3050/graphql`,
             { 
             headers: {
                 'Access-Control-Allow-Origin': '*'
