@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import axios from 'axios';
-// import {Form, Card, Container, Button, Col, Row} from 'react-bootstrap';
 
 import '../../styles/Foros.css';
 
@@ -13,38 +12,39 @@ class CreateForo extends Component {
     imagen: null
   }
 
-  handleChange = (e) => {
-    this.setState({
-      [e.target.id]: e.target.value
-    })
-  };
+  // handleChange = (e) => {
+  //   this.setState({
+  //     [e.target.id]: e.target.value
+  //   })
+  // };
 
-  handleImageChange = (e) => {
-    this.setState({
-      imagen: e.target.files[0]
-    })
-  };
+  // handleImageChange = (e) => {
+  //   this.setState({
+  //     imagen: e.target.files[0]
+  //   })
+  // };
 
-  handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(this.state);
-    let form_data = new FormData();
-    form_data.append('titulo', this.state.titulo);
-    form_data.append('contenido', this.state.contenido);
-    form_data.append('categoria', this.state.categoria);
-    form_data.append('imagen', this.state.imagen);
-    let url = 'http://35.198.21.214:8000/foros/';
+  // handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   console.log(this.state);
+  //   let form_data = new FormData();
+  //   form_data.append('titulo', this.state.titulo);
+  //   form_data.append('contenido', this.state.contenido);
+  //   form_data.append('categoria', this.state.categoria);
+  //   form_data.append('imagen', this.state.imagen);
+  //   let url = 'http://35.198.21.214:3050/graphql';
 
-    axios.post(url, form_data, {
-      headers: {
-        'content-type': 'multipart/form-data'
-      }
-    })
-    .then(res => {
-      console.log(res.data);
-    })
-    .catch(err => console.log(err))
-  };
+  //   axios.post(url, form_data, {
+  //     headers: {
+  //       'content-type': 'multipart/form-data'
+  //     }
+  //   })
+  //   .then(res => {
+  //     console.log(res.data);
+  //   })
+  //   .catch(err => console.log(err))
+  // };
+
 
   render() {
     return (

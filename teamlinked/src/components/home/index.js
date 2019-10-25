@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import Foro from '../foros/Foro'
 
+
 class Home extends Component {
     constructor(props){
         super(props);
@@ -10,18 +11,57 @@ class Home extends Component {
         }
     }
 
-    componentDidMount() {
-        axios.get(`http://localhost:8000/foros/`,
-            { 
+    // componentDidMount() {
+    //     axios.get(`http://35.198.21.214:3050/graphql`,
+    //         { 
+    //         headers: {
+    //             'Access-Control-Allow-Origin': '*'
+    //         }}
+    //     )    
+    //       .then(res => {
+    //         console.log(res)
+    //         const foros = res.data;
+    //         this.setState({ foros });
+    //     })
+    // }
+ 
+    pedirForos() {
+        console.log('Estoy en la funcion pedir foros')
+        const query = `
+        query {
+            Foros {
+            id
+            titulo
+            contenido
+            categoria
+            imagen
+            }
+        }`;
+        const url = "https://cors-anywhere.herokuapp.com/http://35.198.21.214:3050/graphql";
+
+        const opts = {
+            method: "POST",
             headers: {
-                'Access-Control-Allow-Origin': '*'
-            }}
-        )    
-          .then(res => {
-            const foros = res.data;
-            // console.log(res.data);
-            this.setState({ foros });
+                "Content-Type": "application/json",
+                "Access-Control-Allow-Origin": "*"
+            },
+            body: JSON.stringify({ query })
+        };
+
+        fetch(url, opts)
+        .then(res => { res.json()
+            console.log(res);   
         })
+        .then(e => {
+            console.log(e)
+            this.setState({ foros: e.data.Foros });
+            console.log(e.data.Foros);
+        })
+        .catch(console.error);
+    }
+
+    componentDidMount() {
+        this.pedirForos();
     }
 
     render() {
@@ -34,3 +74,4 @@ class Home extends Component {
 }
  
 export default Home;
+
