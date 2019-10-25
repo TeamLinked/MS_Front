@@ -12,7 +12,7 @@ class Home extends Component {
     }
 
     // componentDidMount() {
-    //     axios.get(`http://35.198.21.214:3050/graphql`,
+    //     axios.get(`http://34.94.59.230:3050/graphql`,
     //         { 
     //         headers: {
     //             'Access-Control-Allow-Origin': '*'
@@ -26,18 +26,17 @@ class Home extends Component {
     // }
  
     pedirForos() {
-        console.log('Estoy en la funcion pedir foros')
         const query = `
         query {
             Foros {
-            id
-            titulo
-            contenido
-            categoria
-            imagen
+                id
+                titulo
+                contenido
+                categoria
+                imagen
             }
         }`;
-        const url = "https://cors-anywhere.herokuapp.com/http://35.198.21.214:3050/graphql";
+        const url = "http://34.94.59.230:3050/graphql";
 
         const opts = {
             method: "POST",
@@ -49,11 +48,9 @@ class Home extends Component {
         };
 
         fetch(url, opts)
-        .then(res => { res.json()
-            console.log(res);   
-        })
+        .then(res => res.json())   
         .then(e => {
-            console.log(e)
+            // console.log(e)
             this.setState({ foros: e.data.Foros });
             console.log(e.data.Foros);
         })
