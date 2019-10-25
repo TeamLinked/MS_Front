@@ -2,7 +2,7 @@ version: '2'
 services:
   teamlinked-front:
     # build: ./teamlinked
-    image: teamlinked2019/front-ms:v0.1      
+    image: teamlinked2019/front-ms:v0.2   
     ports:
       - 3005:3000
 
