@@ -12,6 +12,7 @@ class MiRed extends React.Component {
         <h2 className="border-bottom pb-2 mb-0">Tu Red</h2>
         {this.props.personas.map(p => (
           <Amigo persona={p} />
+          
         ))}
       </div>
     );

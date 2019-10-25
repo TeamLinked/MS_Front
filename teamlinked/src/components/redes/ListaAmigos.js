@@ -8,7 +8,7 @@ class ListaAmigos extends React.Component {
     super(props);
     this.state = {
       entradaTexto: "",
-      persons: [],
+      persons: [""],
       busqueda: [],
       idUsuario: "1",
       idsAmigos: [],
@@ -76,7 +76,7 @@ class ListaAmigos extends React.Component {
         }
     `;
     const url =
-      "https://cors-anywhere.herokuapp.com/http://35.198.21.214:3050/graphql";
+      "https://cors-anywhere.herokuapp.com/http://34.94.59.230:3050/graphql";
     const opts = {
       method: "POST",
       headers: {
