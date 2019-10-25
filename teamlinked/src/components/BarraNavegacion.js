@@ -13,7 +13,7 @@ class BarraNavegacion extends Component {
             <Col>
               <LinkContainer to="/home">
                   <Navbar.Brand>
-                      <a className="navbar-brand text-white mr-auto" href="./">TeamLinked</a>
+                      <h3 className="navbar-brand text-white mr-auto" href="./">TeamLinked</h3>
                   </Navbar.Brand>
               </LinkContainer>
             </Col>
