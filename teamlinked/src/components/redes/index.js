@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {Container} from 'react-bootstrap';
+import ListaAmigos from './ListaAmigos';
 
 //Estilos
 //import '../styles/Redes.css'; 
@@ -11,9 +12,9 @@ class MiRed extends Component {
     }
     render() { 
         return (  
-            <Container style={{display: 'flex',  justifyContent:'center', alignItems:'center', paddingTop: '10px' }}>
-                 
-            </Container>
+            <React.Fragment>
+                <ListaAmigos />
+            </React.Fragment>
         );
     }
 }
