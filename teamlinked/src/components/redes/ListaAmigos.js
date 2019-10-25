@@ -1,31 +1,33 @@
 import React from "react";
 // import SolicitudAmistad from "./SolicitudAmistad";
 import MiRed from "./MiRed";
+import BuscaAmigos from "./BuscaAmigos";
 
 class ListaAmigos extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      entradaTexto: "",
       persons: [],
+      busqueda: [],
       idUsuario: "1",
       idsAmigos: [],
       amigos: []
     };
     this.aceptar = this.aceptar.bind(this);
     this.rechazar = this.rechazar.bind(this);
+    this.buscarUsuarios = this.buscarUsuarios.bind(this);
   }
+  
   buscarAmigos(params) {
     let aux = [];
     params.forEach(idAmigo => {
-      // console.log(idAmigo);
-      // console.log(this.state.persons);
       this.state.persons.forEach(person => {
         if (idAmigo == person.id) {
           aux.push(person);
         }
       });
     });
-    // console.log(aux);
     this.setState({ amigos: aux });
   }
   pedirUsuarios() {
@@ -101,6 +103,20 @@ class ListaAmigos extends React.Component {
   rechazar() {
     alert("Logica de rechazar");
   }
+  onInputChange(event) {
+    this.setState({entradaTexto: event.target.value});
+    console.log(this.state.entradaTexto);
+  }
+  buscarUsuarios(){
+    let aux = [];
+    //console.log(this.state.persons[0]);
+    this.state.persons.forEach(person => {
+      if(this.state.entradaTexto == person.nombre){
+        aux.push(person);
+      }
+    })
+    this.setState({busqueda: aux});
+  }
 
   render() {
     return (
@@ -111,6 +127,9 @@ class ListaAmigos extends React.Component {
           rechazar={this.rechazar}
         /> */}
         <MiRed personas={this.state.amigos} />
+        <BuscaAmigos personas={this.state.busqueda} buscar={this.buscarUsuarios}>
+          <input type="text" className="form-control col-md-10" id="nombre" onChange={(event) => this.onInputChange(event)}></input>
+        </BuscaAmigos>
       </div>
     );
   }
