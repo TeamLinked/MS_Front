@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 import axios from 'axios';
+import * as user from '../../datos/user.json';
 // import {Form, Card, Container, Button, Col, Row} from 'react-bootstrap';
 
 import '../../styles/Foros.css';
+import Foro from '../foros/Foro'
 
 import {
   Button,
@@ -18,12 +20,97 @@ import {
   Col
 } from "reactstrap";
 
+
+
+
+
+
 class Feed extends Component {
+  constructor() {
+    super();
+    this.user = user;
+    this.id = 0;
+    this.state = {
+      foros: []
+    }
+  }
   state = {
     titulo: '',
     contenido: '',
     categoria: '',
     imagen: null
+  }
+
+  pedirForos() {
+    const query = `
+    query {
+        Foros {
+            id
+            titulo
+            contenido
+            categoria
+            fechaCreacion
+            imagen
+        }
+    }`;
+    const url = "http://34.94.59.230:3050/graphql";
+
+    const opts = {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*"
+        },
+        body: JSON.stringify({ query })
+    };
+
+    fetch(url, opts)
+    .then(res => res.json())   
+    .then(e => {
+        // console.log(e)
+        this.setState({ foros: e.data.Foros });
+        console.log(e.data.Foros);
+    })
+    .catch(console.error);
+}
+
+
+
+
+
+  componentDidMount() {
+    const query = `
+        query{
+          getUsuarios{
+            id
+            nombre
+            apellido
+            email
+            identificacion
+            nacionalidad
+            perf_profesional
+            perf_personal
+          }
+        }
+    `;
+    const url = "https://cors-anywhere.herokuapp.com/http://34.94.59.230:3050/graphql";
+    const opts = {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" },
+      body: JSON.stringify({ query })
+    };
+    fetch(url, opts)
+      .then(res => res.json())
+      .then(e => {
+        this.user = e.data.getUsuarios[this.id];
+        console.log(this.user);
+        console.log("Pepito");
+        this.forceUpdate();
+      })
+      .catch(console.error);
+      this.pedirForos();
+
+      
   }
 
   render() {
@@ -47,38 +134,19 @@ class Feed extends Component {
                         className="avatar border-gray"
                         src={require("./resources/mike.jpg")}
                       />
-                      <h5 className="title">Chet Faker</h5>
+                      <h5 className="title">{this.user.nombre} {this.user.apellido}</h5>
                     </a>
-                    <p className="description">@chetfaker</p>
+                    <p className="description">{this.user.email}</p>
+                    <p className="description">{this.user.nacionalidad}</p>
                   </div>
                   <p className="description text-center">
-                    "I like the way you work it <br />
-                    No diggity <br />I wanna bag it up"
+                    {this.user.perf_personal}
                   </p>
                 </CardBody>
                 <CardFooter>
                   <hr />
                   <div className="button-container">
-                    <Row>
-                      <Col className="ml-auto" lg="3" md="6" xs="6">
-                        <h5>
-                          12 <br />
-                          <small>Files</small>
-                        </h5>
-                      </Col>
-                      <Col className="ml-auto mr-auto" lg="4" md="6" xs="6">
-                        <h5>
-                          2GB <br />
-                          <small>Used</small>
-                        </h5>
-                      </Col>
-                      <Col className="mr-auto" lg="3">
-                        <h5>
-                          24,6$ <br />
-                          <small>Spent</small>
-                        </h5>
-                      </Col>
-                    </Row>
+                    {this.user.perf_profesional}
                   </div>
                 </CardFooter>
               </Card>
@@ -180,130 +248,21 @@ class Feed extends Component {
               </Card>
             </Col>
             <Col md="8">
-              <Card className="card-user">
-                <CardHeader>
-                  <CardTitle tag="h5">Edit Profile</CardTitle>
-                </CardHeader>
-                <CardBody>
-                  <Form>
-                    <Row>
-                      <Col className="pr-1" md="5">
-                        <FormGroup>
-                          <label>Company (disabled)</label>
-                          <Input
-                            defaultValue="Creative Code Inc."
-                            disabled
-                            placeholder="Company"
-                            type="text"
-                          />
-                        </FormGroup>
-                      </Col>
-                      <Col className="px-1" md="3">
-                        <FormGroup>
-                          <label>Username</label>
-                          <Input
-                            defaultValue="michael23"
-                            placeholder="Username"
-                            type="text"
-                          />
-                        </FormGroup>
-                      </Col>
-                      <Col className="pl-1" md="4">
-                        <FormGroup>
-                          <label htmlFor="exampleInputEmail1">
-                            Email address
-                          </label>
-                          <Input placeholder="Email" type="email" />
-                        </FormGroup>
-                      </Col>
-                    </Row>
-                    <Row>
-                      <Col className="pr-1" md="6">
-                        <FormGroup>
-                          <label>First Name</label>
-                          <Input
-                            defaultValue="Chet"
-                            placeholder="Company"
-                            type="text"
-                          />
-                        </FormGroup>
-                      </Col>
-                      <Col className="pl-1" md="6">
-                        <FormGroup>
-                          <label>Last Name</label>
-                          <Input
-                            defaultValue="Faker"
-                            placeholder="Last Name"
-                            type="text"
-                          />
-                        </FormGroup>
-                      </Col>
-                    </Row>
-                    <Row>
-                      <Col md="12">
-                        <FormGroup>
-                          <label>Address</label>
-                          <Input
-                            defaultValue="Melbourne, Australia"
-                            placeholder="Home Address"
-                            type="text"
-                          />
-                        </FormGroup>
-                      </Col>
-                    </Row>
-                    <Row>
-                      <Col className="pr-1" md="4">
-                        <FormGroup>
-                          <label>City</label>
-                          <Input
-                            defaultValue="Melbourne"
-                            placeholder="City"
-                            type="text"
-                          />
-                        </FormGroup>
-                      </Col>
-                      <Col className="px-1" md="4">
-                        <FormGroup>
-                          <label>Country</label>
-                          <Input
-                            defaultValue="Australia"
-                            placeholder="Country"
-                            type="text"
-                          />
-                        </FormGroup>
-                      </Col>
-                      <Col className="pl-1" md="4">
-                        <FormGroup>
-                          <label>Postal Code</label>
-                          <Input placeholder="ZIP Code" type="number" />
-                        </FormGroup>
-                      </Col>
-                    </Row>
-                    <Row>
-                      <Col md="12">
-                        <FormGroup>
-                          <label>About Me</label>
-                          <Input
-                            type="textarea"
-                            defaultValue="Oh so, your weak rhyme You doubt I'll bother, reading into it"
-                          />
-                        </FormGroup>
-                      </Col>
-                    </Row>
-                    <Row>
-                      <div className="update ml-auto mr-auto">
-                        <Button
-                          className="btn-round"
-                          color="primary"
-                          type="submit"
-                        >
-                          Update Profile
-                        </Button>
-                      </div>
-                    </Row>
-                  </Form>
-                </CardBody>
-              </Card>
+            {/* <CardBody> */}
+
+
+
+
+                 {/* <Form> */}
+
+                    
+
+                    {this.state.foros.map(foro => <Foro key={foro.id} foro={foro} />)}
+
+                  {/* </Form> */}
+                {/* </CardBody> */}
+
+
             </Col>
           </Row>
         </div>
