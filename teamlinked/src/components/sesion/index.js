@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-import {Container} from 'react-bootstrap';
-import ListaAmigos from './ListaAmigos';
+import ISesion from './ISesion';
 
 //Estilos
 //import '../styles/Redes.css'; 
 
-class MiRed extends Component {
+class Sesion extends Component {
     constructor(props) {
         super(props);
         this.state = {  }
@@ -13,10 +12,10 @@ class MiRed extends Component {
     render() { 
         return (  
             <React.Fragment>
-                <ListaAmigos />
+                <ISesion/>
             </React.Fragment>
         );
     }
 }
  
-export default MiRed;
+export default Sesion;

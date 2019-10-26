@@ -10,20 +10,6 @@ class Home extends Component {
             foros: []
         }
     }
-
-    // componentDidMount() {
-    //     axios.get(`http://34.94.59.230:3050/graphql`,
-    //         { 
-    //         headers: {
-    //             'Access-Control-Allow-Origin': '*'
-    //         }}
-    //     )    
-    //       .then(res => {
-    //         console.log(res)
-    //         const foros = res.data;
-    //         this.setState({ foros });
-    //     })
-    // }
  
     pedirForos() {
         const query = `

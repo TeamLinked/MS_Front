@@ -31,7 +31,7 @@ class CreateForo extends Component {
     // form_data.append('contenido', this.state.contenido);
     // form_data.append('categoria', this.state.categoria);
     // form_data.append('imagen', this.state.imagen);
-    let url = 'http://34.94.59.230:3050/graphql';
+    let url = 'http://34.94.59.230:3050/graphql'
 
     axios.post(url,  {
       query: `

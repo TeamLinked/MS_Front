@@ -1,0 +1,14 @@
+{
+    "id": 1,
+    "nombre": "Juancho",
+    "apellido": "Gaitan",
+    "email": "jdgaitanf@unal.edu.co",
+    "password": "lkjslkjdflkaj",
+    "identificacion": "1014208809",
+    "nacionalidad": "Colombiana",
+    "fecha_nac": "2016-08-09T04:05:02.000Z",
+    "perf_profesional": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "perf_personal": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "createdAt": "2019-10-18T20:34:15.000Z",
+    "updatedAt": "2019-10-18T20:34:15.000Z"
+}

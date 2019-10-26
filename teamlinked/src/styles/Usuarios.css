@@ -1,0 +1,29 @@
+.row {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display:         flex;
+    flex-wrap: wrap;
+}
+.row > [class*='col-'] {
+display: flex;
+flex-direction: column;
+}
+
+.App-p{
+    line-height: 0%;
+}
+  
+.App-link {
+    color: #09d3ac;
+}
+  
+.App-image{
+  object-fit: scale-down;
+  width: 100%;
+  height: 100px;
+}
+  
+.Card {
+    border-width:10px  !important;
+}
