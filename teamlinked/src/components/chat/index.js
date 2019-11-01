@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import {Container} from 'react-bootstrap';
 
-//Estilos
-//import '../styles/Chat.css'; 
+import MsjHistory from "./MsjHistory";
+import Recents from "./Recents";
+
+import '../../styles/Chat.css'; 
 
 
 class MiChat extends Component {
@@ -12,9 +13,16 @@ class MiChat extends Component {
     }
     render() { 
         return (  
-            <Container style={{display: 'flex',  justifyContent:'center', alignItems:'center', paddingTop: '10px' }}>
-                 
-            </Container>
+            <div className="App">
+            <div className="container">
+              <div className="messaging">
+                <div className="inbox_msg">
+                  <Recents />
+                  <MsjHistory />
+                </div>
+              </div>
+            </div>
+          </div>
         );
     }
 }
