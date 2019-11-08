@@ -8,9 +8,43 @@ class TypeMsj extends React.Component {
     };
   }
 
+  enviarMsg(msg) {
+    const query = `
+      mutation{
+        SendMessage(input:{
+          transmitter: "1"
+          receiver: "2"
+          message: "${msg}"
+        }){
+          transmitter
+          receiver
+          message
+        }
+      }
+    `;
+    const url =
+      "https://cors-anywhere.herokuapp.com/http://34.94.59.230:3050/graphql";
+    const opts = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*"
+      },
+      body: JSON.stringify({ query })
+    };
+    fetch(url, opts)
+      .then(res => res.json())
+      .then(e => {
+        console.log(e);
+        this.forceUpdate();
+      })
+      .catch(console.error);
+  }
+
   handleKeyDown = (e) => {
     if (e.key === 'Enter') {
       alert(this.state.textField);
+      this.enviarMsg(this.state.textField);
       this.setState({ textField: ''});
     }
   }

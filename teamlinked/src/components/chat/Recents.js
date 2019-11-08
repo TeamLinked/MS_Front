@@ -15,7 +15,7 @@ class Recents extends Component {
           </div>
         </div>
         <div className="inbox_chat">
-          <RecentItem
+          {/* <RecentItem
             name="Yarid"
             date="13 Jun"
             message="Vista previa del mensaje"
@@ -32,7 +32,7 @@ class Recents extends Component {
             date="13 Jun"
             message="Vista previa del mensaje"
             isActive={false}
-          />
+          /> */}
         </div>
       </div>
     );

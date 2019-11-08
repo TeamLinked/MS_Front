@@ -121,14 +121,9 @@ class ListaAmigos extends React.Component {
   render() {
     return (
       <div>
-        {/* <SolicitudAmistad
-          persona={this.state.persons.indexOf(0)}
-          aceptar={this.aceptar}
-          rechazar={this.rechazar}
-        /> */}
         <MiRed personas={this.state.amigos} />
         <BuscaAmigos personas={this.state.busqueda} buscar={this.buscarUsuarios}>
-          <input type="text" className="form-control col-md-10" id="nombre" onChange={(event) => this.onInputChange(event)}></input>
+          <input type="text" className="form-control mr-sm-2" id="nombre" onChange={(event) => this.onInputChange(event)}></input>
         </BuscaAmigos>
       </div>
     );

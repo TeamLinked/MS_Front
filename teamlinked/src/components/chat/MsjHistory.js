@@ -6,16 +6,21 @@ import TypeMsj from "./TypeMsj";
 class MsjHistory extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+  }
+  mostrarMsgEnChat(m) {
+    if(m.transmitter === "1"){
+      return <OutgoingMsj bodyMsj={m.message} timestamp={"11:00, June 9"} />
+    }else{
+      return <IncomingMsj bodyMsj={m.message} timestamp={"11:00, June 9"} />
+    }
   }
   render() {
     return (
       <div className="mesgs">
         <div className="msg_history">
-          <IncomingMsj bodyMsj="Buen día" timestamp={"11:00, June 9"} />
-          <IncomingMsj bodyMsj="Cómo estás?" timestamp={"11:00, June 9"} />
-          <OutgoingMsj bodyMsj="Bien, gracias" timestamp={"11:00, June 9"} />
-          <OutgoingMsj bodyMsj="Y tú?" timestamp={"11:00, June 9"} />
+          {this.props.mensajesRaw.map(m => (
+            this.mostrarMsgEnChat(m)
+          ))}
         </div>
         <TypeMsj />
       </div>
