@@ -12,9 +12,9 @@ import Feed from "./Feed"
 class Home extends Component {
     constructor(props){
         super(props);
-        // this.state = {
-        //     foros: []
-        // }
+        this.state = {
+            iamge : 'no info'
+        }
     }
 
     // componentDidMount()  {
