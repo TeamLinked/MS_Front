@@ -1,11 +1,12 @@
 //Dependencias
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+//import { Row,Col, Container } from 'react-bootstrap';
 
-//Componentes
+// from ''Componentes
 import BarraNavegacion from './BarraNavegacion';
 import Contenido from './Contenido';
-import CreateForo from './foros/CreacionForos';
+
 
 //Estilos
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -22,12 +23,8 @@ class App extends Component {
     const {children} = this.props; 
     return (  
       <React.Fragment>
-        <div style={{background:'#D5E3E1'}}>
-          <BarraNavegacion/>
-          <div style={{background:'#D5E3E1'}}>
-            <Contenido body={children}/>
-          </div>
-        </div>
+        <BarraNavegacion />
+        <Contenido body={children} />
       </React.Fragment>
     );
   }
