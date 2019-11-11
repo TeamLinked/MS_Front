@@ -6,10 +6,12 @@ import PropTypes from 'prop-types';
 // from ''Componentes
 import BarraNavegacion from './BarraNavegacion';
 import Contenido from './Contenido';
+import Footer from './Footer';
 
 
 //Estilos
 import 'bootstrap/dist/css/bootstrap.min.css';
+
 //import '../styles/App.css';
 //import logo from '../assets/logo.svg';
 
@@ -23,8 +25,12 @@ class App extends Component {
     const {children} = this.props; 
     return (  
       <React.Fragment>
-        <BarraNavegacion />
-        <Contenido body={children} />
+        <div style={{minHeight:"calc(100vh)", position:"relative"}}>
+          <BarraNavegacion />
+          <Contenido body={children} />
+          <Footer/>
+        </div>
+        
       </React.Fragment>
     );
   }

@@ -49,7 +49,7 @@ class Feed extends Component {
             titulo
             contenido
             categoria
-            fechaCreacion
+            fecha_creacion
             imagen
         }
     }`;
