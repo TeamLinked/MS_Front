@@ -7,8 +7,8 @@ import "./assets/scss/paper-dashboard.scss?v=1.1.0";
 import "./assets/demo/demo.css";
 import "perfect-scrollbar/css/perfect-scrollbar.css";
 
-import Feed from "./Feed"
-
+import Feed from "./Feed";
+import PaginaPrincipal from './PaginaPrincipal';
 class Home extends Component {
     constructor(props){
         super(props);
@@ -35,7 +35,7 @@ class Home extends Component {
         return (
             <div>
                 {/* { this.state.foros.map(foro => <Foro key={foro.id} foro={foro} />)} */}
-                <Feed/>
+                <PaginaPrincipal/>
             </div>
             
             
