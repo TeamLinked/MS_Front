@@ -8,15 +8,6 @@ import axios from "axios";
 const emailRegex =/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 const MIN_PASS_LENGTH = 6 ;
 
-const infoKey = {
-    accountInfo:{
-        nombre:"Ivan Delgado", 
-        correo:"ivan93.c@gmail.com"
-    },
-    key:"nhfjkhsakjhfhrhrer8ewre7wqyrew",
-    id:"1",
-    role:"usuario"
-};
 
 class ISesion extends Component {
     constructor(props){
@@ -58,18 +49,20 @@ class ISesion extends Component {
             valid: condition,
         });
     }
-
-
+/*{Makeshift way to handle non-existant user}*/
+/*
     handleFormSubmit(e){
         e.preventDefault();
         console.log(this.state);
         this.setState({ isLoading: true });
+
+        
         axios.post('https://vnct01.herokuapp.com/sessions', {
             email: this.state.email,
             password: this.state.password,
         })
         .then(res => {
-            {/*Makeshift way to handle non-existant user*/}
+            
                 if(res.status > 299) throw "nan";
                 console.log(res.data)
                 const infoKey = {
@@ -81,6 +74,45 @@ class ISesion extends Component {
             this.props.storeLoginAccountInfo(infoKey);
         }).catch(e =>{this.setState({valid: "nan", isLoading: false})})
     }
+
+*/
+
+    
+    handleFormSubmit(e) {
+        e.preventDefault();
+        console.log(this.state);
+        this.setState({ isLoading: true });
+
+        console.log("AQUI ESTOY");
+        console.log(this.state.password, this.state.email)
+        const query = `
+            query{
+                Login(body:{
+                    username:`+ this.state.nombre +`
+                    password:`+ this.state.nombre +`
+                }){
+                    token
+                }
+            }
+        `;
+        const url = "http://34.94.59.230:3050/graphql";
+        const opts = {
+            method: "POST",
+            headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" },
+            body: JSON.stringify({ query })
+        };
+        fetch(url, opts)
+            .then(res => res.json())
+            .then(e => {
+                //this.user = e.data.getUsuarios[this.id];
+                console.log(e.data);
+                
+            })
+            .catch(console.error);
+    }
+
+
+    
 
     render() {
         const userValidation = this.state.valid;
