@@ -30,7 +30,7 @@ class Sesion extends Component {
                                 <Card.Body >
                                     <Col>
                                         <h1>Estas logeado {this.props.loginAccountInfo.accountInfo} </h1>
-                                        <LinkContainer to="/home" ><Button size="sm">Ir a la pagina principal</Button></LinkContainer>
+                                        <LinkContainer to="/home" ><Button size="sm"><h3 style={{marginBottom:"0px"}}>Ir a la pagina principal</h3></Button></LinkContainer>
                                     </Col>
                                 </Card.Body>
                             </Card>

@@ -18,16 +18,10 @@ class BarraNavegacion extends Component {
               <LinkContainer to="/home"><Nav.Link>TeamLinked</Nav.Link></LinkContainer>
             </Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
+            
             <Navbar.Collapse className="justify-content-end" id="basic-navbar-nav" style={{backgroundColor:"#343a40"}}>
               
-              <Form inline>
-                <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-                <LinkContainer to="/busqueda">
-                  <Button variant="outline-info">
-                      Buscar
-                  </Button>
-                </LinkContainer>
-              </Form>
+              
 
               <Nav  >
                 <LinkContainer to="/empleos"><Nav.Link>Empleos</Nav.Link></LinkContainer>

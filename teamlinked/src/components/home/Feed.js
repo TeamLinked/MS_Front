@@ -201,7 +201,7 @@ class Feed extends Component {
   render() {
     return (
       <>
-        <div className="content col-lg-10 mx-auto" >
+        <div className="content col-lg-10 mx-auto" style={{marginTop: "20px"}} >
           <Row>
             <Col md="4">
               <Card className="card-user">
