@@ -9,6 +9,7 @@ class ListaEmpleos extends Component {
     render() { 
         return ( 
             <React.Fragment>
+                <CreacionEmpleos/>
                 <SubirArchivos/>
             </React.Fragment>
         );

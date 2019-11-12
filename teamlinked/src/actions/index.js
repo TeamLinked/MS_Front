@@ -6,10 +6,17 @@ export const storeLoginAccountInfo = (loginAccountInfo) =>{
         type: 'STORED_LOGIN_ACCOUNT_INFO',
         payload: {
             key: loginAccountInfo.key,
-            accountInfo: loginAccountInfo.accountInfo,
             id: loginAccountInfo.id,
-            role: loginAccountInfo.role       
+            nombre: loginAccountInfo.nombre,
+            apellido:loginAccountInfo.apellido,
+            email: loginAccountInfo.email,      
         }
     };
 };
 
+export const logOut = () =>{
+    return {
+        type: 'CLOSED_SESSION_ACCOUNT',
+        payload: null
+    };
+};
