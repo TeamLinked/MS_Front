@@ -25,12 +25,12 @@ class Sesion extends Component {
                         <Col md="auto">
                             <Card className="text-center"  >
                                 <Card.Header>
-                                    <h1>¡Bienvenido a TeamLinked!</h1>
+                                    <h2>{"¡Bienvenido "+this.props.loginAccountInfo.nombre+" "+this.props.loginAccountInfo.apellido+" a TeamLinked!"}</h2>
                                 </Card.Header>
                                 <Card.Body >
                                     <Col>
-                                        <h1>Estas logeado {this.props.loginAccountInfo.accountInfo} </h1>
-                                        <LinkContainer to="/home" ><Button size="sm"><h3 style={{marginBottom:"0px"}}>Ir a la pagina principal</h3></Button></LinkContainer>
+                                        
+                                        <LinkContainer to="/home" ><Button size="sm"><h2 style={{marginBottom:"0px"}}>Ir a la pagina principal</h2></Button></LinkContainer>
                                     </Col>
                                 </Card.Body>
                             </Card>

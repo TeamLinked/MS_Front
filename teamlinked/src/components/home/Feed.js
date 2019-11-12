@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios';
 import * as user from '../../datos/user.json';
+import { connect } from 'react-redux';
 // import {Form, Card, Container, Button, Col, Row} from 'react-bootstrap';
 
 import '../../styles/Foros.css';
@@ -30,7 +31,7 @@ class Feed extends Component {
   constructor() {
     super();
     this.user = user;
-    this.id = 0;
+    this.id = "";
     this.state = {
       foros: [],
       amigos: [],
@@ -46,9 +47,13 @@ class Feed extends Component {
     categoria: '',
     imagen: null
   }
-
+  
+  componentDidMount(){
+    this.setState({idUsuario:this.props.loginAccountInfo.id})
+  }
 
   pedirUsuarios() {
+    
     const query = `
         query{
             getUsuarios{
@@ -219,19 +224,19 @@ class Feed extends Component {
                         className="avatar border-gray"
                         src={require("./resources/mike.jpg")}
                       />
-                      <h5 className="title">{this.user.nombre} {this.user.apellido}</h5>
+                      <h5 className="title">{this.props.loginAccountInfo.nombre} {this.props.loginAccountInfo.apellido}</h5>
                     </a>
-                    <p className="description">{this.user.email}</p>
-                    <p className="description">{this.user.nacionalidad}</p>
+                    <p className="description">{this.props.loginAccountInfo.email}</p>
+                    <p className="description">{this.props.loginAccountInfo.apellido}</p>
                   </div>
                   <p className="description text-center">
-                    {this.user.perf_personal}
+                    {this.props.loginAccountInfo.email}
                   </p>
                 </CardBody>
                 <CardFooter>
                   <hr />
                   <div className="button-container">
-                    {this.user.perf_profesional}
+                    {this.props.loginAccountInfo.nombre}
                   </div>
                 </CardFooter>
               </Card>
@@ -293,4 +298,9 @@ class Feed extends Component {
   }
 }
 
-export default Feed
+ 
+const mapStateToProps = (state) => {
+  return {loginAccountInfo: state.loginAccountInfo};
+};
+
+export default connect(mapStateToProps)(Feed);
