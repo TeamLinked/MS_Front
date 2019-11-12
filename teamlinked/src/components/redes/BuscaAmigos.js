@@ -12,7 +12,7 @@ class BuscaAmigos extends React.Component {
         <h2 className="border-bottom pb-2 mb-0">Busca a un compañero</h2>
         <div className="border-bottom pb-2 form-inline md-form mr-auto pt-2">
           {this.props.children}
-          <button type="button" className="btn aqua-gradient btn-rounded btn-sm my-0" onClick={() => this.props.buscar()}>Buscar</button>
+          <button type="button" className="btn aqua-gradient btn-rounded btn-sm my-0 col-md-1" onClick={() => this.props.buscar()}>Buscar</button>
         </div>
         {this.props.personas.map(p => (
           <Amigo persona={p} />

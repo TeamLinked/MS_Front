@@ -123,7 +123,7 @@ class ListaAmigos extends React.Component {
       <div>
         <MiRed personas={this.state.amigos} />
         <BuscaAmigos personas={this.state.busqueda} buscar={this.buscarUsuarios}>
-          <input type="text" className="form-control mr-sm-2" id="nombre" onChange={(event) => this.onInputChange(event)}></input>
+          <input type="text" className="form-control mr-sm-2 col-md-10" id="nombre" onChange={(event) => this.onInputChange(event)}></input>
         </BuscaAmigos>
       </div>
     );
