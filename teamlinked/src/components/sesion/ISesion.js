@@ -13,13 +13,12 @@ class ISesion extends Component {
     constructor(props){
         super(props);
         this.state= {
-            email: "",
-            password: "",
+            email: '',
+            password: '',
             valid: "undefined",
             userToken:false,
             isLoading: false
         }
-
         this.handleChange = this.handleChange.bind(this);
         this.handleFormSubmit = this.handleFormSubmit.bind(this);
     }
@@ -44,10 +43,11 @@ class ISesion extends Component {
             }
         }
 
-        this.setState({
-            [e.target.name]: e.target.value,
-            valid: condition,
-        });
+        let nam = e.target.name;
+        let val = e.target.value;
+        this.setState({[nam]: val});
+
+        
     }
 /*{Makeshift way to handle non-existant user}*/
 /*
@@ -82,14 +82,19 @@ class ISesion extends Component {
         e.preventDefault();
         console.log(this.state);
         this.setState({ isLoading: true });
+        //this.query();
+        //setTimeout(this.query,1000);
+        setTimeout(this.query(), 3000);
+    }
 
+    query (){
         console.log("AQUI ESTOY");
         console.log(this.state.password, this.state.email)
-        const query = `
+        const query =`
             query{
                 Login(body:{
-                    username:`+ this.state.nombre +`
-                    password:`+ this.state.nombre +`
+                    username:"`+this.state.email+`"
+                    password:"`+this.state.password+`"
                 }){
                     token
                 }
@@ -108,7 +113,7 @@ class ISesion extends Component {
                 console.log(e.data);
                 
             })
-            .catch(console.error);
+        .catch(console.error);
     }
 
 
