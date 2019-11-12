@@ -1,30 +1,22 @@
 import React, { Component } from 'react';
 
-import MsjHistory from "./MsjHistory";
-import Recents from "./Recents";
+import Chat from "./Chat";
 
 import '../../styles/Chat.css'; 
 
 
-class MiChat extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {  }
-    }
-    render() { 
-        return (  
-            <div className="App">
-            <div className="container">
-              <div className="messaging">
-                <div className="inbox_msg">
-                  <Recents />
-                  <MsjHistory />
-                </div>
-              </div>
-            </div>
+class Index extends Component {
+  render() {
+    return (  
+      <div className="App">
+        <div className="container">
+          <div className="messaging">
+              <Chat />
           </div>
-        );
-    }
+        </div>
+      </div>
+    );
+  }
 }
  
-export default MiChat;
+export default Index;

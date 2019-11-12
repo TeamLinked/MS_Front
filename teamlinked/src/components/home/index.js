@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { connect } from 'react-redux';
 
 
 import "bootstrap/dist/css/bootstrap.css";
@@ -32,15 +33,27 @@ class Home extends Component {
     // }
 
     render() {
+
+        if (this.props.loginAccountInfo){
+            return(
+                <div>
+                    {/* { this.state.foros.map(foro => <Foro key={foro.id} foro={foro} />)} */}
+                    <Feed/>
+                </div> 
+            )
+        }
         return (
             <div>
-                {/* { this.state.foros.map(foro => <Foro key={foro.id} foro={foro} />)} */}
                 <PaginaPrincipal/>
             </div>
-            
-            
         )
     }
 }
- 
-export default Home;
+
+
+// Para conectar react con redux
+const mapStateToProps = (state) => {
+    return {loginAccountInfo: state.loginAccountInfo};
+};
+  
+export default connect(mapStateToProps)(Home);
