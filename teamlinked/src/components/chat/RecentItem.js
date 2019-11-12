@@ -5,11 +5,14 @@ class RecentItem extends Component {
     super(props);
     this.state = {
       activeChat: "",
-      isActive: this.props.isActive
+      isActive: false,
+      idAmigo: this.props.id
     };
   }
 
   componentDidMount() {
+    this.setState({isActive: this.props.isActive})
+    console.log(this.state.isActive);
     this.revisarSiActivo();
   }
 
@@ -20,10 +23,16 @@ class RecentItem extends Component {
       this.setState({ activeChat: "" });
     }
   }
+  handleClick = e => {
+    let aux = this.state.isActive;
+    this.setState({isActive: !aux});
+    this.revisarSiActivo();
+    this.props.handleClick(this.state.idAmigo);
+  }
 
   render() {
     return (
-      <div className={`chat_list ${this.state.activeChat}`}>
+      <div className={`chat_list ${this.state.activeChat}`} onClick={this.handleClick}>
         <div className="chat_people">
           <div className="chat_ib">
             <h5>
