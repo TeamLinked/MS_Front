@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import axios from 'axios';
 // import {Form, Card, Container, Button, Col, Row} from 'react-bootstrap';
+import SubirArchivos from '../foros/SubirArchivos';
+
 
 import '../../styles/Foros.css';
 
@@ -71,6 +73,9 @@ class CreateForo extends Component {
                 id="imagen"
                 accept="image/png, image/jpeg" alt="" onChange={this.handleImageChange} required/>
             </p>
+
+            <SubirArchivos/>
+
             <button type="submit" class="btn btn-outline-info">Publicar</button>
           </form>
         </div>

@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import {Navbar, Nav, Button, FormControl,  Form, NavDropdown} from 'react-bootstrap';
 import {LinkContainer} from 'react-router-bootstrap';
 import { connect } from 'react-redux';
+import { logOut } from '../actions';
 
 import '../styles/Header.css'; 
 
@@ -17,19 +18,8 @@ class BarraNavegacion extends Component {
               <LinkContainer to="/home"><Nav.Link>TeamLinked</Nav.Link></LinkContainer>
             </Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
-            <Navbar.Collapse id="basic-navbar-nav" style={{backgroundColor:"#343a40"}}>
-              <Nav className="mr-auto" >
-                <LinkContainer to="/empleos"><Nav.Link>Empleos</Nav.Link></LinkContainer>
-                <LinkContainer to="/mired"><Nav.Link>Mi Red</Nav.Link></LinkContainer>
-                <LinkContainer to="/foros"><Nav.Link>Foros</Nav.Link></LinkContainer>
-                <LinkContainer to="/michat"><Nav.Link>Chat</Nav.Link></LinkContainer>
-
-                <NavDropdown title="Usuario" id="collasible-nav-dropdown">
-                  <NavDropdown.Item> <LinkContainer to="/miperfil" style={{color:"#000000"}}><Nav.Link>Mi cuenta</Nav.Link></LinkContainer> </NavDropdown.Item>
-                  <NavDropdown.Divider />
-                  <NavDropdown.Item> <LinkContainer to="/home" style={{color:"#000000"}}><Nav.Link>LogOut</Nav.Link></LinkContainer> </NavDropdown.Item>
-                </NavDropdown>
-              </Nav>
+            <Navbar.Collapse className="justify-content-end" id="basic-navbar-nav" style={{backgroundColor:"#343a40"}}>
+              
               <Form inline>
                 <FormControl type="text" placeholder="Search" className="mr-sm-2" />
                 <LinkContainer to="/busqueda">
@@ -38,6 +28,19 @@ class BarraNavegacion extends Component {
                   </Button>
                 </LinkContainer>
               </Form>
+
+              <Nav  >
+                <LinkContainer to="/empleos"><Nav.Link>Empleos</Nav.Link></LinkContainer>
+                <LinkContainer to="/mired"><Nav.Link>Mi Red</Nav.Link></LinkContainer>
+                <LinkContainer to="/foros"><Nav.Link>Foros</Nav.Link></LinkContainer>
+                <LinkContainer to="/michat"><Nav.Link>Chat</Nav.Link></LinkContainer>
+
+                <NavDropdown title="Usuario" id="collasible-nav-dropdown">
+                  <NavDropdown.Item> <LinkContainer to="/miperfil" style={{color:"#000000"}}><Nav.Link>Mi cuenta</Nav.Link></LinkContainer> </NavDropdown.Item>
+                  <NavDropdown.Divider />
+                  <NavDropdown.Item> <LinkContainer to="/home" style={{color:"#000000"}}><Nav.Link onClick={this.props.logOut}>LogOut</Nav.Link></LinkContainer> </NavDropdown.Item>
+                </NavDropdown>
+              </Nav>
             </Navbar.Collapse>
           </Navbar>
         )
@@ -68,4 +71,5 @@ const mapStateToProps = (state) => {
   return {loginAccountInfo: state.loginAccountInfo};
 };
 
-export default connect(mapStateToProps)(BarraNavegacion);
+export default connect(mapStateToProps, { logOut })(BarraNavegacion);
+

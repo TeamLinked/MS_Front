@@ -34,15 +34,15 @@ class Registro extends Component {
         console.log(`
             mutation{
               putUsuario( body: {
-                nombre: `+ this.state.nombre +`
-                apellido: `+ this.state.apellido +`
-                email: `+ this.state.email +`
-                password: `+ this.state.password +`
-                identificacion: 
-                nacionalidad: ` + this.state.nacionalidad + `
-                fecha_nac: ` + this.state.fecha_nacimiento +`
-                perf_personal: `+ this.state.trabajo + `
-                perf_profesional: `+this.state.lugar_trabajo+`
+                nombre: "`+ this.state.nombre +`"
+                apellido: "`+ this.state.apellido +`"
+                email: "`+ this.state.email +`"
+                password: "`+ this.state.password +`"
+                identificacion: ""
+                nacionalidad: "` + this.state.nacionalidad + `"
+                fecha_nac: "` + this.state.fecha_nacimiento +`"
+                perf_personal: "`+ this.state.trabajo + `"
+                perf_profesional: "`+this.state.lugar_trabajo+`"
               }){
                 nombre
                 apellido
@@ -55,34 +55,71 @@ class Registro extends Component {
     }
     
     query(){
-        const query = `
+
+        let query = `
             mutation{
               putUsuario( body: {
-                nombre: `+ this.state.nombre +`
-                apellido: `+ this.state.apellido +`
-                email: `+ this.state.email +`
-                password: `+ this.state.password +`
-                identificacion: 
-                nacionalidad: ` + this.state.nacionalidad + `
-                fecha_nac: ` + this.state.fecha_nacimiento +`
-                perf_personal: `+ this.state.trabajo + `
-                perf_profesional: `+this.state.lugar_trabajo+`
+                nombre: "`+ this.state.nombre +`"
+                apellido: "`+ this.state.apellido +`"
+                email: "`+ this.state.email +`"
+                password: "XXXXXXXX"
+                identificacion: "1018456"
+                nacionalidad: "` + this.state.nacionalidad + `"
+                fecha_nac: "` + this.state.fecha_nacimiento +`"
+                perf_personal: "`+ this.state.trabajo + `"
+                perf_profesional: "`+this.state.lugar_trabajo+`"
               }){
                 nombre
                 apellido
                 email
               }
-            }`;
+            }
+            `;
+        let queryLDAP = `
+            mutation{
+                Register(body: {
+                  cn: "`+ this.state.email +`" 
+                  sn: "`+ this.state.apellido +`" 
+                  givenName: "`+ this.state.nombre +`"
+                  objectclass: "inetOrgPerson" 
+                  userPassword: "`+ this.state.password +`"
+                }) {
+                  answer
+                }
+              }
+              
+                `;
+
+
+        
         const url = "https://cors-anywhere.herokuapp.com/http://34.94.59.230:3050/graphql";
-        const opts = {
+ 
+        let opts = {
             method: "POST",
             headers: { "Content-Type": "application/json" ,"Access-Control-Allow-Origin": "*"},
             body: JSON.stringify({ query })
         };
+        
+        
+        console.log(query)
         fetch(url, opts)
             .then(res => res.json())
-            .then(e => this.data = e.data.putUsuario)
+            .then(e => {
+                console.log("REGISTRO_RTA:",e.data)
+                query = queryLDAP;
+                let opts = {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" ,"Access-Control-Allow-Origin": "*"},
+                    body: JSON.stringify({ query })
+                };
+
+                fetch(url, opts)
+                    .then(res => res.json())
+                    .then(e => console.log("LDAP:",e.data))
+                    .catch(console.error);
+            }).then()
             .catch(console.error);
+        
     }
     
     render(){

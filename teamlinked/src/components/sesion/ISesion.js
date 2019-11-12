@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import {Button, ButtonToolbar, Card, Col, Form, Row, Container} from "react-bootstrap";
+import {Button, Card, Col, Form, Row, Container} from "react-bootstrap";
 import { connect } from 'react-redux';
 import { storeLoginAccountInfo } from '../../actions';
-import axios from "axios";
+
 
 
 const emailRegex =/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
@@ -17,11 +17,13 @@ class ISesion extends Component {
             password: '',
             valid: "undefined",
             userToken:false,
-            isLoading: false
+            isLoading: false,
+            Key:null, 
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleFormSubmit = this.handleFormSubmit.bind(this);
     }
+
 
     handleChange(e){
 
@@ -46,50 +48,18 @@ class ISesion extends Component {
         let nam = e.target.name;
         let val = e.target.value;
         this.setState({[nam]: val});
-
-        
+       
     }
-/*{Makeshift way to handle non-existant user}*/
-/*
-    handleFormSubmit(e){
-        e.preventDefault();
-        console.log(this.state);
-        this.setState({ isLoading: true });
-
-        
-        axios.post('https://vnct01.herokuapp.com/sessions', {
-            email: this.state.email,
-            password: this.state.password,
-        })
-        .then(res => {
-            
-                if(res.status > 299) throw "nan";
-                console.log(res.data)
-                const infoKey = {
-                accountInfo:res.data.email,
-                key:res.data.authentication_token,
-                id:res.data.id,
-                role:res.data.role
-            };
-            this.props.storeLoginAccountInfo(infoKey);
-        }).catch(e =>{this.setState({valid: "nan", isLoading: false})})
-    }
-
-*/
-
-    
+  
     handleFormSubmit(e) {
         e.preventDefault();
         console.log(this.state);
         this.setState({ isLoading: true });
-        //this.query();
-        //setTimeout(this.query,1000);
-        setTimeout(this.query(), 3000);
+        this.queryLDAP();
     }
 
-    query (){
-        console.log("AQUI ESTOY");
-        console.log(this.state.password, this.state.email)
+    queryLDAP (){
+
         const query =`
             query{
                 Login(body:{
@@ -106,17 +76,61 @@ class ISesion extends Component {
             headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" },
             body: JSON.stringify({ query })
         };
+
         fetch(url, opts)
             .then(res => res.json())
             .then(e => {
                 //this.user = e.data.getUsuarios[this.id];
-                console.log(e.data);
-                
+                console.log("RTA_LOGIN_LDAP",e.data.Login.token);
+                this.setState({key:e.data.Login.token})
+                this.queryBACK()
             })
         .catch(console.error);
     }
 
+    queryBACK (){
+        
+        const query =`
+            query{
+                getUsuarioByEmail(body:{
+                email:"`+this.state.email+`"
+                }){
+                    user{
+                        id
+                        nombre
+                        apellido
+                        email
+                    }
+                }
+            }
+        `;
 
+        const url = "http://34.94.59.230:3050/graphql";
+        const opts = {
+            method: "POST",
+            headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" },
+            body: JSON.stringify({ query })
+        };
+        fetch(url, opts)
+            .then(res => res.json())
+            .then(e => {
+                //this.user = e.data.getUsuarios[this.id];
+                console.log("RTA_LOGIN_BACK",e.data.getUsuarioByEmail.user);
+                
+                if(this.state.key !== null){
+                    const accountInfo = {
+                        key : this.state.key,
+                        id : e.data.getUsuarioByEmail.user.id,
+                        nombre : e.data.getUsuarioByEmail.user.nombre,
+                        apellido : e.data.getUsuarioByEmail.user.apellido,
+                        email : e.data.getUsuarioByEmail.user.email,
+                    }
+                    this.props.storeLoginAccountInfo(accountInfo);
+                }
+                this.setState({isLoading:false})
+            })
+        .catch(console.error);
+    }
     
 
     render() {
