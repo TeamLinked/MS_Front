@@ -61,7 +61,7 @@ class Registro extends Component {
                 nombre: `+ this.state.nombre +`
                 apellido: `+ this.state.apellido +`
                 email: `+ this.state.email +`
-                password: 'XXXXXXXX'
+                password: `+ this.state.password +`
                 identificacion: 
                 nacionalidad: ` + this.state.nacionalidad + `
                 fecha_nac: ` + this.state.fecha_nacimiento +`
@@ -72,38 +72,14 @@ class Registro extends Component {
                 apellido
                 email
               }
-            }
-            `;
-        const queryLDAP = `
-            mutation{
-                Register(body: {
-                  cn: `+ this.state.email +` 
-                  sn: `+ this.state.apellido +` 
-                  givenName: `+ this.state.nombre +`
-                  objectclass: "inetOrgPerson" 
-                  userPassword: `+ this.state.password +`
-                }) {
-                  answer
-                }
-              }
-              
-                `;
+            }`;
         const url = "https://cors-anywhere.herokuapp.com/http://34.94.59.230:3050/graphql";
         const opts = {
             method: "POST",
             headers: { "Content-Type": "application/json" ,"Access-Control-Allow-Origin": "*"},
             body: JSON.stringify({ query })
         };
-        const optsLDAP = {
-            method: "POST",
-            headers: { "Content-Type": "application/json" ,"Access-Control-Allow-Origin": "*"},
-            body: JSON.stringify({ queryLDAP })
-        };
         fetch(url, opts)
-            .then(res => res.json())
-            .then(e => this.data = e.data.putUsuario)
-            .catch(console.error);
-        fetch(url, optsLDAP)
             .then(res => res.json())
             .then(e => this.data = e.data.putUsuario)
             .catch(console.error);
