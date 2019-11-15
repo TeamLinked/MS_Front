@@ -20,3 +20,15 @@ export const logOut = () =>{
         payload: null
     };
 };
+
+
+export const uploadURLImageToSend = (file)=>{
+    return{
+        type: 'UPLOAD_URL_IMAGE_TO_SEND',
+        payload: {
+            name: file.name,
+            type: file.type,
+            photo: file.photo
+        }
+    };
+};

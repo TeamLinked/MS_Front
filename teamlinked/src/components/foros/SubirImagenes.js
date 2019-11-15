@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 
 import firebase from 'firebase';
-import { connect } from 'react-redux';
 import {Button,Card, FormGroup, Form} from "react-bootstrap";
+import { connect } from 'react-redux';
+import { uploadURLImageToSend } from '../../actions';
+
+
 
 import uploadImage from '../../assets/uploadImage.png';
 
@@ -20,7 +23,7 @@ const config = {
 
 firebase.initializeApp(config) 
 
-class SubirArchivos extends Component {
+class SubirImagenes extends Component {
     constructor(props) {
         super(props);
         this.state = {  
@@ -88,4 +91,14 @@ class SubirArchivos extends Component {
     }
 }
  
-export default SubirArchivos;
+
+
+// Para conectar react con redux
+
+const mapStateToProps = (state) => {
+  
+    return {loginAccountInfo: state.loginAccountInfo};
+};
+  
+export default connect(mapStateToProps, { uploadURLImageToSend })(SubirImagenes);
+  
