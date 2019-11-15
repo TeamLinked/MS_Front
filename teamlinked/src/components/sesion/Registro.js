@@ -1,6 +1,7 @@
-import React, { Component } from 'react';
+import React, { Component, useState} from 'react';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom'
+import { Redirect } from 'react-router-dom';
+import {Alert, Button} from 'reactstrap';
 
 import '../../styles/Sesion.css';
 
@@ -20,7 +21,11 @@ class Registro extends Component {
             nacionalidad: '',
             trabajo: '',
             lugar_trabajo: '',
-            fecha_nacimiento: ''
+            fecha_nacimiento: '',
+            //Alert
+            alertVisible: false,
+            
+            redirect:false
             
         };
     
@@ -32,17 +37,28 @@ class Registro extends Component {
         let nam = event.target.name;
         let val = event.target.value;
         this.setState({[nam]: val});
-        console.log(this.state)
     }
     
     handleSubmit(event) {
         console.log(JSON.stringify(this.state));
-        this.query();
+        if(this.state.password == this.state.confirm_password){
+            this.query();
+        }else{
+            this.setState({
+                alertVisible: true
+            });
+        }
         event.preventDefault();
     }
     
     selectCountry (val) {
         this.setState({ nacionalidad: val });
+    }
+    
+    renderRedirect = () => {
+        if(this.state.redirect){
+            return <Redirect to='/sesion' />;
+        }
     }
     
     query(){
@@ -96,6 +112,11 @@ class Registro extends Component {
             .then(res => res.json())
             .then(e => {
                 query = queryLDAP;
+                if(e.errors !== undefined){
+                    this.setState({
+                        alertVisible: true
+                    });
+                };
                 let opts = {
                     method: "POST",
                     headers: { "Content-Type": "application/json" ,"Access-Control-Allow-Origin": "*"},
@@ -104,11 +125,39 @@ class Registro extends Component {
 
                 fetch(url, opts)
                     .then(res => res.json())
-                    .then(e => console.log("LDAP:",e.data))
-                    .catch(console.error);
+                    .then(e => {
+                        console.log("LDAP:",e.data)
+                        if(e.errors !== undefined){
+                            this.setState({
+                                alertVisible: true
+                            });
+                        }else{
+                            console.log("Hello");
+                            this.setState({
+                                redirect: true
+                            })
+                        }
+                    })
+                    .catch(e => {
+                        console.log(e);
+                        this.setState({
+                            alertVisible: true
+                        });
+                    });
             }).then()
-            .catch(console.error);
+            .catch(e => {
+                console.log(e);
+                this.setState({
+                    alertVisible: true
+                });
+            });
         
+    }
+    
+    toggle(){
+        this.setState({
+            alertVisible: !this.state.alertVisible
+        });
     }
     
     render(){
@@ -117,6 +166,7 @@ class Registro extends Component {
             <div>
             
                 <div className = "Registro Registro-header mt-4">Regístrate </div>
+                <Alert color="danger" isOpen={this.state.alertVisible} toggle={this.toggle.bind(this)}>Ha habido un problema ingresando los datos, porfavor intenta de nuevo</Alert>
                 <form onSubmit={this.handleSubmit}>
                     <div className = "row align-items-center mt-4">
                         <div className = "col-3"></div>
@@ -212,8 +262,9 @@ class Registro extends Component {
                     <div className = "row align-items-center mt-4">
                         <div className = "col-5"></div>
                         <div className = "col-2">
-                            <input type="submit" value="Submit" />
+                            <input type="submit" value="Submit"/>
                         </div>
+                        {this.renderRedirect()};
                     </div>
                 </form>
             </div>

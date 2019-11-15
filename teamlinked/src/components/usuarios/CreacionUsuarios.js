@@ -76,8 +76,6 @@ class CreacionUsuarios extends Component {
                         <Card.Title>Actualizar mi informacion</Card.Title>
                     </Card.Header>
                     <form onSubmit={this.handleSubmit} className="p-2">
-                    <img src={this.state.previewimg} className="img-thumbnail"/>
-                    <input type="file" onChange={this.handlePreview}/>
                     <button type="submit" className="btn btn-primary">
                         Actualizar información
                         </button>
