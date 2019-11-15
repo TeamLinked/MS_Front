@@ -2,11 +2,14 @@ import React, { Component } from 'react'
 import axios from 'axios';
 import * as user from '../../datos/user.json';
 import { connect } from 'react-redux';
+
+
 // import {Form, Card, Container, Button, Col, Row} from 'react-bootstrap';
 
 import '../../styles/Foros.css';
 import Foro from '../foros/Foro'
 import Friends from './Friends'
+import NewPost from './NewPost'
 
 import {
   Button,
@@ -217,12 +220,12 @@ class Feed extends Component {
                   />
                 </div>
                 <CardBody>
-                  <div className="author">
+                  <div className="author" >
                     <a href="#pablo" onClick={e => e.preventDefault()}>
                       <img
                         alt="..."
                         className="avatar border-gray"
-                        src={require("./resources/mike.jpg")}
+                        src={require("./resources/default-avatar.png")}
                       />
                       <h5 className="title">{this.props.loginAccountInfo.nombre} {this.props.loginAccountInfo.apellido}</h5>
                     </a>
@@ -281,6 +284,8 @@ class Feed extends Component {
 
 
               {/* <Form> */}
+
+              <NewPost/>
 
 
 

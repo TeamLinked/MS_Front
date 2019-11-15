@@ -12,8 +12,9 @@ class Foro extends Component {
   }
 
   pic(picture) {
-
-    if (picture == null) {
+    console.log("IMAGEN", picture)
+    // if (picture == null) {
+    if (true) {
       return "https://media.sproutsocial.com/uploads/2017/08/Facebook-Shared-Post-Video.png";
     } else {
       return picture;
