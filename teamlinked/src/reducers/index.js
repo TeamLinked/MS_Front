@@ -13,7 +13,16 @@ const storedLoginAccountInfoReducer = (loginAccountInfo = null, action) => {
 }
 
 
+const urlImageUploadedToSendReducer =(urlImage=null, action)=>{
+    if(action.type === 'UPLOAD_URL_IMAGE_TO_SEND'){
+        return action.payload;
+    }
+    return urlImage;
+};
+
+
 //hacemos uso de la funcion combine Reducers
 export default combineReducers({
-    loginAccountInfo: storedLoginAccountInfoReducer
+    loginAccountInfo: storedLoginAccountInfoReducer,
+    urlImageUploaded: urlImageUploadedToSendReducer
 });

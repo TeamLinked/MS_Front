@@ -29,7 +29,6 @@ class PaginaPrincipal extends Component {
                     style={{
                         width: "100%",
                         height: "100%",
-                        filter: "blur(1px)",
                         padding: "0px"
                     }}
                     />

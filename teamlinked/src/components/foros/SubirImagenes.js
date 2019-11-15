@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 
 import firebase from 'firebase';
-import { connect } from 'react-redux';
 import {Button,Card, FormGroup, Form} from "react-bootstrap";
+import { connect } from 'react-redux';
+import { uploadURLImageToSend } from '../../actions';
+
+
 
 import uploadImage from '../../assets/uploadImage.png';
 
@@ -20,7 +23,7 @@ const config = {
 
 firebase.initializeApp(config) 
 
-class SubirArchivos extends Component {
+class SubirImagenes extends Component {
     constructor(props) {
         super(props);
         this.state = {  
@@ -32,7 +35,7 @@ class SubirArchivos extends Component {
     }
 
     handleUploadImage(event){
-        const id_usuario = "1";  // cambiar por el id del store de redux
+        const id_usuario = this.props.loginAccountInfo.id;
         const file = event.target.files[0];
         const name = `u${id_usuario}-${Date.now()}`;
         const storageRef = firebase.storage().ref(`/imagenes/${name}`)
@@ -88,4 +91,14 @@ class SubirArchivos extends Component {
     }
 }
  
-export default SubirArchivos;
+
+
+// Para conectar react con redux
+
+const mapStateToProps = (state) => {
+  
+    return {loginAccountInfo: state.loginAccountInfo};
+};
+  
+export default connect(mapStateToProps, { uploadURLImageToSend })(SubirImagenes);
+  

@@ -13,7 +13,7 @@ class BarraNavegacion extends Component {
       if (this.props.loginAccountInfo){
         console.log(this.props.loginAccountInfo);
         return (
-          <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" style={{marginBottom:"0px", zIndex:"100"}}>
+          <Navbar  collapseOnSelect expand="lg" bg="dark" variant="dark" style={{marginBottom:"0px", zIndex:"100"}}>
             <Navbar.Brand>
               <LinkContainer to="/home"><Nav.Link>TeamLinked</Nav.Link></LinkContainer>
             </Navbar.Brand>
@@ -23,17 +23,13 @@ class BarraNavegacion extends Component {
               
               
 
-              <Nav  >
+              <Nav>
                 <LinkContainer to="/empleos"><Nav.Link>Empleos</Nav.Link></LinkContainer>
                 <LinkContainer to="/mired"><Nav.Link>Mi Red</Nav.Link></LinkContainer>
                 <LinkContainer to="/foros"><Nav.Link>Foros</Nav.Link></LinkContainer>
                 <LinkContainer to="/michat"><Nav.Link>Chat</Nav.Link></LinkContainer>
-
-                <NavDropdown title="Usuario" id="collasible-nav-dropdown">
-                  <NavDropdown.Item> <LinkContainer to="/miperfil" style={{color:"#000000"}}><Nav.Link>Mi cuenta</Nav.Link></LinkContainer> </NavDropdown.Item>
-                  <NavDropdown.Divider />
-                  <NavDropdown.Item> <LinkContainer to="/home" style={{color:"#000000"}}><Nav.Link onClick={this.props.logOut}>LogOut</Nav.Link></LinkContainer> </NavDropdown.Item>
-                </NavDropdown>
+                <LinkContainer to="/miperfil" ><Nav.Link>Mi cuenta</Nav.Link></LinkContainer>
+                <LinkContainer to="/home" ><Nav.Link onClick={this.props.logOut}>LogOut</Nav.Link></LinkContainer>
               </Nav>
             </Navbar.Collapse>
           </Navbar>
