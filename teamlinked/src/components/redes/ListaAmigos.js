@@ -10,7 +10,7 @@ class ListaAmigos extends React.Component {
       entradaTexto: "",
       persons: [""],
       busqueda: [],
-      idUsuario: "1",
+      idUsuario: "5",
       idsAmigos: [],
       amigos: []
     };
@@ -105,13 +105,12 @@ class ListaAmigos extends React.Component {
   }
   onInputChange(event) {
     this.setState({entradaTexto: event.target.value});
-    console.log(this.state.entradaTexto);
   }
   buscarUsuarios(){
     let aux = [];
-    //console.log(this.state.persons[0]);
+    let searchTerm = this.state.entradaTexto.toLowerCase();
     this.state.persons.forEach(person => {
-      if(this.state.entradaTexto == person.nombre){
+      if(person.nombre.toLowerCase().includes(searchTerm) || person.apellido.toLowerCase().includes(searchTerm)){
         aux.push(person);
       }
     })
