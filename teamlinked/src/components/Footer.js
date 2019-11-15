@@ -22,7 +22,7 @@ class Footer extends Component {
                     height:"50px",
                     color:"white",
                     backgroundColor: "#343a40",
-                    alignItems:"center"
+                    justifyContent:"end"
                 }}>
                     
                     <Row>

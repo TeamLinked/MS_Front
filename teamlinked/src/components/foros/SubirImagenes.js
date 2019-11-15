@@ -35,7 +35,7 @@ class SubirImagenes extends Component {
     }
 
     handleUploadImage(event){
-        const id_usuario = "1";  // cambiar por el id del store de redux
+        const id_usuario = this.props.loginAccountInfo.id;
         const file = event.target.files[0];
         const name = `u${id_usuario}-${Date.now()}`;
         const storageRef = firebase.storage().ref(`/imagenes/${name}`)

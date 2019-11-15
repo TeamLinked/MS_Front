@@ -22,13 +22,11 @@ export const logOut = () =>{
 };
 
 
-export const uploadURLImageToSend = (file)=>{
+export const uploadURLImageToSend = (urlImage)=>{
     return{
         type: 'UPLOAD_URL_IMAGE_TO_SEND',
         payload: {
-            name: file.name,
-            type: file.type,
-            photo: file.photo
+            urlImage: urlImage
         }
     };
 };
