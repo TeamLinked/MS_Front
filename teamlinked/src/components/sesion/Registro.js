@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom'
 
 import '../../styles/Sesion.css';
+
+//Components
+import { CountryDropdown} from 'react-country-region-selector';
 
 class Registro extends Component {
     
@@ -27,31 +32,17 @@ class Registro extends Component {
         let nam = event.target.name;
         let val = event.target.value;
         this.setState({[nam]: val});
+        console.log(this.state)
     }
     
     handleSubmit(event) {
         console.log(JSON.stringify(this.state));
-        console.log(`
-            mutation{
-              putUsuario( body: {
-                nombre: "`+ this.state.nombre +`"
-                apellido: "`+ this.state.apellido +`"
-                email: "`+ this.state.email +`"
-                password: "`+ this.state.password +`"
-                identificacion: ""
-                nacionalidad: "` + this.state.nacionalidad + `"
-                fecha_nac: "` + this.state.fecha_nacimiento +`"
-                perf_personal: "`+ this.state.trabajo + `"
-                perf_profesional: "`+this.state.lugar_trabajo+`"
-              }){
-                nombre
-                apellido
-                email
-              }
-            }`
-        );
         this.query();
         event.preventDefault();
+    }
+    
+    selectCountry (val) {
+        this.setState({ nacionalidad: val });
     }
     
     query(){
@@ -87,7 +78,6 @@ class Registro extends Component {
                   answer
                 }
               }
-              
                 `;
 
 
@@ -105,7 +95,6 @@ class Registro extends Component {
         fetch(url, opts)
             .then(res => res.json())
             .then(e => {
-                console.log("REGISTRO_RTA:",e.data)
                 query = queryLDAP;
                 let opts = {
                     method: "POST",
@@ -124,7 +113,9 @@ class Registro extends Component {
     
     render(){
         return(
+            
             <div>
+            
                 <div className = "Registro Registro-header mt-4">Regístrate </div>
                 <form onSubmit={this.handleSubmit}>
                     <div className = "row align-items-center mt-4">
@@ -184,7 +175,7 @@ class Registro extends Component {
                             <div className = "Registro-text">Nacionalidad</div>
                         </div>
                         <div className = "col-3">
-                            <input className="form-control mr-sm-2" type="search" placeholder="Search" name = "nacionalidad" onChange={this.handleChange}/>
+                            <CountryDropdown className="form-control mr-sm-2" value={this.state.nacionalidad} onChange={(val) => this.selectCountry(val)} />
                         </div>
                         <div className = "col-3"></div>
                     </div>
@@ -230,4 +221,12 @@ class Registro extends Component {
     }
 }
 
-export default Registro;
+//Redux
+
+const mapStateToProps = (state) => {
+  
+  return {loginAccountInfo: state.loginAccountInfo};
+};
+
+
+export default connect(mapStateToProps, null)(Registro);
