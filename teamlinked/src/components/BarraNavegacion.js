@@ -1,47 +1,65 @@
 import React, { Component } from 'react';
 
-import {Navbar, Nav, Button, FormControl,  Form, Col} from 'react-bootstrap';
+import {Navbar, Nav, Button, FormControl,  Form, NavDropdown} from 'react-bootstrap';
 import {LinkContainer} from 'react-router-bootstrap';
+import { connect } from 'react-redux';
+import { logOut } from '../actions';
 
 import '../styles/Header.css'; 
 
 
 class BarraNavegacion extends Component {
     render() {
-      return (
-        <Navbar bg="dark" variant="dark">
-            <Col>
-              <LinkContainer to="/home">
-                  <Navbar.Brand>
-                      <h3 className="navbar-brand text-white mr-auto" href="./">TeamLinked</h3>
-                  </Navbar.Brand>
-              </LinkContainer>
-            </Col>
-            <Col md="auto" >
-              <Nav className="justify-content-end">
+      if (this.props.loginAccountInfo){
+        console.log(this.props.loginAccountInfo);
+        return (
+          <Navbar  collapseOnSelect expand="lg" bg="dark" variant="dark" style={{marginBottom:"0px", zIndex:"100"}}>
+            <Navbar.Brand>
+              <LinkContainer to="/home"><Nav.Link>TeamLinked</Nav.Link></LinkContainer>
+            </Navbar.Brand>
+            <Navbar.Toggle aria-controls="basic-navbar-nav" />
+            
+            <Navbar.Collapse className="justify-content-end" id="basic-navbar-nav" style={{backgroundColor:"#343a40"}}>
+              
+              
 
-                  <LinkContainer to="/empleos"><Nav.Link>Empleos</Nav.Link></LinkContainer>
-                  <LinkContainer to="/mired"><Nav.Link>Mi Red</Nav.Link></LinkContainer>
-                  <LinkContainer to="/foros"><Nav.Link>Foros</Nav.Link></LinkContainer>
-                  <LinkContainer to="/michat"><Nav.Link>Chat</Nav.Link></LinkContainer>
-                  <LinkContainer to="/miperfil"><Nav.Link>Mi cuenta</Nav.Link></LinkContainer>
-                  <LinkContainer to="/sesion"><Nav.Link>LogOut</Nav.Link></LinkContainer>
-                  
-                  <Form inline>
-                    <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-                    <LinkContainer to="/busqueda">
-                      <Button variant="outline-info">
-                          Buscar
-                      </Button>
-                    </LinkContainer>
-                  </Form>
-
+              <Nav>
+                <LinkContainer to="/empleos"><Nav.Link>Empleos</Nav.Link></LinkContainer>
+                <LinkContainer to="/mired"><Nav.Link>Mi Red</Nav.Link></LinkContainer>
+                <LinkContainer to="/foros"><Nav.Link>Foros</Nav.Link></LinkContainer>
+                <LinkContainer to="/michat"><Nav.Link>Chat</Nav.Link></LinkContainer>
+                <LinkContainer to="/miperfil" ><Nav.Link>Mi cuenta</Nav.Link></LinkContainer>
+                <LinkContainer to="/home" ><Nav.Link onClick={this.props.logOut}>LogOut</Nav.Link></LinkContainer>
               </Nav>
-            </Col>
+            </Navbar.Collapse>
+          </Navbar>
+        )
+      }
+      
+      return (
+        
+        <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" style={{marginBottom:"0px", zIndex:"100"}}>
+          <Navbar.Brand>
+            <LinkContainer to="/home"><Nav.Link>TeamLinked</Nav.Link></LinkContainer>
+          </Navbar.Brand>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse className="justify-content-end" id="basic-navbar-nav" style={{backgroundColor:"#343a40"}}>
+            <Nav>
+              <LinkContainer to="/sesion"><Nav.Link>Iniciar sesión</Nav.Link></LinkContainer>
+              <LinkContainer to="/registro"><Nav.Link>Registrarse</Nav.Link></LinkContainer>
+            </Nav>
+          </Navbar.Collapse>
         </Navbar>
+
       )
     }
 }
 
+// Para conectar react con redux
+const mapStateToProps = (state) => {
+  
+  return {loginAccountInfo: state.loginAccountInfo};
+};
 
-export default BarraNavegacion
+export default connect(mapStateToProps, { logOut })(BarraNavegacion);
+

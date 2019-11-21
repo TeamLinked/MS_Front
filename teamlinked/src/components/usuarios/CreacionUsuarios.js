@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {Container, Card} from 'react-bootstrap';
+import { connect } from 'react-redux';
 
 //Estilos
 //import '../styles/Usuarios.css'; 
@@ -21,7 +22,6 @@ class CreacionUsuarios extends Component {
           previewimg: ''
         }
         this.handleInputChange = this.handleInputChange.bind(this);
-        this.handlePreview = this.handlePreview.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
     
@@ -30,44 +30,63 @@ class CreacionUsuarios extends Component {
             this.setState({
             [name]: value
             });
-      }
-    
-      handlePreview = (e) => {
-        e.preventDefault();
-
-        let file = e.target.files[0];
-        let reader = new FileReader();
-
-        if (e.target.files.length === 0) {
-        return;
         }
-
-        reader.onloadend = (e) => {
-        this.setState({
-            previewimg: [reader.result]
-        });
-        }
-
-        reader.readAsDataURL(file);
-      }
     
       handleSubmit(e) {
+        
+        console.log(JSON.stringify(this.state));
+        this.query();
         e.preventDefault();
-        //this.props.onAddTodo(this.state); para enviar info de esta pagina a una pagina madre
-        this.setState({
-          nombre: '',
-          apellido: '',
-          correo: '',
-          nacionalidad: '',
-          contrasenaact: '',
-          contrasenanew: '',
-          contrasenaconfirm: '',
-          descripcion: '',
-          experiencia: '',
-          habilidades: '',
-          previewimg: ''
-        });
       }
+      
+      query(){
+          const Uid = this.props.loginAccountInfo.id;
+          let query = `
+            mutation{
+              putUsuario(id: ${Uid},
+              body: {
+            `;
+            if(this.state.nombre != ''){
+                query = query +
+                    `
+                    nombre: "`+ this.state.nombre +`"`
+            }
+            if(this.state.apellido != ''){
+                   query = query +
+                   `
+                    apellido: "`+ this.state.apellido +`"`
+            }
+            if(this.state.correo != ''){
+                query = query +
+                    `
+                    email: "`+ this.state.correo +`"`
+            }
+            if(this.state.nacionalidad != ''){
+                query = query +
+                    `
+                    nacionalidad: "`+ this.state.nacionalidad +`"`
+            }
+            
+            query = query +`
+            }){
+              }
+            }
+            `
+            console.log(query);
+            const url = "https://cors-anywhere.herokuapp.com/http://34.94.59.230:3050/graphql";
+ 
+            let opts = {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" ,"Access-Control-Allow-Origin": "*"},
+                    body: JSON.stringify({ query })
+            };
+            fetch(url, opts)
+                    .then(res => res.json())
+                    .catch(e => {
+                        console.log(e);
+                    });
+      }
+      
     render() { 
         return (  
             <Container style={{display: 'flex',  justifyContent:'center', alignItems:'center', paddingTop: '10px' }}>
@@ -76,9 +95,7 @@ class CreacionUsuarios extends Component {
                         <Card.Title>Actualizar mi informacion</Card.Title>
                     </Card.Header>
                     <form onSubmit={this.handleSubmit} className="p-2">
-                    <img src={this.state.previewimg} className="img-thumbnail"/>
-                    <input type="file" onChange={this.handlePreview}/>
-                    <button type="submit" className="btn btn-primary">
+                    <button type="submit" className="btn btn-primary" onClick={this.handleSubmit}>
                         Actualizar información
                         </button>
                         <div className="twocolscustom">
@@ -97,7 +114,7 @@ class CreacionUsuarios extends Component {
                             Apellido
                             <input
                             type="text"
-                            name="descripcion"
+                            name="apellido"
                             className="form-control"
                             value={this.state.apellido}
                             onChange={this.handleInputChange}
@@ -134,7 +151,7 @@ class CreacionUsuarios extends Component {
                         <div className="form-group p-2">
                             Contraseña Actual
                             <input
-                            type="text"
+                            type="password"
                             name="contrasenaact"
                             className="form-control"
                             value={this.state.contrasenaact}
@@ -145,8 +162,8 @@ class CreacionUsuarios extends Component {
                         <div className="form-group p-2">
                             Nueva Contraseña
                             <input
-                            type="text"
-                            name="descripcion"
+                            type="password"
+                            name="contrasenanew"
                             className="form-control"
                             value={this.state.contrasenanew}
                             onChange={this.handleInputChange}
@@ -161,7 +178,7 @@ class CreacionUsuarios extends Component {
                         <div className="form-group p-2">
                             Confirmar Contraseña
                             <input
-                            type="text"
+                            type="password"
                             name="contrasenaconfirm"
                             className="form-control"
                             value={this.state.contrasenaconfirm}
@@ -211,6 +228,11 @@ class CreacionUsuarios extends Component {
     }
 }
  
-export default CreacionUsuarios;
+const mapStateToProps = (state) => {
+  
+  return {loginAccountInfo: state.loginAccountInfo};
+};
+ 
+export default connect(mapStateToProps, null)(CreacionUsuarios);
 
 

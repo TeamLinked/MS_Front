@@ -1,10 +1,15 @@
 import React, { Component } from 'react'
 import axios from 'axios';
 import * as user from '../../datos/user.json';
+import { connect } from 'react-redux';
+
+
 // import {Form, Card, Container, Button, Col, Row} from 'react-bootstrap';
 
 import '../../styles/Foros.css';
 import Foro from '../foros/Foro'
+import Friends from './Friends'
+import NewPost from './NewPost'
 
 import {
   Button,
@@ -29,9 +34,14 @@ class Feed extends Component {
   constructor() {
     super();
     this.user = user;
-    this.id = 0;
+    this.id = "";
     this.state = {
-      foros: []
+      foros: [],
+      amigos: [],
+      persons: [""],
+      idUsuario: this.id,
+      idsAmigos: [],
+      amigos: [],
     }
   }
   state = {
@@ -39,6 +49,88 @@ class Feed extends Component {
     contenido: '',
     categoria: '',
     imagen: null
+  }
+  
+  componentDidMount(){
+    this.setState({idUsuario:this.props.loginAccountInfo.id})
+  }
+
+  pedirUsuarios() {
+    
+    const query = `
+        query{
+            getUsuarios{
+                id
+                nombre
+                apellido
+                email
+                identificacion
+                nacionalidad
+                perf_profesional
+                perf_personal
+            }
+        }
+    `;
+    const url =
+      "https://cors-anywhere.herokuapp.com/http://34.94.59.230:3050/graphql";
+    const opts = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*"
+      },
+      body: JSON.stringify({ query })
+    };
+    fetch(url, opts)
+      .then(res => res.json())
+      .then(e => {
+        this.setState({ persons: e.data.getUsuarios });
+        this.forceUpdate();
+        this.pedirRelacionesDelUsuario();
+      })
+      .catch(console.error);
+  }
+  pedirRelacionesDelUsuario() {
+    const query =
+      `
+        query{
+            RelacionU(id: "` +
+      this.state.idUsuario +
+      `"){
+                friends
+            }
+        }
+    `;
+    const url =
+      "https://cors-anywhere.herokuapp.com/http://34.94.59.230:3050/graphql";
+    const opts = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*"
+      },
+      body: JSON.stringify({ query })
+    };
+    fetch(url, opts)
+      .then(res => res.json())
+      .then(e => {
+        this.setState({ idsAmigos: e.data.RelacionU[0].friends });
+        this.forceUpdate();
+        this.buscarAmigos(this.state.idsAmigos);
+      })
+      .catch(console.error);
+  }
+
+  buscarAmigos(params) {
+    let aux = [];
+    params.forEach(idAmigo => {
+      this.state.persons.forEach(person => {
+        if (idAmigo == person.id) {
+          aux.push(person);
+        }
+      });
+    });
+    this.setState({ amigos: aux });
   }
 
   pedirForos() {
@@ -56,23 +148,23 @@ class Feed extends Component {
     const url = "http://34.94.59.230:3050/graphql";
 
     const opts = {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": "*"
-        },
-        body: JSON.stringify({ query })
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*"
+      },
+      body: JSON.stringify({ query })
     };
 
     fetch(url, opts)
-    .then(res => res.json())   
-    .then(e => {
+      .then(res => res.json())
+      .then(e => {
         // console.log(e)
         this.setState({ foros: e.data.Foros });
         console.log(e.data.Foros);
-    })
-    .catch(console.error);
-}
+      })
+      .catch(console.error);
+  }
 
 
 
@@ -108,15 +200,16 @@ class Feed extends Component {
         this.forceUpdate();
       })
       .catch(console.error);
-      this.pedirForos();
+    this.pedirForos();
+    this.pedirUsuarios();
 
-      
+
   }
 
   render() {
     return (
       <>
-        <div className="content col-lg-10 mx-auto" >
+        <div className="content col-lg-10 mx-auto" style={{marginTop: "20px"}} >
           <Row>
             <Col md="4">
               <Card className="card-user">
@@ -127,140 +220,79 @@ class Feed extends Component {
                   />
                 </div>
                 <CardBody>
-                  <div className="author">
+                  <div className="author" >
                     <a href="#pablo" onClick={e => e.preventDefault()}>
                       <img
                         alt="..."
                         className="avatar border-gray"
-                        src={require("./resources/mike.jpg")}
+                        src={require("./resources/default-avatar.png")}
                       />
-                      <h5 className="title">{this.user.nombre} {this.user.apellido}</h5>
+                      <h5 className="title">{this.props.loginAccountInfo.nombre} {this.props.loginAccountInfo.apellido}</h5>
                     </a>
-                    <p className="description">{this.user.email}</p>
-                    <p className="description">{this.user.nacionalidad}</p>
+                    <p className="description">{this.props.loginAccountInfo.email}</p>
+                    <p className="description">{this.props.loginAccountInfo.apellido}</p>
                   </div>
                   <p className="description text-center">
-                    {this.user.perf_personal}
+                    {this.props.loginAccountInfo.email}
                   </p>
                 </CardBody>
                 <CardFooter>
                   <hr />
                   <div className="button-container">
-                    {this.user.perf_profesional}
+                    {this.props.loginAccountInfo.nombre}
                   </div>
                 </CardFooter>
               </Card>
+
+
               <Card>
                 <CardHeader>
-                  <CardTitle tag="h4">Team Members</CardTitle>
+                  <CardTitle tag="h4">Miembros de la Red</CardTitle>
                 </CardHeader>
                 <CardBody>
+
+
+
                   <ul className="list-unstyled team-members">
-                    <li>
-                      <Row>
-                        <Col md="2" xs="2">
-                          <div className="avatar">
-                            <img
-                              alt="..."
-                              className="img-circle img-no-padding img-responsive"
-                              src={require("./resources/faces/ayo-ogunseinde-2.jpg")}
-                            />
-                          </div>
-                        </Col>
-                        <Col md="7" xs="7">
-                          DJ Khaled <br />
-                          <span className="text-muted">
-                            <small>Offline</small>
-                          </span>
-                        </Col>
-                        <Col className="text-right" md="3" xs="3">
-                          <Button
-                            className="btn-round btn-icon"
-                            color="success"
-                            outline
-                            size="sm"
-                          >
-                            <i className="fa fa-envelope" />
-                          </Button>
-                        </Col>
-                      </Row>
-                    </li>
-                    <li>
-                      <Row>
-                        <Col md="2" xs="2">
-                          <div className="avatar">
-                            <img
-                              alt="..."
-                              className="img-circle img-no-padding img-responsive"
-                              src={require("./resources/faces/joe-gardner-2.jpg")}
-                            />
-                          </div>
-                        </Col>
-                        <Col md="7" xs="7">
-                          Creative Tim <br />
-                          <span className="text-success">
-                            <small>Available</small>
-                          </span>
-                        </Col>
-                        <Col className="text-right" md="3" xs="3">
-                          <Button
-                            className="btn-round btn-icon"
-                            color="success"
-                            outline
-                            size="sm"
-                          >
-                            <i className="fa fa-envelope" />
-                          </Button>
-                        </Col>
-                      </Row>
-                    </li>
-                    <li>
-                      <Row>
-                        <Col md="2" xs="2">
-                          <div className="avatar">
-                            <img
-                              alt="..."
-                              className="img-circle img-no-padding img-responsive"
-                              src={require("./resources/faces/clem-onojeghuo-2.jpg")}
-                            />
-                          </div>
-                        </Col>
-                        <Col className="col-ms-7" xs="7">
-                          Flume <br />
-                          <span className="text-danger">
-                            <small>Busy</small>
-                          </span>
-                        </Col>
-                        <Col className="text-right" md="3" xs="3">
-                          <Button
-                            className="btn-round btn-icon"
-                            color="success"
-                            outline
-                            size="sm"
-                          >
-                            <i className="fa fa-envelope" />
-                          </Button>
-                        </Col>
-                      </Row>
-                    </li>
+                    
+
+
+
+
+                        {this.state.amigos.map(p => (
+                          <Friends persona={p} />
+
+                        ))}
+
+                    
+                    
                   </ul>
                 </CardBody>
               </Card>
+
+
+
+
+
+
+
             </Col>
             <Col md="8">
-            {/* <CardBody> */}
+              {/* <CardBody> */}
 
 
 
 
-                 {/* <Form> */}
+              {/* <Form> */}
 
-                    
+              <NewPost/>
 
-                    {this.state.foros.map(foro => <Foro key={foro.id} foro={foro} />)}
 
-                  {/* </Form> */}
-                {/* </CardBody> */}
+
+              {this.state.foros.map(foro => <Foro key={foro.id} foro={foro} />)}
+
+              {/* </Form> */}
+              {/* </CardBody> */}
 
 
             </Col>
@@ -271,4 +303,9 @@ class Feed extends Component {
   }
 }
 
-export default Feed
+ 
+const mapStateToProps = (state) => {
+  return {loginAccountInfo: state.loginAccountInfo};
+};
+
+export default connect(mapStateToProps)(Feed);
