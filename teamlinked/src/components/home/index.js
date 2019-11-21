@@ -71,7 +71,7 @@ class Home extends Component {
     }
 
  
-
+}
 
 // Para conectar react con redux
 const mapStateToProps = (state) => {
