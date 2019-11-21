@@ -1,0 +1,13 @@
+mutation{
+  InRelacion(input:{
+    id:"idDelUsuarioNvo"
+  }){
+    id
+    friends
+  }
+}
+mutation{
+    addFriend(id1:"unUsuario",id1:"otro"){
+        id
+    }
+}

@@ -32,6 +32,7 @@ class Foro extends Component {
       //       <p className="card-text">{this.props.foro.fechaCreacion}</p>
       //     </div> 
       // </div>
+
       <Card>
 
         <Card.Img class="center-cropped" variant="top" src={this.pic(this.props.foro.imagen)} />
@@ -55,7 +56,6 @@ class Foro extends Component {
           {console.log(this.props.foro.fechaCreacion)}
           <small className="text-muted">{this.props.foro.fecha_creacion} </small>
         </Card.Footer>
-
       </Card>
 
 
