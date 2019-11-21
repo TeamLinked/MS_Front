@@ -1,6 +1,10 @@
 import React, { Component } from 'react'
 import axios from 'axios';
 
+// import {Form, Card, Container, Button, Col, Row} from 'react-bootstrap';
+import SubirImagenes from './SubirImagenes';
+
+
 import '../../styles/Foros.css';
 
 class CreateForo extends Component {
@@ -88,6 +92,9 @@ class CreateForo extends Component {
                 id="imagen"
                 accept="image/png, image/jpeg" alt="" onChange={this.handleImageChange} />
             </p>
+
+            <SubirImagenes/>
+
             <button type="submit" class="btn btn-outline-info">Publicar</button>
           </form>
         </div>

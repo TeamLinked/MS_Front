@@ -1,5 +1,7 @@
 {
-    "editor.fontSize": 11,
-    "debug.console.fontSize": 11,
-    "terminal.integrated.fontSize": 11
+    "editor.fontSize": 12,
+    "editor.suggestFontSize": 12,
+    "debug.console.fontSize": 12,
+    "terminal.integrated.fontSize": 12,
+    "markdown.preview.fontSize": 12
 }

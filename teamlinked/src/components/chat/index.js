@@ -1,22 +1,22 @@
 import React, { Component } from 'react';
-import {Container} from 'react-bootstrap';
 
-//Estilos
-//import '../styles/Chat.css'; 
+import Chat from "./Chat";
+
+import '../../styles/Chat.css'; 
 
 
-class MiChat extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {  }
-    }
-    render() { 
-        return (  
-            <Container style={{display: 'flex',  justifyContent:'center', alignItems:'center', paddingTop: '10px' }}>
-                 
-            </Container>
-        );
-    }
+class Index extends Component {
+  render() {
+    return (  
+      <div className="App">
+        <div className="container">
+          <div className="messaging">
+              <Chat />
+          </div>
+        </div>
+      </div>
+    );
+  }
 }
  
-export default MiChat;
+export default Index;

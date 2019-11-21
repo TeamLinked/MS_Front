@@ -1,111 +1,230 @@
-// Dependencias
 import React, { Component } from 'react';
-import {LinkContainer} from 'react-router-bootstrap';
+import {Button, Card, Col, Form, Row, Container} from "react-bootstrap";
+import { connect } from 'react-redux';
+import { storeLoginAccountInfo } from '../../actions';
 
-// Estilos
-import '../../styles/Sesion.css';
+
+
+const emailRegex =/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+const MIN_PASS_LENGTH = 6 ;
 
 
 class ISesion extends Component {
-    
-    constructor(props) {
+    constructor(props){
         super(props);
-        this.state = {
+        this.state= {
             email: '',
-            password: ''
-        };
-    
-        this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
-    }
-    
-    checkMail(){
-        var i = 0;
-        while (i < this.data.length) {
-            if(this.data[i].email === this.state.email){
-                if(this.data[i].password === this.state.password){
-                    return i;
-                }else{
-                    return -1;
-                }
-            }
-            i++; 
+            password: '',
+            valid: "undefined",
+            userToken:false,
+            isLoading: false,
+            Key:null, 
         }
-        return -1;
+        this.handleChange = this.handleChange.bind(this);
+        this.handleFormSubmit = this.handleFormSubmit.bind(this);
+    }
+
+
+    handleChange(e){
+
+        {/*Email format and password length validation*/}
+        let condition;
+        console.log(this.state.password.length);
+        if(e.target.name=="email"){
+            if(emailRegex.test(e.target.value) && this.state.password.length >= MIN_PASS_LENGTH){
+                condition= "valid";
+                if(e.target.value.length == 0 && this.state.password.length == 0)condition = "undefined";
+            }else{
+                condition = "invalid";
+            }
+        }else{
+            if(emailRegex.test(this.state.email) && e.target.value.length >= MIN_PASS_LENGTH){
+                condition = "valid";
+            }else{
+                condition = "invalid";
+            }
+        }
+
+        let nam = e.target.name;
+        let val = e.target.value;
+        this.setState({[nam]: val});
+       
     }
   
-    handleChange = (event) => {
-        let nam = event.target.name;
-        let val = event.target.value;
-        this.setState({[nam]: val});
+    handleFormSubmit(e) {
+        e.preventDefault();
+        console.log(this.state);
+        this.setState({ isLoading: true });
+        this.queryLDAP();
     }
-    
-    handleSubmit(event) {
-        console.log(JSON.stringify(this.state));
-        console.log(this.data);
-        console.log(this.checkMail());
-        event.preventDefault();
-    }
-    
-    
-    componentDidMount(){
-        const query = `
+
+    queryLDAP (){
+
+        const query =`
             query{
-              getUsuarios{
-                id
-                email
-                password
-              }
+                Login(body:{
+                    username:"`+this.state.email+`"
+                    password:"`+this.state.password+`"
+                }){
+                    token
+                }
             }
         `;
-        const url = "https://cors-anywhere.herokuapp.com/http://34.94.59.230:3050/graphql";
+        const url = "http://34.94.59.230:3050/graphql";
         const opts = {
             method: "POST",
-            headers: { "Content-Type": "application/json" ,"Access-Control-Allow-Origin": "*"},
+            headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" },
+            body: JSON.stringify({ query })
+        };
+
+        fetch(url, opts)
+            .then(res => res.json())
+            .then(e => {
+                //this.user = e.data.getUsuarios[this.id];
+                console.log("RTA_LOGIN_LDAP",e.data.Login.token);
+                this.setState({key:e.data.Login.token})
+                this.queryBACK()
+            })
+        .catch(console.error);
+    }
+
+    queryBACK (){
+        
+        const query =`
+            query{
+                getUsuarioByEmail(body:{
+                email:"`+this.state.email+`"
+                }){
+                    user{
+                        id
+                        nombre
+                        apellido
+                        email
+                    }
+                }
+            }
+        `;
+
+        const url = "http://34.94.59.230:3050/graphql";
+        const opts = {
+            method: "POST",
+            headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" },
             body: JSON.stringify({ query })
         };
         fetch(url, opts)
-            .catch(console.error);
+            .then(res => res.json())
+            .then(e => {
+                //this.user = e.data.getUsuarios[this.id];
+                console.log("RTA_LOGIN_BACK",e.data.getUsuarioByEmail.user);
+                
+                if(this.state.key !== null){
+                    const accountInfo = {
+                        key : this.state.key,
+                        id : e.data.getUsuarioByEmail.user.id,
+                        nombre : e.data.getUsuarioByEmail.user.nombre,
+                        apellido : e.data.getUsuarioByEmail.user.apellido,
+                        email : e.data.getUsuarioByEmail.user.email,
+                    }
+                    this.props.storeLoginAccountInfo(accountInfo);
+                }
+                this.setState({isLoading:false})
+            })
+        .catch(console.error);
     }
     
-    render(){
-        return(
-            <div>
-                <div className = "Registro Registro-header mt-4">Iniciar Sesión </div>
-                <form onSubmit={this.handleSubmit}>
-                    <div className = "row align-items-center mt-4">
-                        <div className = "col-3"></div>
-                        <div className = "col-3">
-                            <div className = "Registro-text">E-mail</div>
-                        </div>
-                        <div className = "col-3">
-                            <input className="form-control mr-sm-2" type="search" placeholder="Search" name = "email" onChange={this.handleChange}/>
-                        </div>
-                        <div className = "col-3"></div>
-                    </div>
-                    <div className = "row align-items-center">
-                        <div className = "col-3"></div>
-                        <div className = "col-3">
-                            <div className = "Registro-text">Contraseña</div>
-                        </div>
-                        <div className = "col-3">
-                            <input className="form-control mr-sm-2" type="password" name = "password" placeholder="Search" onChange={this.handleChange}/>
-                        </div>
-                        <div className = "col-3"></div>
-                    </div>
-                    <div className = "row align-items-center mt-4">
-                        <div className = "col-5"></div>
-                        <div className = "col-2">
-                            <input type="submit" value="Submit" />
-                            <LinkContainer to="/registro">
-                                <button type="button">Registrarse</button>
-                            </LinkContainer>
-                        </div>
-                    </div>
-                </form>
-            </div>
+
+    render() {
+        const userValidation = this.state.valid;
+        const  isLoading  = this.state.isLoading;
+        console.log(isLoading);
+        let message;
+        
+        switch(userValidation){
+            case "undefined":
+                    message = <Form.Label>Enter your email and password</Form.Label>;
+                    break;
+            case "valid":
+                message = <Form.Label>Valid email and password</Form.Label>;
+                break;
+            case "invalid":
+                message = <Form.Label>Invalid email or password</Form.Label>;
+                break;
+            case "nan":
+                message = <Form.Label> The user does not exists</Form.Label>;
+                break;
+            default:
+                message = <Form.Label>Default message</Form.Label>;
+                break;
+        }
+
+        return (
+            <Container style={{display: 'flex',  justifyContent:'center', alignItems:'center', height: '80vh'}}>
+                <Row className="justify-content-md-center">
+                <Col md="auto">
+                <Card className="text-center"  >
+
+                    <Card.Header>
+                        <h1>Inicia sesion en TeamLinked </h1>
+                    </Card.Header>
+
+                    <Card.Body >
+                        <Form className="justify-content-md-center" onSubmit={this.handleFormSubmit} >
+                            <Form.Group as={Row} controlId="formHorizontalEmail" className="justify-content-md-center">
+                                <Col sm={5}>
+                                    {message}
+                                    <Form.Control
+                                    name="email"
+                                    type="email"
+                                    placeholder="Email"
+                                    onChange={this.handleChange}
+                                    />
+                                </Col>
+                            </Form.Group>
+
+                            <Form.Group as={Row} controlId="formHorizontalPassword" className="justify-content-md-center">
+                                <Col sm={5}>
+                                    <Form.Control
+                                    name="password"
+                                    type="password"
+                                    placeholder="Password"
+                                    onChange={this.handleChange}
+                                    />
+                                    <Form.Label>Password must be at least 6 characters long</Form.Label>
+                                </Col>
+                            </Form.Group>
+
+                            <Form.Group as={Row} className="justify-content-md-center">
+                                <Col sm={5}>
+                                    <Card.Link href="/forgot">Forgot Password?</Card.Link>
+                                </Col>
+                            </Form.Group>
+
+                            <Form.Group as={Row} className="justify-content-md-center">
+                                <Col sm={8}>
+                                    <Card.Link href="/registro">Don't have and account? Register</Card.Link>
+                                </Col>
+                            </Form.Group>
+
+                            <Form.Group as={Row} className="justify-content-md-center">
+                                <Col sm={5}>
+                                    <Button type="submit" disabled={isLoading}>
+                                        {isLoading ? 'Loading…' : 'Submit'}
+                                    </Button>
+                                </Col>
+                            </Form.Group>
+
+                        </Form>
+                    </Card.Body>
+
+                </Card>
+
+                    </Col>
+                    </Row>
+            </Container>
+
         );
     }
 }
 
-export default ISesion;
+
+export default connect(null, {storeLoginAccountInfo})(ISesion);

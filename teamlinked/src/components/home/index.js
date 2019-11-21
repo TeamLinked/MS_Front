@@ -1,13 +1,19 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import Foro from '../foros/Foro'
+import { connect } from 'react-redux';
+import "bootstrap/dist/css/bootstrap.css";
+import "./assets/scss/paper-dashboard.scss?v=1.1.0";
+import "./assets/demo/demo.css";
+import "perfect-scrollbar/css/perfect-scrollbar.css";
 
+import Feed from "./Feed";
+import PaginaPrincipal from './PaginaPrincipal';
 
 class Home extends Component {
     constructor(props){
         super(props);
         this.state = {
-            foros: []
+            iamge : 'no info'
         }
     }
  
@@ -48,13 +54,29 @@ class Home extends Component {
     }
 
     render() {
+
+        if (this.props.loginAccountInfo){
+            return(
+                <div>
+                    {/* { this.state.foros.map(foro => <Foro key={foro.id} foro={foro} />)} */}
+                    <Feed/>
+                </div> 
+            )
+        }
         return (
             <div>
-                { this.state.foros.map(foro => <Foro key={foro.id} foro={foro} />)}
+                <PaginaPrincipal/>
             </div>
         )
     }
-}
+
  
-export default Home;
+
+
+// Para conectar react con redux
+const mapStateToProps = (state) => {
+    return {loginAccountInfo: state.loginAccountInfo};
+};
+  
+export default connect(mapStateToProps)(Home);
 

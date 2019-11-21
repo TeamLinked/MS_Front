@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import CreacionEmpleos from './CreacionEmpleos'
+import CreacionEmpleos from './CreacionEmpleos';
+
 
 //Estilos
 //import '../styles/Redes.css'; 

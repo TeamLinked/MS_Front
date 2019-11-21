@@ -4,6 +4,7 @@ import CreateForo from './CreacionForos'
 //Estilos
 //import '../styles/Redes.css'; 
 
+
 class Foros extends Component {
     constructor(props) {
         super(props);
