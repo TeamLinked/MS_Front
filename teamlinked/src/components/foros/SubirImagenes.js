@@ -56,7 +56,7 @@ class SubirImagenes extends Component {
             (error) =>{
                 console.log(error.message)
             },
-            ()=>{
+            () => {
                 firebase.storage()
                 .ref("imagenes").child(`${name}`)
                 .getDownloadURL()

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+// import axios from 'axios';
 import { connect } from 'react-redux';
 import "bootstrap/dist/css/bootstrap.css";
 import "./assets/scss/paper-dashboard.scss?v=1.1.0";
@@ -69,12 +69,9 @@ class Home extends Component {
             </div>
         )
     }
-
- 
-
-
+}
 // Para conectar react con redux
-const mapStateToProps = (state) => {
+var mapStateToProps = (state) => {
     return {loginAccountInfo: state.loginAccountInfo};
 };
   
