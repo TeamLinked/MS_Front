@@ -70,6 +70,7 @@ class Home extends Component {
         )
     }
 }
+
 // Para conectar react con redux
 var mapStateToProps = (state) => {
     return {loginAccountInfo: state.loginAccountInfo};
