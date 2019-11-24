@@ -57,10 +57,6 @@ class Foro extends Component {
           <small className="text-muted">{this.props.foro.fecha_creacion} </small>
         </Card.Footer>
       </Card>
-
-
-
-
     )
   }
 }

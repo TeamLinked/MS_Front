@@ -14,7 +14,7 @@ export const saveState = (state) => {
     try {
         let serializedData = JSON.stringify(state);
         localStorage.setItem('state',serializedData);
-    } catch (error){
+    } catch (error) {
         console.log(error,"Fallo el salvado en el storage");
     }
 };

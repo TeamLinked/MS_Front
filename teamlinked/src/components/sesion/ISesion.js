@@ -10,9 +10,9 @@ const MIN_PASS_LENGTH = 6 ;
 
 
 class ISesion extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
-        this.state= {
+        this.state = {
             email: '',
             password: '',
             valid: "undefined",
@@ -30,10 +30,10 @@ class ISesion extends Component {
         {/*Email format and password length validation*/}
         let condition;
         console.log(this.state.password.length);
-        if(e.target.name=="email"){
-            if(emailRegex.test(e.target.value) && this.state.password.length >= MIN_PASS_LENGTH){
+        if(e.target.name ==="email"){
+            if(emailRegex.test(e.target.value) && this.state.password.length >= MIN_PASS_LENGTH) {
                 condition= "valid";
-                if(e.target.value.length == 0 && this.state.password.length == 0)condition = "undefined";
+                if(e.target.value.length === 0 && this.state.password.length === 0)condition = "undefined";
             }else{
                 condition = "invalid";
             }
@@ -58,13 +58,13 @@ class ISesion extends Component {
         this.queryLDAP();
     }
 
-    queryLDAP (){
+    queryLDAP() {
 
         const query =`
             query{
                 Login(body:{
-                    username:"`+this.state.email+`"
-                    password:"`+this.state.password+`"
+                    username:"` + this.state.email+`"
+                    password:"` + this.state.password+`"
                 }){
                     token
                 }
