@@ -12,7 +12,7 @@ class CreateForo extends Component {
     titulo: '',
     contenido: '',
     categoria: '',
-    imagen: null
+    imagen: ''
   }
   
   handleChange = (e) => {

@@ -26,10 +26,6 @@ import {
 } from "reactstrap";
 
 
-
-
-
-
 class Feed extends Component {
   constructor() {
     super();
@@ -51,7 +47,7 @@ class Feed extends Component {
     imagen: null
   }
   
-  componentDidMount(){
+  componentDidMount() {
     this.setState({idUsuario:this.props.loginAccountInfo.id})
   }
 
@@ -71,8 +67,10 @@ class Feed extends Component {
             }
         }
     `;
+
     const url =
       "https://cors-anywhere.herokuapp.com/http://34.94.59.230:3050/graphql";
+
     const opts = {
       method: "POST",
       headers: {
@@ -90,10 +88,11 @@ class Feed extends Component {
       })
       .catch(console.error);
   }
+
   pedirRelacionesDelUsuario() {
     const query =
       `
-        query{
+        query {
             RelacionU(id: "` +
       this.state.idUsuario +
       `"){
@@ -166,10 +165,6 @@ class Feed extends Component {
       .catch(console.error);
   }
 
-
-
-
-
   componentDidMount() {
     const query = `
         query{
@@ -185,18 +180,20 @@ class Feed extends Component {
           }
         }
     `;
+
     const url = "https://cors-anywhere.herokuapp.com/http://34.94.59.230:3050/graphql";
     const opts = {
       method: "POST",
       headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" },
       body: JSON.stringify({ query })
     };
+
     fetch(url, opts)
       .then(res => res.json())
       .then(e => {
         this.user = e.data.getUsuarios[this.id];
         console.log(this.user);
-        console.log("Pepito");
+        console.log(this.props.loginAccountInfo.id);
         this.forceUpdate();
       })
       .catch(console.error);
@@ -250,54 +247,24 @@ class Feed extends Component {
                   <CardTitle tag="h4">Miembros de la Red</CardTitle>
                 </CardHeader>
                 <CardBody>
-
-
-
                   <ul className="list-unstyled team-members">
-                    
-
-
-
-
                         {this.state.amigos.map(p => (
                           <Friends persona={p} />
-
-                        ))}
-
-                    
-                    
+                        ))}                 
                   </ul>
                 </CardBody>
               </Card>
-
-
-
-
-
-
-
             </Col>
             <Col md="8">
               {/* <CardBody> */}
-
-
-
-
               {/* <Form> */}
-
               <NewPost/>
-
-
-
               {this.state.foros.map(foro => <Foro key={foro.id} foro={foro} />)}
-
               {/* </Form> */}
-              {/* </CardBody> */}
-
-
+              {/* </CardBody> */} 
             </Col>
           </Row>
-        </div>
+        </div> 
       </>
     );
   }

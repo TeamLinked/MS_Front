@@ -10,10 +10,10 @@ import Feed from "./Feed";
 import PaginaPrincipal from './PaginaPrincipal';
 
 class Home extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state = {
-            iamge : 'no info'
+            image : 'no info'
         }
     }
  
