@@ -93,5 +93,4 @@ const mapStateToProps = (state) => {
 
 export default connect(mapStateToProps)(MisForos);
  
-// export default MisForos;
 
