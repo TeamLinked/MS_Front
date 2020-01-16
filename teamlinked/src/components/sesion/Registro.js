@@ -97,8 +97,8 @@ class Registro extends Component {
                 `;
 
 
-        
-        const url = "https://cors-anywhere.herokuapp.com/http://34.94.59.230:3050/graphql";
+        //https://cors-anywhere.herokuapp.com/
+        const url = "http://35.235.64.211:3051/graphql";
  
         let opts = {
             method: "POST",
