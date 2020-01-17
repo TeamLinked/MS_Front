@@ -13,6 +13,7 @@ class ISesion extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            counter: 4,
             email: '',
             password: '',
             valid: "undefined",
@@ -70,7 +71,7 @@ class ISesion extends Component {
                 }
             }
         `;
-        const url = "http://35.215.69.224:3051/graphql";
+        const url = "http://34.94.208.170:3051/graphql";
         const opts = {
             method: "POST",
             headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" },
@@ -105,7 +106,7 @@ class ISesion extends Component {
             }
         `;
 
-        const url = "http://35.235.64.211:3051/graphql";
+        const url = "http://34.94.208.170:3051/graphql";
         const opts = {
             method: "POST",
             headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" },
@@ -115,17 +116,24 @@ class ISesion extends Component {
             .then(res => res.json())
             .then(e => {
                 //this.user = e.data.getUsuarios[this.id];
+                console.log(e);
                 console.log("RTA_LOGIN_BACK",e.data.getUsuarioByEmail.user);
-                
-                if(this.state.key !== null){
-                    const accountInfo = {
-                        key : this.state.key,
-                        id : e.data.getUsuarioByEmail.user.id,
-                        nombre : e.data.getUsuarioByEmail.user.nombre,
-                        apellido : e.data.getUsuarioByEmail.user.apellido,
-                        email : e.data.getUsuarioByEmail.user.email,
+                if(e.data.getUsuarioByEmail.user !== null){
+                    if(this.state.key !== null){
+                        const accountInfo = {
+                            key : this.state.key,
+                            id : e.data.getUsuarioByEmail.user.id,
+                            nombre : e.data.getUsuarioByEmail.user.nombre,
+                            apellido : e.data.getUsuarioByEmail.user.apellido,
+                            email : e.data.getUsuarioByEmail.user.email,
+                        }
+                        this.props.storeLoginAccountInfo(accountInfo);
                     }
-                    this.props.storeLoginAccountInfo(accountInfo);
+                }else if(this.state.counter > 0){
+                    this.state.counter -= 1; 
+                    this.queryBACK();
+                }else{
+                    window.location.reload();
                 }
                 this.setState({isLoading:false})
             })

@@ -101,8 +101,9 @@ class Feed extends Component {
             }
         }
     `;
+    //https://cors-anywhere.herokuapp.com/
     const url =
-      "https://cors-anywhere.herokuapp.com/http://34.94.59.230:3050/graphql";
+      "http://34.94.59.230:3050/graphql";
     const opts = {
       method: "POST",
       headers: {

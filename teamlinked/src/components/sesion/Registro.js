@@ -98,7 +98,7 @@ class Registro extends Component {
 
 
         //https://cors-anywhere.herokuapp.com/
-        const url = "http://35.235.64.211:3051/graphql";
+        const url = "http://34.94.208.170:3051/graphql";
  
         let opts = {
             method: "POST",
@@ -111,6 +111,8 @@ class Registro extends Component {
         fetch(url, opts)
             .then(res => res.json())
             .then(e => {
+                console.log("fetched");
+                console.log(e);
                 query = queryLDAP;
                 if(e.errors !== undefined){
                     this.setState({
