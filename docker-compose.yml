@@ -1,9 +1,11 @@
 version: '2'
 services:
   teamlinked-front:
-    build: ./teamlinked
-    #image: teamlinked2019/front-ms:v2.0   
+    #build: ./teamlinked
+    image: teamlinked2019/front-ms:v2.3   
     ports:
       - 3005:3000
+    labels:
+      io.rancher.scheduler.global: 'true'
 
   
