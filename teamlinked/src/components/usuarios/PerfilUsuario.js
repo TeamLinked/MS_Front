@@ -42,7 +42,7 @@ class PerfilUsuario extends Component {
                     }
                 }
             `;
-            const url = "https://cors-anywhere.herokuapp.com/http://34.94.59.230:3050/graphql";
+            const url = "http://34.94.208.170:3051/graphql";
             const opts = {
                 method: "POST",
                 headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" },
