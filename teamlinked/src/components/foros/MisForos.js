@@ -19,10 +19,6 @@ class MisForos extends Component {
         imagen: ''
       }
     
-    // componentDidMount() {
-    //   this.setState({ idUsuario: this.props.loginAccountInfo.id })
-    // }
- 
     pedirForosPorUsuario() {
         const query = `
         query {
@@ -35,8 +31,8 @@ class MisForos extends Component {
               id_creador
           }
         }`;
-        console.log(this.props.loginAccountInfo.id);
-        const url = "http://34.94.59.230:3050/graphql";
+        
+        const url = "http://34.94.208.170:3051/graphql";
 
         const opts = {
             method: "POST",
