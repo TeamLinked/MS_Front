@@ -93,10 +93,10 @@ class ISesion extends Component {
         
         const query =`
             query{
-                getUsuarioByEmail(body:{
+                getUsuarioByEmail(body: {
                 email:"`+this.state.email+`"
-                }){
-                    user{
+                }) {
+                    user {
                         id
                         nombre
                         apellido

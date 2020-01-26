@@ -73,7 +73,7 @@ class NewPost extends Component {
                     contenido:"`+ this.state.contenido + `",
                     categoria: "`+ this.state.categoria + `",
                     imagen: "`+ this.state.imagen + `"
-                }){
+                }) {
                     id
                 }
             }
@@ -153,18 +153,10 @@ class NewPost extends Component {
                     <Card.Text>
                         <div className="form-group">
                             <input className="no-border form-control-lg mt-2" type="text" placeholder='Titulo' id='titulo' value={this.state.titulo} onChange={this.handleChange} required />
-
                         </div>
                         <FormGroup>
-
-
                             <Input
-
-
-
-
                                 id="contenido"
-
                                 type="textarea"
                                 placeholder="Escribe acá lo que desees publicar"
                                 value={this.state.contenido} onChange={this.handleChange} />
@@ -182,15 +174,9 @@ class NewPost extends Component {
                                         <Form.Control name="images[]" type="file" multiple onChange={this.handleUploadImage} />
                                         {"Cambiar imagen"}
                                     </Button>
-
-
                                 </FormGroup>
-
-
-
                             </div>
                         </Col>
-
                         <Col>
                             <div align="center">
                                 <Form onSubmit={this.handleFormSubmit}>
@@ -202,26 +188,12 @@ class NewPost extends Component {
                                 </Form>
                             </div>
                         </Col>
-
-
-
                     </Row>
-
                 </Card.Body>
-
-
             </Card>
-
-
-
-
         )
     }
 }
-
-
-
-
 // Para conectar react con redux
 
 const mapStateToProps = (state) => {
