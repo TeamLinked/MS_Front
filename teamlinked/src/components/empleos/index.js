@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import CreacionEmpleos from './CreacionEmpleos';
 import Empleos from './Empleos';
 import {Card, Button, Row, Col} from 'react-bootstrap';
+import {LinkContainer} from 'react-router-bootstrap';
 //Estilos
 //import '../styles/Redes.css'; 
 
@@ -51,7 +52,9 @@ class ListaEmpleos extends Component {
       <React.Fragment>
         <div style={{ "maxWidth": 1050, "margin": "10px auto","height":"50px", "opacity":0.8}}>
           <Row className="justify-content-end">
-            <Button style={{ "margin": "5px"}}>Crear Empleo</Button>
+            <LinkContainer to="/crearempleo"  style={{ "margin": "5px"}} >
+              <Button>Crear Empleo</Button>
+            </LinkContainer>
             <Button style={{ "margin": "5px"}}>Mis postulaciones</Button>
           </Row>
         </div>
