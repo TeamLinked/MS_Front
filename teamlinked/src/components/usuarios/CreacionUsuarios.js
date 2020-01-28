@@ -5,6 +5,8 @@ import { connect } from 'react-redux';
 //Estilos
 //import '../styles/Usuarios.css'; 
 
+import { CountryDropdown} from 'react-country-region-selector';
+
 class CreacionUsuarios extends Component {
     constructor() {
         super();
@@ -38,6 +40,10 @@ class CreacionUsuarios extends Component {
         this.query();
         e.preventDefault();
       }
+      
+      selectCountry (val) {
+            this.setState({ nacionalidad: val });
+        }
       
       query(){
           const Uid = this.props.loginAccountInfo.id;
@@ -136,13 +142,10 @@ class CreacionUsuarios extends Component {
                         </div>
                         <div className="form-group p-2">
                             Nacionalidad
-                            <input
-                            type="text"
-                            name="nacionalidad"
-                            className="form-control"
-                            value={this.state.nacionalidad}
-                            onChange={this.handleInputChange}
-                            placeholder="nacionalidad"
+                            <CountryDropdown 
+                            className="form-control mr-sm-2" 
+                            value={this.state.nacionalidad} 
+                            onChange={(val) => this.selectCountry(val)} 
                             />
                         </div>
                         </div>

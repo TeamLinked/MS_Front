@@ -1,7 +1,7 @@
 //Dependencias
 import React, { Component } from 'react';
 import {Form, Card, Container, Button, Col, Row} from 'react-bootstrap';
-
+import {LinkContainer} from 'react-router-bootstrap';
 //Estilos
 //import '../styles/Empleos.css'; 
 //https://reactjs.org/docs/forms.html
@@ -13,8 +13,19 @@ class CreacionEmpleos extends Component {
     }
     render() { 
         return (  
-            <Container style={{display: 'flex',  justifyContent:'center', alignItems:'center', paddingTop: '10px' }}>   
-                <Card bg="light" style={{ width: '50rem' }}>
+            <Container style={{ "padding": "0 60px", "maxWidth": 1200, "margin": "10px auto" }} > 
+
+                <div style={{ "maxWidth": 1050, "margin": "10px auto","height":"50px", "opacity":0.8}}>
+                    <Row className="justify-content-end">
+                        <LinkContainer to="/empleos"  style={{ "margin": "5px"}} >
+                        <Button>Buscar Empleo</Button>
+                        </LinkContainer>
+                        <Button style={{ "margin": "5px"}}>Mis postulaciones</Button>
+                    </Row>
+                    <Row><br></br><br></br></Row>
+                    <Row className="justify-content-center">
+                    
+                    <Card bg="light" style={{ width: '67rem' }}>
                     <Card.Header>
                         <Card.Title>Nueva Oferta de Empleo</Card.Title>
                     </Card.Header>
@@ -53,7 +64,11 @@ class CreacionEmpleos extends Component {
                             </Form>
                         </Card.Text>
                     </Card.Body>
-                </Card>              
+                </Card>         
+                    </Row>
+                </div>
+
+                     
             </Container>
         );
     }
