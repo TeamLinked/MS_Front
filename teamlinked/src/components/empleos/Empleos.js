@@ -81,17 +81,24 @@ class Empleos extends Component {
               <div
                 key={i}
               >
-                <Card style={{ width: '16rem', height: '16rem' }}>
+                
+                <Card className="text-center" style={{ width: '16rem', height: '15rem' }}>
                   
                   <Card.Body>
-            <Card.Title>{this.state.empleosPorCategoria[i].titulo}</Card.Title>
+                    <Card.Title >{this.state.empleosPorCategoria[i].titulo}</Card.Title>
                     <Card.Text>
+                      
                       - Publicado en: {this.state.empleosPorCategoria[i].fechaPublicacion} <br></br>
                       - Vence en: {this.state.empleosPorCategoria[i].fechaVencimiento} 
                     </Card.Text>
-                    <Button variant="primary">Ver mas</Button>
+                    
                   </Card.Body>
+                  <Card.Footer >
+                    <Button variant="primary">Ver mas</Button>
+                    
+                  </Card.Footer>
                 </Card>
+                
 
               </div>
             )}
