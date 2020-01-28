@@ -99,9 +99,9 @@ class Feed extends Component {
             }
         }
     `;
-    //https://cors-anywhere.herokuapp.com/
-    const url =
-      "http://34.94.208.170:3051/graphql";
+
+    const url = "http://34.94.208.170:3051/graphql";
+
     const opts = {
       method: "POST",
       headers: {
@@ -134,16 +134,17 @@ class Feed extends Component {
 
   pedirForos() {
     const query = `
-    query {
-        Foros {
-            id
-            titulo
-            contenido
-            categoria
-            fecha_creacion
-            imagen
-        }
-    }`;
+      query {
+          Foros {
+              id
+              titulo
+              contenido
+              categoria
+              fecha_creacion
+              imagen
+          }
+      }`;
+
     const url = "http://34.94.208.170:3051/graphql";
 
     const opts = {
@@ -158,7 +159,7 @@ class Feed extends Component {
     fetch(url, opts)
       .then(res => res.json())
       .then(e => {
-        // console.log(e)
+        console.log(e)
         this.setState({ foros: e.data.Foros });
         console.log(e.data.Foros);
       })
@@ -198,10 +199,9 @@ class Feed extends Component {
         this.forceUpdate();
       })
       .catch(console.error);
+
     this.pedirForos();
     this.pedirUsuarios();
-
-
   }
 
   render() {

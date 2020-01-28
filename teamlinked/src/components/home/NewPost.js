@@ -56,30 +56,31 @@ class NewPost extends Component {
     }
 
     handleFormSubmit(e) {
-        e.preventDefault();
-        console.log(this.state);
-        
+        e.preventDefault();        
         this.setState({ isLoading: true });
         this.query();
+        console.log(this.state);
     }
 
 
     query() {
-
         const query = `
             mutation{
                 inputForo(body:{
-                    titulo:"`+ this.state.titulo + `",
-                    contenido:"`+ this.state.contenido + `",
+                    id_creador: `+ this.props.loginAccountInfo.id + `,
+                    titulo: "`+ this.state.titulo + `",
+                    contenido: "`+ this.state.contenido + `",
                     categoria: "`+ this.state.categoria + `",
-                    imagen: "`+ this.state.imagen + `"
+                    imagen: ""
                 }) {
                     id
+                    titulo
                 }
             }
         `;
         
         const url = "http://34.94.208.170:3051/graphql";
+
         const opts = {
             method: "POST",
             headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" },
@@ -88,7 +89,8 @@ class NewPost extends Component {
 
         fetch(url, opts)
             .then(res => res.json())
-            .catch(console.error);
+            .catch(console.error)
+            .then(response => console.log('Success:', response));
     }
 
 
@@ -139,14 +141,6 @@ class NewPost extends Component {
     render() {
         const isLoading = this.state.isLoading;
         return (
-            // <div className="card bg-dark text-black mt-2">
-            //     <img src={this.props.foro.imagen} className="card-img" alt="..."/>
-            //     <div className="card-img-overlay">
-            //       <h1 className="card-title">{this.props.foro.titulo}</h1>
-            //       <p className="card-text">{this.props.foro.contenido}</p>
-            //       <p className="card-text">{this.props.foro.fechaCreacion}</p>
-            //     </div> 
-            // </div>
             <Card>
                 <Card.Img class="center-cropped" variant="top" src={this.state.loadImage ? this.state.picture : uploadImage} />
                 <Card.Body>
@@ -181,7 +175,7 @@ class NewPost extends Component {
                             <div align="center">
                                 <Form onSubmit={this.handleFormSubmit}>
                                     <FormGroup>
-                                        <button type="submit" class="btn btn-outline-info" disabled={isLoading}>
+                                        <button type="submit" value="Submit" class="btn btn-outline-info" disabled={isLoading}>
                                             {isLoading ? 'Publicando..' : 'Publicar'}
                                         </button>
                                     </FormGroup>
@@ -194,8 +188,8 @@ class NewPost extends Component {
         )
     }
 }
-// Para conectar react con redux
 
+// Para conectar react con redux
 const mapStateToProps = (state) => {
 
     return { loginAccountInfo: state.loginAccountInfo };
