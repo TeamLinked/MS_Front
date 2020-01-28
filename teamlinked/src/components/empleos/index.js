@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import CreacionEmpleos from './CreacionEmpleos';
 import Empleos from './Empleos';
-
+import {Card, Button, Row, Col} from 'react-bootstrap';
 //Estilos
 //import '../styles/Redes.css'; 
 
@@ -49,12 +49,22 @@ class ListaEmpleos extends Component {
   render() {
     return (
       <React.Fragment>
+        <div style={{ "maxWidth": 1050, "margin": "10px auto","height":"50px", "opacity":0.8}}>
+          <Row className="justify-content-end">
+            <Button style={{ "margin": "5px"}}>Crear Empleo</Button>
+            <Button style={{ "margin": "5px"}}>Mis postulaciones</Button>
+          </Row>
+        </div>
+        
+        
+
         {Array.from(this.state.categorias).map((_, i) =>
               <div key={i}>
                 <Empleos categoria={this.state.categorias[i].nombre}/>
               </div>
         )
         }
+      
       </React.Fragment>
     );
   }
