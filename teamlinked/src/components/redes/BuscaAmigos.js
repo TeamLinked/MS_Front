@@ -5,7 +5,7 @@ class BuscaAmigos extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      idUsuario: ""
+      idUsuario: this.props.idUsuario
     };
   }
 
@@ -19,7 +19,7 @@ class BuscaAmigos extends React.Component {
       }
       `;
     const url =
-      "https://cors-anywhere.herokuapp.com/http://34.94.59.230:3050/graphql";
+      "http://34.94.208.170:3051/graphql";
     const opts = {
       method: "POST",
       headers: {
@@ -32,17 +32,23 @@ class BuscaAmigos extends React.Component {
       .then(res => res.json())
       .then(e => {
         this.forceUpdate();
-        alert("Ha sido añadido a tu red");
+        //alert("Ha sido añadido a tu red");
       })
       .catch(console.error);
   }
 
   handleClick = idRetornado => {
-    this.mutacionAgregarAmigo(this.state.idUsuario,idRetornado)
+    var i = 0;
+    while(i < 4){
+      this.mutacionAgregarAmigo(this.state.idUsuario,idRetornado);
+      i = i + 1;
+      console.log(i);
+    }
+    window.location.reload();
   }
 
   componentDidMount(){
-    this.setState({idUsuario: this.props.idUsuario})
+    console.log(this.props.idUsuario);
   }
 
   agregarAmigo(){

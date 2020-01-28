@@ -19,7 +19,7 @@ class MiRed extends React.Component {
       }
       `;
     const url =
-      "https://cors-anywhere.herokuapp.com/http://34.94.59.230:3050/graphql";
+      "http://34.94.208.170:3051/graphql";
     const opts = {
       method: "POST",
       headers: {
@@ -32,13 +32,18 @@ class MiRed extends React.Component {
       .then(res => res.json())
       .then(e => {
         this.forceUpdate();
-        alert("Eliminación exitosa");
       })
       .catch(console.error);
   }
 
   handleClick = idRetornado => {
-    this.mutacionEliminarAmigo(this.state.idUsuario,idRetornado)
+    var i = 0;
+    while(i < 4){
+      this.mutacionEliminarAmigo(this.state.idUsuario,idRetornado);
+      i = i + 1;
+      console.log(i);
+    }
+    window.location.reload();
   }
 
   componentDidMount(){
