@@ -45,11 +45,25 @@ class CreacionEmpleos extends Component {
                                 <Form.Group controlId="categoriaEmpleo">
                                     <Form.Label>Categoria</Form.Label>
                                     <Form.Control as="select">
-                                        <option value='Diseño' >Diseño</option>
-                                        <option value='Ingenieria'>Ingeniería</option>
-                                        <option value='Medicina'>Medicina</option>
-                                        <option value='Derecho'>Derecho</option>
-                                        <option value='Ciencias'>Ciencias</option>
+                                        <option value='Administracion de empresas' >Administracion de empresas</option>
+                                        <option value='Administrativos y secretariado'>Administrativos y secretariado</option>
+                                        <option value='Atencion al cliente'>Atencion al cliente</option>
+                                        <option value='Banca y seguros'>Banca y seguros</option>
+                                        <option value='Calidad, Medio Ambiente'>Calidad, Medio Ambiente</option>
+                                        <option value='Comercial, Ventas' >Comercial, Ventas</option>
+                                        <option value='Compras, Logistica y Transporte'>Compras, Logistica y Transporte</option>
+                                        <option value='Construccion e inmobiliaria'>Construccion e inmobiliaria</option>
+                                        <option value='Educacion, formacion'>Educacion, formacion</option>
+                                        <option value='Hoteleria y Turismo'>Hoteleria y Turismo</option>
+                                        <option value='Ingenieria y Produccion' >Ingenieria y Produccion</option>
+                                        <option value='Internet'>Internet</option>
+                                        <option value='Medios, Editorial y Artes Graficas'>Medios, Editorial y Artes Graficas</option>
+                                        <option value='Oficios Varios'>Oficios Varios</option>
+                                        <option value='Recursos Humanos'>Recursos Humanos</option>
+                                        <option value='Sanidad Salud y Servicios Sociales'>Sanidad Salud y Servicios Sociales</option>
+                                        <option value='Tecnologia e Informatica'>Tecnologia e Informatica</option>
+                                        <option value='Telecomunicaciones'>Telecomunicaciones</option>
+                                        
                                     </Form.Control>
                                 </Form.Group>
 
