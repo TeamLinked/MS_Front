@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 import MiRed from "./MiRed";
 import BuscaAmigos from "./BuscaAmigos";
@@ -13,7 +14,7 @@ class Index extends Component {
             entradaTexto: "",
             persons: [""],
             busqueda: [],
-            idUsuario: "5",
+            idUsuario: this.props.loginAccountInfo.id,
             idsAmigos: [],
             amigos: []
         };
@@ -49,7 +50,7 @@ class Index extends Component {
             }
         `;
         const url =
-          "https://cors-anywhere.herokuapp.com/http://34.94.59.230:3050/graphql";
+          "http://34.94.208.170:3051/graphql";
         const opts = {
           method: "POST",
           headers: {
@@ -62,8 +63,14 @@ class Index extends Component {
           .then(res => res.json())
           .then(e => {
             this.setState({ persons: e.data.getUsuarios });
+            //console.log(this.state.idUsuario);
             this.forceUpdate();
-            this.pedirRelacionesDelUsuario();
+            var i = 0
+            while(i < 4){
+              console.log(this.state.idsAmigos.length);
+              this.pedirRelacionesDelUsuario();
+              i = i + 1;
+            }
           })
           .catch(console.error);
       }
@@ -79,7 +86,7 @@ class Index extends Component {
             }
         `;
         const url =
-          "https://cors-anywhere.herokuapp.com/http://34.94.59.230:3050/graphql";
+          "http://34.94.208.170:3051/graphql";
         const opts = {
           method: "POST",
           headers: {
@@ -131,5 +138,11 @@ class Index extends Component {
         );
     }
 }
- 
-export default Index;
+
+//Redux
+const mapStateToProps = (state) => {
+    return {loginAccountInfo: state.loginAccountInfo};
+};
+  
+
+export default connect(mapStateToProps, null)(Index);
