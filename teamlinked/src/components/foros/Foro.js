@@ -3,18 +3,13 @@ import { Card, Button } from 'react-bootstrap'
 
 import './index.css'
 
-
-
 class Foro extends Component {
   constructor(props) {
     super(props);
-
   }
 
   pic(picture) {
-    console.log("IMAGEN", picture)
-    // if (picture == null) {
-    if (true) {
+    if (picture === "") {
       return "https://media.sproutsocial.com/uploads/2017/08/Facebook-Shared-Post-Video.png";
     } 
     else {
@@ -28,22 +23,22 @@ class Foro extends Component {
         <Card.Img class="center-cropped" variant="top" src={this.pic(this.props.foro.imagen)} />
 			    {console.log(this.props.foro.imagen)}
         <Card.Body>
-          	<Card.Text>
-				<Card.Title>{this.props.foro.titulo}</Card.Title>
-				{this.props.foro.contenido}
-			</Card.Text>
-			<div className="update ml-auto mr-auto" align="center">
-				<Button className="btn-round" color="primary" type="submit">
-					Participar
-				</Button>
-			</div>
+          <Card.Text>
+          <Card.Title>{this.props.foro.titulo}</Card.Title>
+				    {this.props.foro.contenido}
+          </Card.Text>
+          <div className="update ml-auto mr-auto" align="center">
+            <Button className="btn-round" color="primary" type="submit">
+              Participar
+            </Button>
+          </div>
         </Card.Body>
         <Card.Footer>
-			{console.log(this.props.foro.fechaCreacion)}
-			<small className="text-muted">{this.props.foro.fecha_creacion} </small>
+          <small className="text-muted">{this.props.foro.fecha_creacion} </small>
         </Card.Footer>
       </Card>
     )
   }
 }
+
 export default Foro
