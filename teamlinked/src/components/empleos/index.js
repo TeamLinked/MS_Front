@@ -43,7 +43,7 @@ class ListaEmpleos extends Component {
       .catch(console.error);
   }
 
-  componentDidMount(){
+  componentWillMount(){
     this.pedirUsuarios();
   }
 
