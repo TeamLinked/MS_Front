@@ -45,7 +45,6 @@ class NewPost extends Component {
             titulo: '',
             contenido: '',
             categoria: '',
-            imagen: '',
 
             isLoading: false,
 
@@ -71,7 +70,7 @@ class NewPost extends Component {
                     titulo: "`+ this.state.titulo + `",
                     contenido: "`+ this.state.contenido + `",
                     categoria: "`+ this.state.categoria + `",
-                    imagen: ""
+                    imagen: "`+ this.state.picture + `"
                 }) {
                     id
                     titulo

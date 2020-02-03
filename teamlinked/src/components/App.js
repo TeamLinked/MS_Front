@@ -6,7 +6,6 @@ import PropTypes from 'prop-types';
 // from ''Componentes
 import BarraNavegacion from './BarraNavegacion';
 import Contenido from './Contenido';
-import Footer from './Footer';
 
 
 //Estilos
