@@ -28,6 +28,7 @@ class App extends Component {
         <div style={{minHeight:"calc(100vh)", position:"relative"}}>
           <BarraNavegacion />
           <Contenido body={children} />
+          <br></br><br></br>
           <Footer/>
         </div>
         
