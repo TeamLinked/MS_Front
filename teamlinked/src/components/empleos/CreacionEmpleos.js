@@ -102,7 +102,9 @@ class CreacionEmpleos extends Component {
         console.log('RTA',e.data);
         this.setState({ categorias: e.data.getCategorias })
         //console.log('RTA2',this.state.categorias);
-        this.setState({ show: true });
+        if (e.data.inputEmpleo !== null){
+          this.setState({ show: true });
+        }
         this.forceUpdate();
       })
       .catch(console.error);
@@ -208,7 +210,13 @@ class CreacionEmpleos extends Component {
                       Crear Empleo
                     </Button>
 
-                    <Modal show={this.state.show} onHide={this.handleClose}>
+                    <Modal 
+                      show={this.state.show} 
+                      onHide={this.handleClose} 
+                      size="lg"
+                      aria-labelledby="contained-modal-title-vcenter"
+                      centered
+                    >
                       <Modal.Header closeButton>
                         <Modal.Title>El nuevo empleo ha sido creado</Modal.Title>
                       </Modal.Header>
