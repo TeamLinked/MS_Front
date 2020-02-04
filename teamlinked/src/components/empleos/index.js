@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import CreacionEmpleos from './CreacionEmpleos';
+
 import Empleos from './Empleos';
-import {Card, Button, Row, Col} from 'react-bootstrap';
+import {Button, Row} from 'react-bootstrap';
 import {LinkContainer} from 'react-router-bootstrap';
 //Estilos
 //import '../styles/Redes.css'; 

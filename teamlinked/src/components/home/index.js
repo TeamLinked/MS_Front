@@ -44,7 +44,7 @@ class Home extends Component {
         .then(e => {
             // console.log(e)
             this.setState({ foros: e.data.Foros });
-            console.log(e.data.Foros);
+            //console.log(e.data.Foros);
         })
         .catch(console.error);
     }

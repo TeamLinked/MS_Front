@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import axios from 'axios';
 import * as user from '../../datos/user.json';
 import { connect } from 'react-redux';
 
@@ -12,15 +11,11 @@ import Friends from './Friends'
 import NewPost from './NewPost'
 
 import {
-  Button,
   Card,
   CardHeader,
   CardBody,
   CardFooter,
   CardTitle,
-  FormGroup,
-  Form,
-  Input,
   Row,
   Col
 } from "reactstrap";
@@ -115,7 +110,7 @@ class Feed extends Component {
     let aux = [];
     params.forEach(idAmigo => {
       this.state.persons.forEach(person => {
-        if (idAmigo == person.id) {
+        if (idAmigo === person.id) {
           aux.push(person);
         }
       });
@@ -186,8 +181,8 @@ class Feed extends Component {
       .then(res => res.json())
       .then(e => {
         this.user = e.data.getUsuarios[this.id];
-        console.log(this.user);
-        console.log(this.props.loginAccountInfo.id);
+        //console.log(this.user);
+        //console.log(this.props.loginAccountInfo.id);
         this.forceUpdate();
       })
       .catch(console.error);

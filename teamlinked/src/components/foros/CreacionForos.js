@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios';
 
+
 // import {Form, Card, Container, Button, Col, Row} from 'react-bootstrap';
 import SubirImagenes from './SubirImagenes';
 
@@ -94,8 +95,9 @@ class CreateForo extends Component {
             </p>
 
             <SubirImagenes/>
-
-            <button type="submit" class="btn btn-outline-info">Publicar</button>
+            
+              <button type="submit" class="btn btn-outline-info">Publicar</button>
+            
           </form>
         </div>
       </div>

@@ -11,6 +11,7 @@ class EmpleoDetallado extends Component {
     }
     this.handleShow = this.handleShow.bind(this);
     this.handleClose = this.handleClose.bind(this);
+    
   }
 
   handleClose() {
@@ -72,7 +73,9 @@ class EmpleoDetallado extends Component {
           </Modal.Footer>
         </Modal>
       </div>
+      
     );
+    
   }
 }
 

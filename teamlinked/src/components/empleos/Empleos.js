@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import ItemsCarousel from 'react-items-carousel';
-import {Card, Button, Modal} from 'react-bootstrap';
 import EmpleoDetallado from './EmpleoDetallado';
 
 class Empleos extends Component {
@@ -85,7 +84,7 @@ class Empleos extends Component {
               <div
                 key={i}
               >
-                {console.log(this.state.empleosPorCategoria[i])}
+                
                  <EmpleoDetallado empleo={this.state.empleosPorCategoria[i]} />
               </div>
             )}

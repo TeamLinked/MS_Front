@@ -27,7 +27,7 @@ class Index extends Component {
         let aux = [];
         params.forEach(idAmigo => {
           this.state.persons.forEach(person => {
-            if (idAmigo == person.id) {
+            if (idAmigo === person.id) {
               aux.push(person);
             }
           });

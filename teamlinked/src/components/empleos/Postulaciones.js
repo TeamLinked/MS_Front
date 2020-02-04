@@ -9,8 +9,8 @@ class Postulaciones extends Component {
     }
     render() { 
         return (
-
-          );
+            
+        );
     }
 }
  
