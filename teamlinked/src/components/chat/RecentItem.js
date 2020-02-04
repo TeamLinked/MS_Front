@@ -12,7 +12,7 @@ class RecentItem extends Component {
 
   componentDidMount() {
     this.setState({isActive: this.props.isActive})
-    console.log(this.state.isActive);
+    //console.log(this.state.isActive);
     this.revisarSiActivo();
   }
 
