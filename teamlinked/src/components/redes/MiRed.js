@@ -53,7 +53,7 @@ class MiRed extends React.Component {
   render() {
     return (
       <div className="my-3 p-3 bg-white rounded shadow-sm container">
-        <h2 className="border-bottom pb-2 mb-0">Tu Red</h2>
+        <h2 className="border-bottom pb-2 mb-0">Mi Red profesional</h2>
         {this.props.personas.map(p => (
           <Amigo persona={p} btnlabel={"Eliminar"} handleClick={this.handleClick}/>
         ))}
