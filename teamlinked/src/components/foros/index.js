@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import CreateForo from './CreacionForos'
 import MisForos from './MisForos';
 
 class Foros extends Component {

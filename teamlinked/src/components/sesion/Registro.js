@@ -1,7 +1,7 @@
-import React, { Component, useState} from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import {Alert, Button} from 'reactstrap';
+import {Alert} from 'reactstrap';
 
 import '../../styles/Sesion.css';
 
@@ -40,7 +40,7 @@ class Registro extends Component {
     }
     
     handleSubmit(event) {
-        if(this.state.password == this.state.confirm_password){
+        if(this.state.password === this.state.confirm_password){
             this.query();
         }else{
             this.setState({

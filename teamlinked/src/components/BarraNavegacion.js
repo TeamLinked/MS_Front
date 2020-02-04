@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import {Navbar, Nav, Button, FormControl,  Form, NavDropdown} from 'react-bootstrap';
+import {Navbar, Nav} from 'react-bootstrap';
 import {LinkContainer} from 'react-router-bootstrap';
 import { connect } from 'react-redux';
 import { logOut } from '../actions';
@@ -10,8 +10,9 @@ import '../styles/Header.css';
 
 class BarraNavegacion extends Component {
     render() {
+      
       if (this.props.loginAccountInfo){
-        console.log(this.props.loginAccountInfo);
+        //console.log(this.props.loginAccountInfo);
         return (
           <Navbar  collapseOnSelect expand="lg" bg="dark" variant="dark" style={{marginBottom:"0px", zIndex:"100"}}>
             <Navbar.Brand>

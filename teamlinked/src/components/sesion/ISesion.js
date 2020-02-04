@@ -28,7 +28,7 @@ class ISesion extends Component {
 
     handleChange(e){
 
-        {/*Email format and password length validation*/}
+        
         let condition;
         console.log(this.state.password.length);
         if(e.target.name ==="email"){
