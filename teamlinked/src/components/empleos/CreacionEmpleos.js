@@ -132,7 +132,10 @@ class CreacionEmpleos extends Component {
             <LinkContainer to="/empleos" style={{ "margin": "5px" }} >
               <Button variant="outline-info">Buscar Empleo</Button>
             </LinkContainer>
-            <Button variant="outline-info" style={{ "margin": "5px" }}>Mis postulaciones</Button>
+            <LinkContainer to="/postulaciones" style={{ "margin": "5px" }} >
+              <Button variant="outline-info">Mis postulaciones</Button>
+            </LinkContainer>
+            
           </Row>
           <Row><br></br><br></br></Row>
           <Row className="justify-content-center">

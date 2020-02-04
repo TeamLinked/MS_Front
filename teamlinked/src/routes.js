@@ -15,6 +15,7 @@ import CreacionUsuarios from './components/usuarios/CreacionUsuarios';
 import Sesion from './components/sesion';
 import Registro from './components/sesion/Registro';
 import CreacionEmpleos from './components/empleos/CreacionEmpleos';
+import Postulaciones from './components/empleos/Postulaciones';
 
 const AppRoutes = () =>
     <App>
@@ -28,6 +29,7 @@ const AppRoutes = () =>
             <Route path ='/michat' render= {props => <MiChat {...props}/>} />
             <Route path ='/crearusuario' render= {props => <CreacionUsuarios {...props}/>} />
             <Route path ='/crearempleo' render= {props => <CreacionEmpleos {...props}/>} />
+            <Route path ='/postulaciones' render= {props => <Postulaciones {...props}/>} />
             <Route path ='/' render= {props => <Home {...props}/>} />
              
         </Switch>
