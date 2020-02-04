@@ -19,7 +19,7 @@ class Foro extends Component {
 
   render() {
     return (
-      <Card>
+      <Card style={{ "padding": "0 60px", "maxWidth": 1200, "margin": "10px auto" }}>
         <Card.Img class="center-cropped" variant="top" src={this.pic(this.props.foro.imagen)} />
 			    {console.log(this.props.foro.imagen)}
         <Card.Body>
