@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import MiRed from "./MiRed";
 import BuscaAmigos from "./BuscaAmigos";
 
+
 //Estilos
 //import '../styles/Redes.css'; 
 
@@ -27,7 +28,7 @@ class Index extends Component {
         let aux = [];
         params.forEach(idAmigo => {
           this.state.persons.forEach(person => {
-            if (idAmigo === person.id) {
+            if (idAmigo == person.id) {
               aux.push(person);
             }
           });
@@ -129,10 +130,16 @@ class Index extends Component {
     render() { 
         return (
             <div>
-                <MiRed personas={this.state.amigos} idUsuario={this.state.idUsuario}/>
+              
                 <BuscaAmigos personas={this.state.busqueda} buscar={this.buscarUsuarios} idUsuario={this.state.idUsuario}>
                     <input type="text" className="form-control mr-sm-2 col-md-10" id="nombre" onChange={(event) => this.onInputChange(event)}></input>
+
+                
                 </BuscaAmigos>
+                
+                <MiRed personas={this.state.amigos} idUsuario={this.state.idUsuario}/>
+                
+              
             </div>
             
         );
