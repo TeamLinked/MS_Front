@@ -28,7 +28,7 @@ class App extends Component {
           <BarraNavegacion />
           <Contenido body={children} />
           <br></br><br></br>
-          <Footer/>
+          
         </div>
         
       </React.Fragment>
