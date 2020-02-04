@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import {Card, Button} from 'react';
+
 
 class Postulaciones extends Component {
     constructor(props) {
@@ -6,7 +8,9 @@ class Postulaciones extends Component {
         this.state = {  }
     }
     render() { 
-        return (  );
+        return (
+
+          );
     }
 }
  
