@@ -53,9 +53,11 @@ class ListaEmpleos extends Component {
         <div style={{ "maxWidth": 1050, "margin": "10px auto","height":"50px", "opacity":0.8}}>
           <Row className="justify-content-end">
             <LinkContainer to="/crearempleo"  style={{ "margin": "5px"}} >
-              <Button>Crear Empleo</Button>
+              <Button variant="outline-info">Publicar Empleo</Button>
             </LinkContainer>
-            <Button style={{ "margin": "5px"}}>Mis postulaciones</Button>
+            <LinkContainer to="/postulaciones"  style={{ "margin": "5px"}} >
+              <Button variant="outline-info">Mis postulaciones</Button>
+            </LinkContainer>
           </Row>
         </div>
         

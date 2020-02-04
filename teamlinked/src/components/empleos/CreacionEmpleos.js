@@ -86,7 +86,7 @@ class CreacionEmpleos extends Component {
     `;
 
 
-    console.log(query);
+    //console.log(query);
     const opts = {
       method: "POST",
       headers: {
@@ -99,7 +99,7 @@ class CreacionEmpleos extends Component {
     fetch(url, opts)
       .then(res => res.json())
       .then(e => {
-        console.log('RTA',e.data);
+        //console.log('RTA',e.data);
         this.setState({ categorias: e.data.getCategorias })
         //console.log('RTA2',this.state.categorias);
         if (e.data.inputEmpleo !== null){
@@ -112,10 +112,10 @@ class CreacionEmpleos extends Component {
 
   handleSubmit (e) {
     this.crearEmpleo();
-    console.log(this.state.tituloEmpleo)
-    console.log(this.state.descripcionEmpleo)
-    console.log(this.state.fechaVencimientoEmpleo)
-    console.log(this.state.categoriaEmpleo)
+    //console.log(this.state.tituloEmpleo)
+    //console.log(this.state.descripcionEmpleo)
+    //console.log(this.state.fechaVencimientoEmpleo)
+    //console.log(this.state.categoriaEmpleo)
     e.preventDefault();
     e.stopPropagation();
   }
@@ -130,9 +130,12 @@ class CreacionEmpleos extends Component {
         <div style={{ "maxWidth": 1050, "margin": "10px auto", "height": "50px", "opacity": 0.8 }}>
           <Row className="justify-content-end">
             <LinkContainer to="/empleos" style={{ "margin": "5px" }} >
-              <Button>Buscar Empleo</Button>
+              <Button variant="outline-info">Buscar Empleo</Button>
             </LinkContainer>
-            <Button style={{ "margin": "5px" }}>Mis postulaciones</Button>
+            <LinkContainer to="/postulaciones" style={{ "margin": "5px" }} >
+              <Button variant="outline-info">Mis postulaciones</Button>
+            </LinkContainer>
+            
           </Row>
           <Row><br></br><br></br></Row>
           <Row className="justify-content-center">
