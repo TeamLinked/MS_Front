@@ -37,7 +37,7 @@ class Feed extends Component {
       persons: [""],
       idUsuario: this.id,
       idsAmigos: [],
-      amigos: [],
+      url: "http://34.94.208.170:3051/graphql"
     }
   }
   state = {
@@ -46,29 +46,22 @@ class Feed extends Component {
     categoria: '',
     imagen: null
   }
-  
-  componentDidMount() {
-    this.setState({idUsuario:this.props.loginAccountInfo.id})
-  }
 
   pedirUsuarios() {
-    
     const query = `
-        query{
-            getUsuarios{
-                id
-                nombre
-                apellido
-                email
-                identificacion
-                nacionalidad
-                perf_profesional
-                perf_personal
-            }
+      query{
+        getUsuarios{
+          id
+          nombre
+          apellido
+          email
+          identificacion
+          nacionalidad
+          perf_profesional
+          perf_personal
         }
+      }
     `;
-
-    const url = "http://34.94.208.170:3051/graphql";
 
     const opts = {
       method: "POST",
@@ -78,29 +71,26 @@ class Feed extends Component {
       },
       body: JSON.stringify({ query })
     };
-    fetch(url, opts)
+    fetch(this.state.url, opts)
       .then(res => res.json())
       .then(e => {
         this.setState({ persons: e.data.getUsuarios });
         this.forceUpdate();
         this.pedirRelacionesDelUsuario();
+        //console.log(this.state.persons);
       })
       .catch(console.error);
   }
 
   pedirRelacionesDelUsuario() {
     const query =
-      `
-        query {
-            RelacionU(id: "` +
-      this.state.idUsuario +
-      `"){
-                friends
-            }
+    `
+      query {
+        RelacionU(id: "`+ this.state.idUsuario +`"){
+          friends
         }
+      }
     `;
-
-    const url = "http://34.94.208.170:3051/graphql";
 
     const opts = {
       method: "POST",
@@ -110,12 +100,13 @@ class Feed extends Component {
       },
       body: JSON.stringify({ query })
     };
-    fetch(url, opts)
+    fetch(this.state.url, opts)
       .then(res => res.json())
       .then(e => {
         this.setState({ idsAmigos: e.data.RelacionU[0].friends });
         this.forceUpdate();
         this.buscarAmigos(this.state.idsAmigos);
+        //console.log(this.state.idsAmigos);
       })
       .catch(console.error);
   }
@@ -159,14 +150,15 @@ class Feed extends Component {
     fetch(url, opts)
       .then(res => res.json())
       .then(e => {
-        console.log(e)
+        //console.log(e)
         this.setState({ foros: e.data.Foros });
-        console.log(e.data.Foros);
+        //console.log(e.data.Foros);
       })
       .catch(console.error);
   }
 
   componentDidMount() {
+    this.setState({idUsuario: this.props.loginAccountInfo.id});
     const query = `
         query{
           getUsuarios{

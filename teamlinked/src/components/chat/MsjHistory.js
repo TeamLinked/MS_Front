@@ -10,7 +10,8 @@ class MsjHistory extends React.Component {
       textField: '',
       mensajesRaw: [],
       idUsuario: "5",
-      amigoEscogido: this.props.amigoEscogido
+      amigoEscogido: this.props.amigoEscogido,
+      url: "http://34.94.208.170:3051/graphql"
     };
   }
 
@@ -24,8 +25,6 @@ class MsjHistory extends React.Component {
         }
       }
     `;
-    const url =
-      "http://34.94.59.230:3050/graphql";
     const opts = {
       method: "POST",
       headers: {
@@ -34,7 +33,7 @@ class MsjHistory extends React.Component {
       },
       body: JSON.stringify({ query })
     };
-    fetch(url, opts)
+    fetch(this.state.url, opts)
       .then(res => res.json())
       .then(e => {
         this.setState({ mensajesRaw: e.data.FindMessajes });
@@ -54,11 +53,10 @@ class MsjHistory extends React.Component {
           transmitter
           receiver
           message
+          date
         }
       }
     `;
-    const url =
-      "https://cors-anywhere.herokuapp.com/http://34.94.59.230:3050/graphql";
     const opts = {
       method: "POST",
       headers: {
@@ -67,7 +65,7 @@ class MsjHistory extends React.Component {
       },
       body: JSON.stringify({ query })
     };
-    fetch(url, opts)
+    fetch(this.state.url, opts)
       .then(res => res.json())
       .then(e => {
         console.log(e);
@@ -99,12 +97,20 @@ class MsjHistory extends React.Component {
 
   handleKeyDown = (e) => {
     if (e.key === 'Enter') {
-      this.enviarYLimpiarEntrada();
+      var i = 0;
+      while(i < 4){
+        this.enviarYLimpiarEntrada();
+        i = i + 1;
+      }
     }
   }
 
   handleClick = (e) => {
-    this.enviarYLimpiarEntrada();
+    var i = 0;
+    while(i < 4){
+      this.enviarYLimpiarEntrada();
+      i = i + 1;
+    }
   }
 
   render() {
