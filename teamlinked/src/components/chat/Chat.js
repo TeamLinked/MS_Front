@@ -37,7 +37,7 @@ class Chat extends Component {
       .then(res => res.json())
       .then(e => {
         this.setState({ idsAmigos: e.data.RelacionU[0].friends });
-        console.log(this.state.idsAmigos);
+        //console.log(this.state.idsAmigos);
         this.forceUpdate();
         this.pedirUsuarios();
       })
@@ -68,7 +68,7 @@ class Chat extends Component {
       .then(res => res.json())
       .then(e => {
         this.setState({amigos: [...this.state.amigos, e.data.getUsuario.user]})
-        console.log(this.state.amigos);
+        //console.log(this.state.amigos);
       })
       .catch(console.error);
   }

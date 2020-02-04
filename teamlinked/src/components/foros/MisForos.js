@@ -46,9 +46,9 @@ class MisForos extends Component {
         fetch(url, opts)
           .then(res => res.json())   
           .then(e => {
-            console.log(e)
+            //console.log(e)
             this.setState({ foros: e.data.findForoCreador });
-            console.log("estos son los foros: ", e.data.findForoCreador);
+            //console.log("estos son los foros: ", e.data.findForoCreador);
         })
         .catch(console.error);
     }

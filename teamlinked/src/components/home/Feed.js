@@ -14,7 +14,6 @@ import {
   Card,
   CardHeader,
   CardBody,
-  CardFooter,
   CardTitle,
   Row,
   Col
@@ -110,7 +109,7 @@ class Feed extends Component {
     let aux = [];
     params.forEach(idAmigo => {
       this.state.persons.forEach(person => {
-        if (idAmigo === person.id) {
+        if (idAmigo == person.id) {
           aux.push(person);
         }
       });
@@ -189,9 +188,11 @@ class Feed extends Component {
 
     this.pedirForos();
     this.pedirUsuarios();
+    
   }
 
   render() {
+    console.clear();
     return (
       <>
         <div className="content col-lg-10 mx-auto" style={{marginTop: "20px"}} >
@@ -215,18 +216,11 @@ class Feed extends Component {
                       <h5 className="title">{this.props.loginAccountInfo.nombre} {this.props.loginAccountInfo.apellido}</h5>
                     </a>
                     <p className="description">{this.props.loginAccountInfo.email}</p>
-                    <p className="description">{this.props.loginAccountInfo.apellido}</p>
+                    
                   </div>
-                  <p className="description text-center">
-                    {this.props.loginAccountInfo.email}
-                  </p>
+                  
                 </CardBody>
-                <CardFooter>
-                  <hr />
-                  <div className="button-container">
-                    {this.props.loginAccountInfo.nombre}
-                  </div>
-                </CardFooter>
+                
               </Card>
 
 
@@ -252,10 +246,13 @@ class Feed extends Component {
               {/* </CardBody> */} 
             </Col>
           </Row>
-        </div> 
+        </div>
+         
       </>
     );
+    
   }
+  
 }
 
  

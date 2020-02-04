@@ -48,7 +48,7 @@ class BuscaAmigos extends React.Component {
   }
 
   componentDidMount(){
-    console.log(this.props.idUsuario);
+    //console.log(this.props.idUsuario);
   }
 
   agregarAmigo(){

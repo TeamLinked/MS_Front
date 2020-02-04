@@ -30,7 +30,7 @@ class ISesion extends Component {
 
         
         let condition;
-        console.log(this.state.password.length);
+        //console.log(this.state.password.length);
         if(e.target.name ==="email"){
             if(emailRegex.test(e.target.value) && this.state.password.length >= MIN_PASS_LENGTH) {
                 condition= "valid";
@@ -54,7 +54,7 @@ class ISesion extends Component {
   
     handleFormSubmit(e) {
         e.preventDefault();
-        console.log(this.state);
+        //console.log(this.state);
         this.setState({ isLoading: true });
         this.queryLDAP();
     }
@@ -82,7 +82,7 @@ class ISesion extends Component {
             .then(res => res.json())
             .then(e => {
                 //this.user = e.data.getUsuarios[this.id];
-                console.log("RTA_LOGIN_LDAP",e.data.Login.token);
+                //console.log("RTA_LOGIN_LDAP",e.data.Login.token);
                 this.setState({key:e.data.Login.token})
                 this.queryBACK()
             })
@@ -116,8 +116,8 @@ class ISesion extends Component {
             .then(res => res.json())
             .then(e => {
                 //this.user = e.data.getUsuarios[this.id];
-                console.log(e);
-                console.log("RTA_LOGIN_BACK",e.data.getUsuarioByEmail.user);
+                //console.log(e);
+                //console.log("RTA_LOGIN_BACK",e.data.getUsuarioByEmail.user);
                 if(e.data.getUsuarioByEmail.user !== null){
                     if(this.state.key !== null){
                         const accountInfo = {
@@ -144,7 +144,7 @@ class ISesion extends Component {
     render() {
         const userValidation = this.state.valid;
         const  isLoading  = this.state.isLoading;
-        console.log(isLoading);
+        //console.log(isLoading);
         let message;
         
         switch(userValidation){

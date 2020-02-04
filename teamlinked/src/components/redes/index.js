@@ -67,7 +67,7 @@ class Index extends Component {
             this.forceUpdate();
             var i = 0
             while(i < 4){
-              console.log(this.state.idsAmigos.length);
+              //console.log(this.state.idsAmigos.length);
               this.pedirRelacionesDelUsuario();
               i = i + 1;
             }
