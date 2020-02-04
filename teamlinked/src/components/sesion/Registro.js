@@ -40,7 +40,6 @@ class Registro extends Component {
     }
     
     handleSubmit(event) {
-        console.log(JSON.stringify(this.state));
         if(this.state.password == this.state.confirm_password){
             this.query();
         }else{
@@ -107,12 +106,9 @@ class Registro extends Component {
         };
         
         
-        console.log(query)
         fetch(url, opts)
             .then(res => res.json())
             .then(e => {
-                console.log("fetched");
-                console.log(e);
                 query = queryLDAP;
                 if(e.errors !== undefined){
                     this.setState({
@@ -128,13 +124,11 @@ class Registro extends Component {
                 fetch(url, opts)
                     .then(res => res.json())
                     .then(e => {
-                        console.log("LDAP:",e.data)
                         if(e.errors !== undefined){
                             this.setState({
                                 alertVisible: true
                             });
                         }else{
-                            console.log("Hello");
                             this.setState({
                                 redirect: true
                             })
