@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ItemsCarousel from 'react-items-carousel';
-import {Card, Button} from 'react-bootstrap';
+import {Card, Button, Modal} from 'react-bootstrap';
+import EmpleoDetallado from './EmpleoDetallado';
 
 class Empleos extends Component {
 
@@ -11,6 +12,9 @@ class Empleos extends Component {
       empleosPorCategoria: []
     }
   }
+
+  
+
   pedirEmpleosPorCategoria(){
     const url = "http://34.94.208.170:3051/graphql";
     const query = `
@@ -81,25 +85,8 @@ class Empleos extends Component {
               <div
                 key={i}
               >
-                
-                <Card className="text-center" style={{ width: '16rem', height: '15rem' }}>
-                  
-                  <Card.Body>
-                    <Card.Title >{this.state.empleosPorCategoria[i].titulo}</Card.Title>
-                    <Card.Text>
-                      
-                      - Publicado en: {this.state.empleosPorCategoria[i].fechaPublicacion} <br></br>
-                      - Vence en: {this.state.empleosPorCategoria[i].fechaVencimiento} 
-                    </Card.Text>
-                    
-                  </Card.Body>
-                  <Card.Footer >
-                    <Button variant="primary">Ver mas</Button>
-                    
-                  </Card.Footer>
-                </Card>
-                
-
+                {console.log(this.state.empleosPorCategoria[i])}
+                 <EmpleoDetallado empleo={this.state.empleosPorCategoria[i]} />
               </div>
             )}
           </ItemsCarousel>
