@@ -1,7 +1,7 @@
-import React, { Component, useState} from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import {Alert, Button} from 'reactstrap';
+import {Alert} from 'reactstrap';
 
 import '../../styles/Sesion.css';
 
@@ -40,8 +40,7 @@ class Registro extends Component {
     }
     
     handleSubmit(event) {
-        console.log(JSON.stringify(this.state));
-        if(this.state.password == this.state.confirm_password){
+        if(this.state.password === this.state.confirm_password){
             this.query();
         }else{
             this.setState({
@@ -97,8 +96,8 @@ class Registro extends Component {
                 `;
 
 
-        
-        const url = "https://cors-anywhere.herokuapp.com/http://34.94.59.230:3050/graphql";
+        //https://cors-anywhere.herokuapp.com/
+        const url = "http://34.94.208.170:3051/graphql";
  
         let opts = {
             method: "POST",
@@ -107,7 +106,6 @@ class Registro extends Component {
         };
         
         
-        console.log(query)
         fetch(url, opts)
             .then(res => res.json())
             .then(e => {
@@ -126,13 +124,11 @@ class Registro extends Component {
                 fetch(url, opts)
                     .then(res => res.json())
                     .then(e => {
-                        console.log("LDAP:",e.data)
                         if(e.errors !== undefined){
                             this.setState({
                                 alertVisible: true
                             });
                         }else{
-                            console.log("Hello");
                             this.setState({
                                 redirect: true
                             })

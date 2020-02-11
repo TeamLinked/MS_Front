@@ -11,8 +11,7 @@ class PaginaPrincipal extends Component {
         }
     }
 
-
-    handleSelect(selectedIndex, e){
+    handleSelect(selectedIndex, e) {
         this.setState({
             setIndex: selectedIndex,
             setDirection: e.direction

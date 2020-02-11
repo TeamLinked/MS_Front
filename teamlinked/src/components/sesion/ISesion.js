@@ -10,9 +10,10 @@ const MIN_PASS_LENGTH = 6 ;
 
 
 class ISesion extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
-        this.state= {
+        this.state = {
+            counter: 4,
             email: '',
             password: '',
             valid: "undefined",
@@ -27,13 +28,13 @@ class ISesion extends Component {
 
     handleChange(e){
 
-        {/*Email format and password length validation*/}
+        
         let condition;
-        console.log(this.state.password.length);
-        if(e.target.name=="email"){
-            if(emailRegex.test(e.target.value) && this.state.password.length >= MIN_PASS_LENGTH){
+        //console.log(this.state.password.length);
+        if(e.target.name ==="email"){
+            if(emailRegex.test(e.target.value) && this.state.password.length >= MIN_PASS_LENGTH) {
                 condition= "valid";
-                if(e.target.value.length == 0 && this.state.password.length == 0)condition = "undefined";
+                if(e.target.value.length === 0 && this.state.password.length === 0)condition = "undefined";
             }else{
                 condition = "invalid";
             }
@@ -53,24 +54,24 @@ class ISesion extends Component {
   
     handleFormSubmit(e) {
         e.preventDefault();
-        console.log(this.state);
+        //console.log(this.state);
         this.setState({ isLoading: true });
         this.queryLDAP();
     }
 
-    queryLDAP (){
+    queryLDAP() {
 
         const query =`
             query{
                 Login(body:{
-                    username:"`+this.state.email+`"
-                    password:"`+this.state.password+`"
+                    username:"` + this.state.email+`"
+                    password:"` + this.state.password+`"
                 }){
                     token
                 }
             }
         `;
-        const url = "http://34.94.59.230:3050/graphql";
+        const url = "http://34.94.208.170:3051/graphql";
         const opts = {
             method: "POST",
             headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" },
@@ -81,7 +82,7 @@ class ISesion extends Component {
             .then(res => res.json())
             .then(e => {
                 //this.user = e.data.getUsuarios[this.id];
-                console.log("RTA_LOGIN_LDAP",e.data.Login.token);
+                //console.log("RTA_LOGIN_LDAP",e.data.Login.token);
                 this.setState({key:e.data.Login.token})
                 this.queryBACK()
             })
@@ -92,10 +93,10 @@ class ISesion extends Component {
         
         const query =`
             query{
-                getUsuarioByEmail(body:{
+                getUsuarioByEmail(body: {
                 email:"`+this.state.email+`"
-                }){
-                    user{
+                }) {
+                    user {
                         id
                         nombre
                         apellido
@@ -105,7 +106,7 @@ class ISesion extends Component {
             }
         `;
 
-        const url = "http://34.94.59.230:3050/graphql";
+        const url = "http://34.94.208.170:3051/graphql";
         const opts = {
             method: "POST",
             headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" },
@@ -115,17 +116,24 @@ class ISesion extends Component {
             .then(res => res.json())
             .then(e => {
                 //this.user = e.data.getUsuarios[this.id];
-                console.log("RTA_LOGIN_BACK",e.data.getUsuarioByEmail.user);
-                
-                if(this.state.key !== null){
-                    const accountInfo = {
-                        key : this.state.key,
-                        id : e.data.getUsuarioByEmail.user.id,
-                        nombre : e.data.getUsuarioByEmail.user.nombre,
-                        apellido : e.data.getUsuarioByEmail.user.apellido,
-                        email : e.data.getUsuarioByEmail.user.email,
+                //console.log(e);
+                //console.log("RTA_LOGIN_BACK",e.data.getUsuarioByEmail.user);
+                if(e.data.getUsuarioByEmail.user !== null){
+                    if(this.state.key !== null){
+                        const accountInfo = {
+                            key : this.state.key,
+                            id : e.data.getUsuarioByEmail.user.id,
+                            nombre : e.data.getUsuarioByEmail.user.nombre,
+                            apellido : e.data.getUsuarioByEmail.user.apellido,
+                            email : e.data.getUsuarioByEmail.user.email,
+                        }
+                        this.props.storeLoginAccountInfo(accountInfo);
                     }
-                    this.props.storeLoginAccountInfo(accountInfo);
+                }else if(this.state.counter > 0){
+                    this.state.counter -= 1; 
+                    this.queryBACK();
+                }else{
+                    window.location.reload();
                 }
                 this.setState({isLoading:false})
             })
@@ -136,7 +144,7 @@ class ISesion extends Component {
     render() {
         const userValidation = this.state.valid;
         const  isLoading  = this.state.isLoading;
-        console.log(isLoading);
+        //console.log(isLoading);
         let message;
         
         switch(userValidation){

@@ -6,7 +6,6 @@ import PropTypes from 'prop-types';
 // from ''Componentes
 import BarraNavegacion from './BarraNavegacion';
 import Contenido from './Contenido';
-import Footer from './Footer';
 
 
 //Estilos
@@ -22,17 +21,20 @@ class App extends Component {
   };
   
   render() {
+    
     const {children} = this.props; 
     return (  
       <React.Fragment>
         <div style={{minHeight:"calc(100vh)", position:"relative"}}>
           <BarraNavegacion />
           <Contenido body={children} />
-          <Footer/>
+          <br></br><br></br>
+          
         </div>
         
       </React.Fragment>
     );
+    
   }
 }
  

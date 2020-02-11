@@ -1,20 +1,11 @@
 import React, { Component } from 'react'
 
-import * as user from '../../datos/user.json';
 // import {Form, Card, Container, Button, Col, Row} from 'react-bootstrap';
 
 import '../../styles/Foros.css';
 
 import {
     Button,
-    Card,
-    CardHeader,
-    CardBody,
-    CardFooter,
-    CardTitle,
-    FormGroup,
-    Form,
-    Input,
     Row,
     Col
 } from "reactstrap";
@@ -25,10 +16,7 @@ import {
 
 
 class Friends extends Component {
-    constructor() {
-        super();
-
-    }
+    
 
 
 
@@ -43,7 +31,7 @@ class Friends extends Component {
                                 <img
                                     alt="..."
                                     className="img-circle img-no-padding img-responsive"
-                                    src={require("./resources/faces/ayo-ogunseinde-2.jpg")}
+                                    src={require("./resources/default-avatar.png")}
                                 />
                             </div>
                         </Col>

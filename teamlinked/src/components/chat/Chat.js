@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { connect } from 'react-redux';
+
 import RecentItem from "./RecentItem";
 import MsjHistory from "./MsjHistory";
 
@@ -6,10 +8,11 @@ class Chat extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      idUsuario: "5",
+      idUsuario: this.props.loginAccountInfo.id,
       idsAmigos: [],
       amigos: [],
-      amigoEscogido: ""
+      amigoEscogido: "",
+      url: "http://34.94.208.170:3051/graphql"
     };
   }
 
@@ -17,15 +20,11 @@ class Chat extends Component {
     const query =
       `
         query{
-            RelacionU(id: "` +
-      this.state.idUsuario +
-      `"){
+            RelacionU(id: "${this.state.idUsuario}"){
                 friends
             }
         }
     `;
-    const url =
-      "https://cors-anywhere.herokuapp.com/http://34.94.59.230:3050/graphql";
     const opts = {
       method: "POST",
       headers: {
@@ -34,11 +33,11 @@ class Chat extends Component {
       },
       body: JSON.stringify({ query })
     };
-    fetch(url, opts)
+    fetch(this.state.url, opts)
       .then(res => res.json())
       .then(e => {
         this.setState({ idsAmigos: e.data.RelacionU[0].friends });
-        console.log(this.state.idsAmigos);
+        //console.log(this.state.idsAmigos);
         this.forceUpdate();
         this.pedirUsuarios();
       })
@@ -57,8 +56,6 @@ class Chat extends Component {
           }
         }
       }`;
-    const url =
-      "https://cors-anywhere.herokuapp.com/http://34.94.59.230:3050/graphql";
     const opts = {
       method: "POST",
       headers: {
@@ -67,11 +64,11 @@ class Chat extends Component {
       },
       body: JSON.stringify({ query })
     };
-    fetch(url, opts)
+    fetch(this.state.url, opts)
       .then(res => res.json())
       .then(e => {
         this.setState({amigos: [...this.state.amigos, e.data.getUsuario.user]})
-        console.log(this.state.amigos);
+        //console.log(this.state.amigos);
       })
       .catch(console.error);
   }
@@ -126,4 +123,10 @@ class Chat extends Component {
   }
 }
 
-export default Chat;
+//Redux
+const mapStateToProps = (state) => {
+  return {loginAccountInfo: state.loginAccountInfo};
+};
+
+
+export default connect(mapStateToProps, null)(Chat);

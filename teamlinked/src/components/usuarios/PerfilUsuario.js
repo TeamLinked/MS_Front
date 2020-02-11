@@ -42,7 +42,7 @@ class PerfilUsuario extends Component {
                     }
                 }
             `;
-            const url = "https://cors-anywhere.herokuapp.com/http://34.94.59.230:3050/graphql";
+            const url = "http://34.94.208.170:3051/graphql";
             const opts = {
                 method: "POST",
                 headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" },
@@ -71,29 +71,41 @@ class PerfilUsuario extends Component {
         if (this.props.loginAccountInfo){
             return (
                 <div className="App" >
-                    <div className="container mt-4">
-                        <div className="row align-items-center">
-                            <div className="col-sm-2 ">
-                                <img className="img-responsive App-image" src={stock} alt="stock"></img>
-                            </div>
-                            <div className="col-sm-7 ">
-                                <h3>{this.user.nombre} {this.user.apellido}</h3>
-                                <p className=" App-p" >{this.user.email}</p>
-                                <p className=" App-p">{this.user.nacionalidad}</p>
-                            </div>
-                            <div className="col-sm-3">
-                                <LinkContainer to="/crearusuario">
-                                    <button type="button">Editar usuario</button>
-                                </LinkContainer>
+                    <div className="my-3 p-3 bg-white rounded shadow-sm container">
+                        <div className="container mt-4">
+                            <div className="row align-items-center">
+                                <div className="col-sm-2 ">
+                                    <img className="img-responsive App-image rounded-circle" src={stock} alt="stock"></img>
+                                </div>
+                                <div className="col-sm-7 ">
+                                    <h3 className="font-weight-bold">{this.user.nombre} {this.user.apellido}</h3>
+                                </div>
+                                <div className="col-sm-3">
+                                    <LinkContainer to="/crearusuario">
+                                        <button type="submit" className="btn btn-primary" onClick={this.handleSubmit}>
+                                            Editar usuario
+                                        </button>
+                                    </LinkContainer>
+                                </div>
                             </div>
                         </div>
-                    </div>
-    
-                    <div className="container mt-4">
-                        <TarjetaUsuario propiedad="Sobre mí" texto={this.user.perf_personal} />
-                    </div>
-                    <div className="container mt-4">
-                        <TarjetaUsuario propiedad="Mi experiencia" texto={this.user.perf_profesional} />
+        
+                        <div className="container mt-2">
+                            <TarjetaUsuario propiedad="Correo" texto={this.user.email} />
+                        </div>
+                        
+                        <div className="container mt-4">
+                            <TarjetaUsuario propiedad="Nacionalidad" texto={this.user.nacionalidad} />
+                        </div>
+                        
+                        <div className="container mt-4">
+                            <TarjetaUsuario propiedad="Sobre mí" texto={this.user.perf_personal} />
+                        </div>
+                        
+                        <div className="container mt-4">
+                            <TarjetaUsuario propiedad="Mi experiencia" texto={this.user.perf_profesional} />
+                        </div>
+                        
                     </div>
                 </div>
             );

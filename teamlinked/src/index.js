@@ -14,6 +14,7 @@ import { loadState, saveState} from './components/LocalStorage';
 //Estilos
 import './styles/index.css';
 
+
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const initialData = loadState();

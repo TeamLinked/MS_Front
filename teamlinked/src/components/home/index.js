@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+// import axios from 'axios';
 import { connect } from 'react-redux';
 import "bootstrap/dist/css/bootstrap.css";
 import "./assets/scss/paper-dashboard.scss?v=1.1.0";
@@ -10,10 +10,10 @@ import Feed from "./Feed";
 import PaginaPrincipal from './PaginaPrincipal';
 
 class Home extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state = {
-            iamge : 'no info'
+            image : 'no info'
         }
     }
  
@@ -28,7 +28,7 @@ class Home extends Component {
                 imagen
             }
         }`;
-        const url = "http://34.94.59.230:3050/graphql";
+        const url = "http://34.94.208.170:3051/graphql";
 
         const opts = {
             method: "POST",
@@ -44,7 +44,7 @@ class Home extends Component {
         .then(e => {
             // console.log(e)
             this.setState({ foros: e.data.Foros });
-            console.log(e.data.Foros);
+            //console.log(e.data.Foros);
         })
         .catch(console.error);
     }
@@ -69,12 +69,10 @@ class Home extends Component {
             </div>
         )
     }
-
- 
 }
 
 // Para conectar react con redux
-const mapStateToProps = (state) => {
+var mapStateToProps = (state) => {
     return {loginAccountInfo: state.loginAccountInfo};
 };
   

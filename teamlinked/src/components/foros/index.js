@@ -1,9 +1,5 @@
 import React, { Component } from 'react';
-import CreateForo from './CreacionForos'
-
-//Estilos
-//import '../styles/Redes.css'; 
-
+import MisForos from './MisForos';
 
 class Foros extends Component {
     constructor(props) {
@@ -13,10 +9,10 @@ class Foros extends Component {
     render() { 
         return (  
             <React.Fragment>
-                <CreateForo/>
+                <MisForos/>
             </React.Fragment>
         );
     }
-}
+} 
  
 export default Foros;

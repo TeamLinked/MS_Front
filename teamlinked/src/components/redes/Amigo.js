@@ -1,5 +1,13 @@
 import React from "react";
+import {Button} from 'react-bootstrap';
+
+import '../../styles/Redes.css' 
+
 class Amigo extends React.Component {
+  handleClick = e => {
+    this.props.handleClick(this.props.persona.id);
+  }
+
   render() {
     return (
       <div className="media text-muted pt-3">
@@ -8,6 +16,7 @@ class Amigo extends React.Component {
             <strong className="text-gray-dark">
               {this.props.persona.nombre}{" "}{this.props.persona.apellido}
             </strong>
+            <Button type="button" className="btn-personalized btn btn-xs" onClick={this.handleClick}>{this.props.btnlabel}</Button>
           </div>
           <span className="d-block">{this.props.persona.email}</span>
         </div>

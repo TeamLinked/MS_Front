@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import axios from 'axios';
 import * as user from '../../datos/user.json';
 import { connect } from 'react-redux';
 
@@ -12,22 +11,13 @@ import Friends from './Friends'
 import NewPost from './NewPost'
 
 import {
-  Button,
   Card,
   CardHeader,
   CardBody,
-  CardFooter,
   CardTitle,
-  FormGroup,
-  Form,
-  Input,
   Row,
   Col
 } from "reactstrap";
-
-
-
-
 
 
 class Feed extends Component {
@@ -41,7 +31,7 @@ class Feed extends Component {
       persons: [""],
       idUsuario: this.id,
       idsAmigos: [],
-      amigos: [],
+      url: "http://34.94.208.170:3051/graphql"
     }
   }
   state = {
@@ -50,29 +40,23 @@ class Feed extends Component {
     categoria: '',
     imagen: null
   }
-  
-  componentDidMount(){
-    this.setState({idUsuario:this.props.loginAccountInfo.id})
-  }
 
   pedirUsuarios() {
-    
     const query = `
-        query{
-            getUsuarios{
-                id
-                nombre
-                apellido
-                email
-                identificacion
-                nacionalidad
-                perf_profesional
-                perf_personal
-            }
+      query{
+        getUsuarios{
+          id
+          nombre
+          apellido
+          email
+          identificacion
+          nacionalidad
+          perf_profesional
+          perf_personal
         }
+      }
     `;
-    const url =
-      "https://cors-anywhere.herokuapp.com/http://34.94.59.230:3050/graphql";
+
     const opts = {
       method: "POST",
       headers: {
@@ -81,28 +65,27 @@ class Feed extends Component {
       },
       body: JSON.stringify({ query })
     };
-    fetch(url, opts)
+    fetch(this.state.url, opts)
       .then(res => res.json())
       .then(e => {
         this.setState({ persons: e.data.getUsuarios });
         this.forceUpdate();
         this.pedirRelacionesDelUsuario();
+        //console.log(this.state.persons);
       })
       .catch(console.error);
   }
+
   pedirRelacionesDelUsuario() {
     const query =
-      `
-        query{
-            RelacionU(id: "` +
-      this.state.idUsuario +
-      `"){
-                friends
-            }
+    `
+      query {
+        RelacionU(id: "`+ this.state.idUsuario +`"){
+          friends
         }
+      }
     `;
-    const url =
-      "https://cors-anywhere.herokuapp.com/http://34.94.59.230:3050/graphql";
+
     const opts = {
       method: "POST",
       headers: {
@@ -111,12 +94,13 @@ class Feed extends Component {
       },
       body: JSON.stringify({ query })
     };
-    fetch(url, opts)
+    fetch(this.state.url, opts)
       .then(res => res.json())
       .then(e => {
         this.setState({ idsAmigos: e.data.RelacionU[0].friends });
         this.forceUpdate();
         this.buscarAmigos(this.state.idsAmigos);
+        //console.log(this.state.idsAmigos);
       })
       .catch(console.error);
   }
@@ -135,17 +119,18 @@ class Feed extends Component {
 
   pedirForos() {
     const query = `
-    query {
-        Foros {
-            id
-            titulo
-            contenido
-            categoria
-            fecha_creacion
-            imagen
-        }
-    }`;
-    const url = "http://34.94.59.230:3050/graphql";
+      query {
+          Foros {
+              id
+              titulo
+              contenido
+              categoria
+              fecha_creacion
+              imagen
+          }
+      }`;
+
+    const url = "http://34.94.208.170:3051/graphql";
 
     const opts = {
       method: "POST",
@@ -159,18 +144,15 @@ class Feed extends Component {
     fetch(url, opts)
       .then(res => res.json())
       .then(e => {
-        // console.log(e)
+        //console.log(e)
         this.setState({ foros: e.data.Foros });
-        console.log(e.data.Foros);
+        //console.log(e.data.Foros);
       })
       .catch(console.error);
   }
 
-
-
-
-
   componentDidMount() {
+    this.setState({idUsuario: this.props.loginAccountInfo.id});
     const query = `
         query{
           getUsuarios{
@@ -185,28 +167,32 @@ class Feed extends Component {
           }
         }
     `;
-    const url = "https://cors-anywhere.herokuapp.com/http://34.94.59.230:3050/graphql";
+    
+    const url = "http://34.94.208.170:3051/graphql";
+    
     const opts = {
       method: "POST",
       headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" },
       body: JSON.stringify({ query })
     };
+
     fetch(url, opts)
       .then(res => res.json())
       .then(e => {
         this.user = e.data.getUsuarios[this.id];
-        console.log(this.user);
-        console.log("Pepito");
+        //console.log(this.user);
+        //console.log(this.props.loginAccountInfo.id);
         this.forceUpdate();
       })
       .catch(console.error);
+
     this.pedirForos();
     this.pedirUsuarios();
-
-
+    
   }
 
   render() {
+    console.clear();
     return (
       <>
         <div className="content col-lg-10 mx-auto" style={{marginTop: "20px"}} >
@@ -230,18 +216,11 @@ class Feed extends Component {
                       <h5 className="title">{this.props.loginAccountInfo.nombre} {this.props.loginAccountInfo.apellido}</h5>
                     </a>
                     <p className="description">{this.props.loginAccountInfo.email}</p>
-                    <p className="description">{this.props.loginAccountInfo.apellido}</p>
+                    
                   </div>
-                  <p className="description text-center">
-                    {this.props.loginAccountInfo.email}
-                  </p>
+                  
                 </CardBody>
-                <CardFooter>
-                  <hr />
-                  <div className="button-container">
-                    {this.props.loginAccountInfo.nombre}
-                  </div>
-                </CardFooter>
+                
               </Card>
 
 
@@ -250,57 +229,30 @@ class Feed extends Component {
                   <CardTitle tag="h4">Miembros de la Red</CardTitle>
                 </CardHeader>
                 <CardBody>
-
-
-
                   <ul className="list-unstyled team-members">
-                    
-
-
-
-
                         {this.state.amigos.map(p => (
                           <Friends persona={p} />
-
-                        ))}
-
-                    
-                    
+                        ))}                 
                   </ul>
                 </CardBody>
               </Card>
-
-
-
-
-
-
-
             </Col>
             <Col md="8">
               {/* <CardBody> */}
-
-
-
-
               {/* <Form> */}
-
               <NewPost/>
-
-
-
               {this.state.foros.map(foro => <Foro key={foro.id} foro={foro} />)}
-
               {/* </Form> */}
-              {/* </CardBody> */}
-
-
+              {/* </CardBody> */} 
             </Col>
           </Row>
         </div>
+         
       </>
     );
+    
   }
+  
 }
 
  
