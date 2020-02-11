@@ -1,8 +1,8 @@
 version: '2'
 services:
   teamlinked-front:
-    #build: ./teamlinked
-    image: teamlinked2019/front-ms:v2.6   
+    build: ./teamlinked
+    #image: teamlinked2019/front-ms:v2.6   
     ports:
       - 3000:3000
     labels:
